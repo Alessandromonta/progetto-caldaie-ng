@@ -1,6 +1,57 @@
-
-<p-card *ngFor="let ehe of errori">
+<!-- <p-card *ngFor="let ehe of errori">
+    <p class="m-0"  >
+        {{ ehe.descrizioneErrore }}
+    </p>
+</p-card> -->
+<!-- <p-card *ngFor="let ehe of errori">
      <p class="m-0"  *ngFor="let eheee of ehe | keyvalue">
          {{ eheee.value }}
      </p>
- </p-card>
+ </p-card> -->
+
+ <div class="card-container">
+
+    <mat-accordion>
+        <mat-expansion-panel *ngFor="let ehe of errori"
+                             (opened)="panelOpenState[ehe.idErrore] = true"
+                             (closed)="panelOpenState[ehe.idErrore] = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{ ehe.codiceErrore }}
+                </mat-panel-title>
+                <mat-panel-description>
+                    Currently I am {{panelOpenState[ehe.idErrore] ? 'open' : 'closed'}}
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>
+                {{ ehe.descrizioneErrore }}
+            </p>
+            <mat-divider></mat-divider>
+            <p>
+                {{ ehe.soluzioneErrore }}
+            </p>
+            <mat-divider></mat-divider>
+
+            <div class="soluzione">
+                <div class="card flex justify-content-center">
+                    <p-overlayPanel #op>
+                        <ng-template pTemplate="content">
+                            <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit.  </h4>
+                        </ng-template>
+                    </p-overlayPanel>
+    
+                    <button (click)="op.toggle($event)" mat-raised-button color="primary">Primary</button>
+    
+                </div>
+            </div>
+            
+
+
+        </mat-expansion-panel>
+    </mat-accordion>
+      
+ </div>
+
+ 
+
+  
