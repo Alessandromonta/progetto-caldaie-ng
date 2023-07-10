@@ -16,14 +16,5 @@ export class MainCardComponent implements OnInit{
   public panelOpenState: boolean[] = [];
   
   ngOnInit(){
-    this.http.get<ErroriCaldaie[]>(this.url).subscribe((data=>{
-      this.errori = data
-      console.log(data);
-      this.errori.forEach(e => {
-        //console.log(e['codiceErrore']);
-        this.panelOpenState.push(false)
-      });
-      console.log(this.panelOpenState);
-    }));
   }
 }

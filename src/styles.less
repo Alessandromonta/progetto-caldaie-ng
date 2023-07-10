@@ -2,3 +2,52 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.p-tabmenu {
+    .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link {
+        box-shadow: none !important;
+    }
+}
+
+/**
+    TODO: Capire perché non piglia il nested css sui custom dei componenti
+*/
+.card-container .package-card .p-card-header {
+    padding: 10px;
+    text-align: center;
+}
+
+.card-container .package-card {
+
+    .p-card:hover {
+        box-shadow: 0 0 11px rgba(33,33,33,.2); 
+    }
+    
+    .icon {
+        margin: 10px;
+        font-size: 40px;
+        padding: 40px;
+        border-radius: 50%;
+        border: 1px solid black
+    }
+
+    .icon:hover {
+        color: #ffffff;
+        background-color: #000000;
+    }
+
+    .card-title:hover, .icon:hover {
+        cursor: pointer;
+    }
+}
+
+.userinfo-card {
+    .p-card-header {
+        padding: 3em;
+    }
+    .p-card-body {
+        .check-icon {
+            color: rgb(71, 255, 93);
+        }
+    }
+}

@@ -1,0 +1,25 @@
+<div class="login-box">
+    <div class="data-input email">
+        <input 
+            class="p-input"
+            type="email"
+            pInputText
+            placeholder="Email"
+            [(ngModel)]="userService.userData.email"
+        />
+    </div>
+    <div class="data-input passwd">
+        <p-password
+            class="p-input"
+            placeholder="Password"
+            [(ngModel)]="userService.userData.passwd"
+        ></p-password>
+    </div>
+    <div class="submit">
+        <p-button
+            class="p-input"
+            label="Login"
+            (onClick)="onLogin()"
+        ></p-button>
+    </div>
+</div>
