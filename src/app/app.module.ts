@@ -12,18 +12,19 @@ import {MatCardModule} from '@angular/material/card';
 import {MatExpansionModule, } from '@angular/material/expansion';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MatDividerModule} from '@angular/material/divider';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthComponent } from './pages/auth/auth.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { PrimeNGConfig } from 'primeng/api';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { PackagesListComponent } from './pages/packages-list/packages-list.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AuthInterceptorComponent } from './components/Interceptor/auth-interceptor/auth-interceptor.component';
  
 const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
@@ -37,7 +38,8 @@ const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
     LoginComponent,
     RegisterComponent,
     UserProfileComponent,
-    PackagesListComponent
+    PackagesListComponent,
+    AuthInterceptorComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +48,7 @@ const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
     MenubarModule,
     CardModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MatButtonModule,
     MatCardModule,
@@ -56,7 +59,8 @@ const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
   ],
   providers: [
     {
-      provide: APP_INITIALIZER,
+      provide: HTTP_INTERCEPTORS,
+      useClass:AuthInterceptorComponent,
       useFactory: initializePrimeNgConfig,
       deps: [PrimeNGConfig],
       multi: true

@@ -1,25 +1,44 @@
 <div class="login-box">
-    <div class="data-input email">
-        <input 
-            class="p-input"
-            type="email"
-            pInputText
-            placeholder="Email"
-            [(ngModel)]="userService.userData.email"
-        />
-    </div>
-    <div class="data-input passwd">
-        <p-password
-            class="p-input"
-            placeholder="Password"
-            [(ngModel)]="userService.userData.passwd"
-        ></p-password>
-    </div>
-    <div class="submit">
-        <p-button
-            class="p-input"
-            label="Login"
-            (onClick)="onLogin()"
-        ></p-button>
-    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <!--Username-->
+        <div class="form-group pt-3">
+            <div class="input-field" [class.error]="loginForm.controls['username'].dirty && loginForm.hasError('required','username')"> 
+                <span class="fa fa-user p-2"></span> 
+                <input 
+                    class="p-input"
+                    type="text"
+                    pInputText
+                    formControlName="username"
+                    placeholder="Username o Email" required=""/>
+            </div>
+        </div>
+        <small *ngIf="loginForm.controls['username'].dirty && loginForm.hasError('required','username')" class="text-danger">*Username is required*</small>
+        
+        <!--Password-->
+        <div class="form-group pt-3">
+            <div class="input-field" [class.error]="loginForm.controls['password'].dirty && loginForm.hasError('required','password')"> 
+                <span class="fa fa-lock px-2"></span> 
+                <p-password
+                    formControlName="password"
+                    [toggleMask] = true
+                    class="p-input"
+                    placeholder="Password">
+                </p-password>                 
+                <!--showclear: la x che cancella la parola ma è sfasata-->            
+            </div>
+        </div>
+        <small *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required','password')" class="text-danger"> *Password is required*</small>
+        
+        <div class="form-inline fr mt-4"> 
+            <a id="forgot" data-bs-toggle="modal" data-bs-target="#exampleModal" class="font-weight-bold">Forgot password?</a> 
+        </div>
+        <!--Login Button-->
+        <p-button 
+            type="submit" 
+            label="Login">
+        </p-button>
+        <div class="text-center pt-4 text-muted">Don't have an account? 
+            <a id="forgot" routerLink="/signup" (click)="OnForgot()">Sign up</a> 
+        </div>
+    </form>
 </div>

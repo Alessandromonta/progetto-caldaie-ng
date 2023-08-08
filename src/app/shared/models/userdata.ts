@@ -3,9 +3,13 @@ export class UserData {
     costructor() {}
 
     public email: string = null;
-    public passwd: string = null;
-    public name: string = null;
-    public surname: string = null;
+    public password: string = null;
+    public confirmPassword: string = null;
+    public username: string = null;
+    public grado: number = 2;   //privilegio
+    public token: number = 0;   //numero di token dell'utente
+
+    
 
     // public get email(): string {return this.email};
     // public get passwd(): string {return this.passwd};

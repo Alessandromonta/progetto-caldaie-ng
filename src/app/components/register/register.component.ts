@@ -9,6 +9,7 @@ import { UserData } from 'src/app/shared/models/userdata';
 })
 export class RegisterComponent implements OnInit{
 
+  
   constructor(
     public userService: UserService
   ) {}
@@ -18,6 +19,13 @@ export class RegisterComponent implements OnInit{
   }
 
   public onRegister() {
-    console.log("registrato (maybe)")
+    //console.log("registrato (maybe)")
+    if(this.userService.userData.password != this.userService.userData.confirmPassword)
+    {
+      alert("Le password Non coincidono")
+    }
+    else{
+      this.userService.RegisterUser(this.userService.userData.username, this.userService.userData.email, this.userService.userData.password)
+    }
   }
 }
