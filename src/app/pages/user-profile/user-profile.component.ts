@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IconDefinition } from '@fortawesome/free-brands-svg-icons';
-import { UserService } from 'src/app/services/user.service';
-import { UserData } from 'src/app/shared/models/userdata';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from 'src/app/shared/auth.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -12,7 +11,7 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 export class UserProfileComponent implements OnInit {
 
   constructor(
-    public userService: UserService
+    public authService: AuthService
   ) {}
 
   public checkIcon: IconDefinition = null;

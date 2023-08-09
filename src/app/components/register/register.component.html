@@ -3,7 +3,6 @@
         <input 
             pInputText
             placeholder="Nome"
-            [(ngModel)]="userService.userData.username"
         />
     </div>
     <div class="data-input email">
@@ -12,14 +11,12 @@
             type="email"
             pInputText
             placeholder="Email"
-            [(ngModel)]="userService.userData.email"
         />
     </div>
     <div class="data-input passwd">
         <p-password
             class="p-input"
             placeholder="Password"
-            [(ngModel)]="userService.userData.password"
         ></p-password>
     </div>
 
@@ -27,7 +24,6 @@
         <p-password
             class="p-input"
             placeholder="Conferma Password"
-            [(ngModel)]="userService.userData.confirmPassword"
         ></p-password>
     </div>
     <div class="submit">

@@ -18,13 +18,11 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { InputTextModule } from 'primeng/inputtext';
-import { PasswordModule } from 'primeng/password';
 import { PrimeNGConfig } from 'primeng/api';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { PackagesListComponent } from './pages/packages-list/packages-list.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { AuthInterceptorComponent } from './components/Interceptor/auth-interceptor/auth-interceptor.component';
+import { AuthInterceptor } from './shared/authconfig.interceptor';
  
 const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
@@ -39,7 +37,6 @@ const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
     RegisterComponent,
     UserProfileComponent,
     PackagesListComponent,
-    AuthInterceptorComponent
   ],
   imports: [
     BrowserModule,
@@ -55,14 +52,14 @@ const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
     MatExpansionModule,
     NoopAnimationsModule,
     MatDividerModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass:AuthInterceptorComponent,
-      useFactory: initializePrimeNgConfig,
-      deps: [PrimeNGConfig],
+      useClass:AuthInterceptor,
+      //useFactory: initializePrimeNgConfig,
+      //deps: [PrimeNGConfig],
       multi: true
     }
   ],

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthComponent } from './pages/auth/auth.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
-import { AuthGuard } from './shared/guards/auth.guard';
 import { PackagesListComponent } from './pages/packages-list/packages-list.component';
+import { AuthGuard } from './shared/auth.guard';
+import { AuthComponent } from './pages/auth/auth.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
