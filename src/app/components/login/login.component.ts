@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
       .subscribe((res: any) => {
         localStorage.setItem('access_token', res);
         console.log(res);
-        this.router.navigate(['profilo-utente']);
+        this.router.navigate(['/profilo-utente']);
       },
       (error) => {
         console.error('Error signing in:', error);

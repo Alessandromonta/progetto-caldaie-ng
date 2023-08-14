@@ -17,7 +17,7 @@ import { Utenti } from '../Models/utenti';
   providedIn: 'root',
 })
 export class AuthService {
-  endpoint: string = 'https://localhost:7173/api/User';
+  endpoint: string = 'http://asbregafioi-001-site1.etempurl.com/api/User';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
   constructor(private http: HttpClient, public router: Router) {}
