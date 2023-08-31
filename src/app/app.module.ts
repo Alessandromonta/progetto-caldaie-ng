@@ -23,9 +23,6 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
 import { PackagesListComponent } from './pages/packages-list/packages-list.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthInterceptor } from './shared/authconfig.interceptor';
-import { ProductDisplayComponent } from './components/product-display/product-display.component';
-import { MessageComponent } from './components/message/message.component';
-import { CheckoutFormComponent } from './components/checkout-form/checkout-form.component';
  
 const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
@@ -40,9 +37,6 @@ const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
     RegisterComponent,
     UserProfileComponent,
     PackagesListComponent,
-    ProductDisplayComponent,
-    MessageComponent,
-    CheckoutFormComponent,
   ],
   imports: [
     BrowserModule,
