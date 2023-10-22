@@ -1,0 +1,10 @@
+{
+  "/api": {
+    "secure": false,
+    "target": "http://asbregafioi-001-site1.etempurl.com",
+    "pathRewrite": {
+      "^api/": ""
+    },
+    "changeOrigin": true
+  }
+}

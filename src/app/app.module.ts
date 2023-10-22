@@ -23,7 +23,7 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
 import { PackagesListComponent } from './pages/packages-list/packages-list.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthInterceptor } from './shared/authconfig.interceptor';
- 
+
 const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
 }
@@ -52,7 +52,7 @@ const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
     MatExpansionModule,
     NoopAnimationsModule,
     MatDividerModule,
-    FontAwesomeModule,
+    FontAwesomeModule
   ],
   providers: [
     {
