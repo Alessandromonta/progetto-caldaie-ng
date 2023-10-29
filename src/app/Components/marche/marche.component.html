@@ -1,0 +1,31 @@
+<app-crud></app-crud>
+
+<div class="marche-list">
+     <h2>Elenco delle Marche</h2>
+     <ul>
+          <li *ngFor="let marca of marcheList">
+               {{ marca.nome }}
+               <button (click)="openEditMarcaPopup(marca)">Modifica</button>
+               <button (click)="deleteMarca(marca.id)">Elimina</button>
+             </li>
+     </ul>
+   
+     <!-- Bottone per aprire il modulo popup -->
+     <button (click)="openAddMarcaPopup()">Aggiungi Marca</button>
+   
+     <div class="popup" *ngIf="showEditMarcaPopup">
+          <h3>Modifica Marca</h3>
+          <input type="text" [(ngModel)]="editMarcaNome" placeholder="Nuovo Nome della Marca">
+          <button (click)="updateMarca()">Salva</button>
+          <button (click)="closeEditMarcaPopup()">Annulla</button>
+        </div>
+
+     <!-- Modulo popup per aggiungere una nuova marca -->
+     <div class="popup" *ngIf="showAddMarcaPopup">
+       <h3>Aggiungi Nuova Marca</h3>
+       <input type="text" [(ngModel)]="newMarca" placeholder="Nome della Marca">
+       <button (click)="addMarca()">Aggiungi</button>
+       <button (click)="closeAddMarcaPopup()">Annulla</button>
+     </div>
+   </div>
+   

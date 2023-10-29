@@ -20,6 +20,10 @@ import { AuthComponent } from './Auth/Component/auth/auth.component';
 import { UserProfileComponent } from './Components/user-profile/user-profile.component';
 import { LoginComponent } from './Components/login/login.component';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { CrudComponent } from './Components/crud/crud.component';
+import { MarcheComponent } from './Components/marche/marche.component';
+import { CaldaieComponent } from './Components/caldaie/caldaie.component';
+import { PacchettiComponent } from './Components/pacchetti/pacchetti.component';
  
 const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
@@ -38,6 +42,10 @@ export function jwtOptionsFactory() {
     AuthComponent,
     UserProfileComponent,
     LoginComponent,
+    CrudComponent,
+    MarcheComponent,
+    CaldaieComponent,
+    PacchettiComponent,
     
   ],
   imports: [

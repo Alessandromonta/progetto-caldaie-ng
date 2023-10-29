@@ -4,6 +4,9 @@ import { AuthComponent } from './Auth/Component/auth/auth.component';
 import { AuthGuard } from './Auth/Guard/auth.guard';
 import { LoginComponent } from './Components/login/login.component';
 import { UserProfileComponent } from './Components/user-profile/user-profile.component';
+import { MarcheComponent } from './Components/marche/marche.component';
+import { CaldaieComponent } from './Components/caldaie/caldaie.component';
+import { PacchettiComponent } from './Components/pacchetti/pacchetti.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -21,11 +24,10 @@ const routes: Routes = [
     path: 'user-profile', 
     component: UserProfileComponent,
     canActivate: [AuthGuard]
-  }/*,
-  {
-    path: 'elenco-pacchetti',
-    component: PackagesListComponent
-  }*/
+  }, 
+  { path: 'Marche', component: MarcheComponent },
+  { path: 'Caldaie', component: CaldaieComponent },
+  { path: 'Pacchetti', component: PacchettiComponent }
 ];
 
 @NgModule({

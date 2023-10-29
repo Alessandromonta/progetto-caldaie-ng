@@ -1,0 +1,40 @@
+/* navbar.component.less */
+
+nav {
+     background-color: #333; // Colore di sfondo
+     color: #fff; // Colore del testo
+     display: flex; // Per renderla in linea
+   
+     ul {
+       list-style: none;
+       padding: 0;
+       display: flex;
+       align-items: center; // Per centrare verticalmente
+       margin: 0;
+   
+       li {
+         margin: 0 20px; // Spaziatura tra gli elementi della barra di navigazione
+   
+         a {
+           text-decoration: none;
+           color: #fff;
+           transition: color 0.3s; // Effetto di transizione sul cambio di colore
+   
+           &:hover {
+             color: #ff9900; // Colore del testo al passaggio del mouse
+           }
+         }
+       }
+     }
+   }
+   
+   /* Stile per il link Logout (puoi aggiungere altri stili specifici qui) */
+   ul:last-child {
+     li:nth-child(2) {
+       margin-left: auto; // Per spostare il link "Logout" a destra
+     }
+   }
+   
+   .content {
+    padding: 20px; // Spaziatura tra il contenuto e la barra di navigazione
+  }
