@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { IconDefinition } from '@fortawesome/free-brands-svg-icons';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/Auth/Service/auth-service.service';
 
 @Component({
@@ -10,13 +9,23 @@ import { AuthService } from 'src/app/Auth/Service/auth-service.service';
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor(
-    public authService: AuthService
-  ) {}
-  
+  public checkIcon: IconDefinition = null;
+  isOwner: boolean = false;
+
+  constructor(private authService: AuthService) {}
+
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    // Controlla il ruolo dell'utente ottenuto dal servizio di autenticazione
+    const userRole = this.authService.getUserRole(); // Implementa questo metodo nel tuo servizio
+
+    // Verifica se l'utente è un "Owner" o ha il grado appropriato
+    if (userRole === '1' ) {
+      this.isOwner = true;
+    }
+    else{
+      this.isOwner = false;
+    }
   }
 
-  public checkIcon: IconDefinition = null;
+  
 }

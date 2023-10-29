@@ -1,82 +1,34 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import {
   HttpClient,
-  HttpHeaders,
-  HttpErrorResponse,
 } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { Utenti } from 'src/app/Models/Utenti';
-
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  endpoint: string = 'http://asbregafioi-001-site1.etempurl.com/api/User';
-  headers = new HttpHeaders().set('Content-Type', 'application/json');
-  currentUser = {};
-  constructor(private http: HttpClient, public router: Router) {}
+  private apiUrl = 'http://autoclima-001-site1.atempurl.com/api'; 
 
-  //public userData: UserData = null;
-  //Init
-  initUserData(): void{
-    //this.userData = new UserData();
-  }
+  constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
 
-  // Sign-up
-  RegisterUser(user: Utenti): Observable<any> {
-    let api = `${this.endpoint}`;
-    return this.http.post(api, user).pipe(catchError(this.handleError));
-  }
-  // Sign-in
-  loginUser(user: Utenti): Observable<any> {
-    return this.http.post(`${this.endpoint}/Login`, user, { responseType: 'text' });   //default piglia response type: JSON
-  }
-  setTokenHeader(): void{
-    this.headers = new HttpHeaders({
-      'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-    });
-  }
-  getToken() : string {
-    if(localStorage.getItem('access_token') != null)
-      return localStorage.getItem('access_token') as string;
-    else
-      return ""
-  }
-  get isLoggedIn(): boolean {
-    let authToken = localStorage.getItem('access_token');
-    return authToken !== null ? true : false;
-  }
-  doLogout() {
-    let removeToken = localStorage.removeItem('access_token');
-    if (removeToken == null) {
-      this.router.navigate(['log-in']);
-    }
-  }
-  // User profile
-  getUserProfile(): Observable<any> {
-    debugger
-    let api = `${this.endpoint}`;
-    return this.http.get(api, { headers: this.headers }).pipe(
-      map((res) => {
-        console.log(res);
-        return res || {};
-      }),
-      catchError(this.handleError)
+  login(username: string, password: string): Observable<any> {
+    const credentials = { username, password };
+
+    return this.http.post(`${this.apiUrl}/User/Login`, credentials, { responseType: 'text' }).pipe(
+      tap((response) => {
+        console.log('Risultato della chiamata POST:', response);
+      })
     );
+
   }
-  // Error
-  handleError(error: HttpErrorResponse) {
-    let msg = '';
-    if (error.error instanceof ErrorEvent) {
-      // client-side error
-      msg = error.error.message;
-    } else {
-      // server-side error
-      msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    return throwError(msg);
+
+  getUserRole() {
+    const token = localStorage.getItem('bearerToken'); 
+    const decodedToken = this.jwtHelper.decodeToken(token);
+    return decodedToken['Grado']; // Estrai il claim "Grado"
   }
+
 }

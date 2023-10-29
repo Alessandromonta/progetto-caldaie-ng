@@ -1,0 +1,26 @@
+<div class="login-container">
+     <h2>Login</h2>
+     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+       <div class="form-group">
+         <label for="username">Username</label>
+         <input type="text" id="username" formControlName="username" required />
+       </div>
+       <div class="form-group">
+         <label for="password">Password</label>
+         <input type="password" id="password" formControlName="password" required />
+       </div>
+       <button type="submit" [disabled]="loginForm.invalid">Login</button>
+       <div *ngIf="loginError" class="error-message">
+         Login failed. Please check your credentials.
+       </div>
+     </form>
+   </div>
+
+   <!-- eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+    eyJVc2VySWQiOiIyIiwiVXNlcm5hbWUiOiJGaWxsbyIsIkdyYWRvIjoiMSIsIm5iZiI6MTY5ODYxNDgwNSwiZXhwIjoxNjk4NzAxMjA1LCJpYXQiOjE2OTg2MTQ4MDV9.
+    vE0bCOoU7EEloaAzIF7Ae_d0J9peDMWXTsxqRJ8j8K0 
+  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+  eyJVc2VySWQiOiIyIiwiVXNlcm5hbWUiOiJGaWxsbyIsIkdyYWRvIjoiMSIsIm5iZiI6MTY5ODYxNjIwNiwiZXhwIjoxNjk4NzAyNjA2LCJpYXQiOjE2OTg2MTYyMDZ9.
+  PuIVsDqt05rUJXz3RCyMaXW2rAOt20ZwSF6R1b6vOwM
+  -->
+   

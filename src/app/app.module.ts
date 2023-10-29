@@ -18,9 +18,18 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthInterceptor } from './Auth/auth.interceptor';
 import { AuthComponent } from './Auth/Component/auth/auth.component';
 import { UserProfileComponent } from './Components/user-profile/user-profile.component';
+import { LoginComponent } from './Components/login/login.component';
+import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
  
 const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
+}
+
+export function jwtOptionsFactory() {
+  return {
+    tokenGetter: () => localStorage.getItem('bearerToken'), // Nome della chiave in cui hai memorizzato il token nella local storage
+    allowedDomains: ['autoclima-001-site1.atempurl.com'], // Sostituisci con il tuo dominio
+  };
 }
 
 @NgModule({
@@ -28,6 +37,8 @@ const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
     AppComponent,
     AuthComponent,
     UserProfileComponent,
+    LoginComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -43,6 +54,12 @@ const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
     NoopAnimationsModule,
     MatDividerModule,
     FontAwesomeModule,
+    JwtModule.forRoot({
+      jwtOptionsProvider: {
+        provide:JWT_OPTIONS,
+        useFactory: jwtOptionsFactory,
+      }
+    })
   ],
   providers: [
     {
