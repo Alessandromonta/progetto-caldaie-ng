@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UserProfileComponent } from './pages/user-profile/user-profile.component';
-import { PackagesListComponent } from './pages/packages-list/packages-list.component';
-import { AuthGuard } from './shared/auth.guard';
-import { AuthComponent } from './pages/auth/auth.component';
+import { AuthComponent } from './Auth/Component/auth/auth.component';
+import { AuthGuard } from './Auth/Guard/auth.guard';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -17,7 +15,7 @@ const routes: Routes = [
       registerFlag: true
     } 
   },
-  {
+  /*{
     path: 'profilo-utente', 
     component: UserProfileComponent,
     canActivate: [AuthGuard]
@@ -25,7 +23,7 @@ const routes: Routes = [
   {
     path: 'elenco-pacchetti',
     component: PackagesListComponent
-  }
+  }*/
 ];
 
 @NgModule({
