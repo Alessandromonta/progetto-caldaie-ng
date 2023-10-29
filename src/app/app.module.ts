@@ -60,12 +60,12 @@ const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
       useFactory: initializePrimeNgConfig,
       deps: [PrimeNGConfig],
       multi: true
-    },
+    }/*,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    }*/
   ],
   bootstrap: [AppComponent]
 })

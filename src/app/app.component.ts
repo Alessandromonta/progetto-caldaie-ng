@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Stripe, loadStripe, StripeElement } from '@stripe/stripe-js';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { from, map, switchMap, tap } from 'rxjs';
+import { catchError, from, map, switchMap, tap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { PaymentInformation, LineItem, PriceData, ProductData } from 'src/app/Models/checkout.model';
 @Component({
@@ -35,21 +35,24 @@ export class AppComponent {
     item.price_data.unit_amount = 54;
     item.price_data.product_data.name = "Un bambino scuro";
 
-    checkoutConfig.line_items = {
-      1: item
-    }
+    checkoutConfig.line_items = [item]
     checkoutConfig.mode = "payment";
     checkoutConfig.allow_promotion_codes = true;
-    checkoutConfig.success_url = "";
-    checkoutConfig.cancel_url = "";
+    checkoutConfig.success_url = "/success";
+    checkoutConfig.cancel_url = "/cancel";
     checkoutConfig.payment_method_types = [];
     checkoutConfig.payment_method_types.push('card')
     //"ConnectionStrings": { "DefaultConnection": "Server=SQL8002.site4now.net;Database=db_aa06c8_autoclimarepair;User Id=db_aa06c8_autoclimarepair_admin;Password=Autoclima2023;" }
     console.log(checkoutConfig);
     this.httpClient
       .post<any>(
-        'http://autoclima-001-site1.atempurl.com/api/payment/create-checkout-session', checkoutConfig,
-        { responseType: 'json' }
+        'https://localhost:7173/api/payment/create-checkout-session', checkoutConfig,
+        { 
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': '', // Specifico che non richiede autorizzazione
+          })
+        }
       )
       .pipe(
         tap( res => {
