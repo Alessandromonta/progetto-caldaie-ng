@@ -1,31 +1,42 @@
 <app-crud></app-crud>
 
 <div class="marche-list">
-     <h2>Elenco delle Marche</h2>
-     <ul>
-          <li *ngFor="let marca of marcheList">
-               {{ marca.nome }}
-               <button (click)="openEditMarcaPopup(marca)">Modifica</button>
-               <button (click)="deleteMarca(marca.id)">Elimina</button>
-             </li>
-     </ul>
+      <h2>Elenco delle Marche</h2>
+      <div *ngFor="let marca of marcheList">
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>{{ marca.nome }}</mat-card-title>
+                <mat-card-subtitle>{{ marca.id }}</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-actions>
+                <button mat-raised-button color="primary" (click)="openEditMarcaPopup(marca)">Modifica</button>
+                <button mat-raised-button color="primary" (click)="deleteMarca(marca.id)">Elimina</button>
+              </mat-card-actions>
+            </mat-card>
+      </div>
    
      <!-- Bottone per aprire il modulo popup -->
-     <button (click)="openAddMarcaPopup()">Aggiungi Marca</button>
+     <button mat-raised-button color="primary" (click)="openAddMarcaPopup()">Aggiungi Marca</button>
    
-     <div class="popup" *ngIf="showEditMarcaPopup">
-          <h3>Modifica Marca</h3>
-          <input type="text" [(ngModel)]="editMarcaNome" placeholder="Nuovo Nome della Marca">
-          <button (click)="updateMarca()">Salva</button>
-          <button (click)="closeEditMarcaPopup()">Annulla</button>
-        </div>
+    <div class="popup" *ngIf="showEditMarcaPopup">
+        <h3>Modifica Marca</h3>
+        <mat-form-field >
+          <mat-label>Nuovo Nome della Marca</mat-label>
+          <input [(ngModel)]="editMarcaNome" matInput placeholder="Ex. Riello">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="updateMarca()">Salva</button>
+        <button mat-raised-button color="primary" (click)="closeEditMarcaPopup()">Annulla</button>
+    </div>
 
-     <!-- Modulo popup per aggiungere una nuova marca -->
      <div class="popup" *ngIf="showAddMarcaPopup">
-       <h3>Aggiungi Nuova Marca</h3>
-       <input type="text" [(ngModel)]="newMarca" placeholder="Nome della Marca">
-       <button (click)="addMarca()">Aggiungi</button>
-       <button (click)="closeAddMarcaPopup()">Annulla</button>
-     </div>
-   </div>
+        <h3>Aggiungi Nuova Marca</h3>
+        <mat-form-field >
+          <mat-label>Nome della Marca</mat-label>
+          <input [(ngModel)]="newMarca" matInput placeholder="Ex. Riello">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="closeAddMarcaPopup()">Annulla</button>
+        <button mat-raised-button color="primary" (click)="addMarca()">Aggiungi</button>
+     </div> 
+</div>
+   
    

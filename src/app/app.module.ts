@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule, inject } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -24,7 +24,12 @@ import { CrudComponent } from './Components/crud/crud.component';
 import { MarcheComponent } from './Components/marche/marche.component';
 import { CaldaieComponent } from './Components/caldaie/caldaie.component';
 import { PacchettiComponent } from './Components/pacchetti/pacchetti.component';
- 
+
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+
 const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
 }
@@ -58,7 +63,11 @@ export function jwtOptionsFactory() {
     HttpClientModule,
     MatButtonModule,
     MatCardModule,
+    MatIconModule,
     MatExpansionModule,
+    MatSelectModule,
+    MatInputModule,
+    MatFormFieldModule,
     NoopAnimationsModule,
     MatDividerModule,
     FontAwesomeModule,

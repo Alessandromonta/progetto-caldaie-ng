@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MarcheService } from 'src/app/Services/marche.service';
+
+
 
 @Component({
   selector: 'app-marche',
   templateUrl: './marche.component.html',
+  styleUrls: ['./marche.component.less']
 })
 export class MarcheComponent implements OnInit {
   marcheList: any[] = [];
@@ -18,31 +21,12 @@ export class MarcheComponent implements OnInit {
   ngOnInit(): void {
     this.getMarcheList();
   }
-
+//#region   CRUD
   getMarcheList(): void {
     this.marcheService.getMarche().subscribe((marche) => {
       this.marcheList = marche;
     });
   }
-
-  openAddMarcaPopup(): void {
-    this.showAddMarcaPopup = true;
-  }
-
-  closeAddMarcaPopup(): void {
-    this.showAddMarcaPopup = false;
-  }
-
-  openEditMarcaPopup(marca: any): void {
-    this.editMarcaId = marca.id;
-    this.editMarcaNome = marca.nome;
-    this.showEditMarcaPopup = true;
-  }
-
-  closeEditMarcaPopup(): void {
-    this.showEditMarcaPopup = false;
-  }
-
   addMarca(): void {
     if (this.newMarca) {
       this.marcheService.addMarca({ nome: this.newMarca }).subscribe((response) => {
@@ -71,4 +55,33 @@ export class MarcheComponent implements OnInit {
       this.showEditMarcaPopup = false; // Chiudi il modulo popup di modifica
     });
   }
+  //#endregion
+
+  //#region NEW POPUP
+
+
+  //#endregion
+
+  //#region OLD POPUP
+  openAddMarcaPopup(): void {
+    this.showAddMarcaPopup = true;
+  }
+
+  closeAddMarcaPopup(): void {
+    this.showAddMarcaPopup = false;
+  }
+
+  openEditMarcaPopup(marca: any): void {
+    this.editMarcaId = marca.id;
+    this.editMarcaNome = marca.nome;
+    this.showEditMarcaPopup = true;
+  }
+
+  closeEditMarcaPopup(): void {
+    this.showEditMarcaPopup = false;
+  }
+//#endregion
+  
+
 }
+
