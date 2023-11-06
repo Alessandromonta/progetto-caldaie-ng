@@ -7,7 +7,7 @@ import { MenubarModule } from 'primeng/menubar';
 import { CardModule } from 'primeng/card';
 
 import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
+import {MatCard, MatCardModule} from '@angular/material/card';
 import {MatExpansionModule, } from '@angular/material/expansion';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MatDividerModule} from '@angular/material/divider';
@@ -29,6 +29,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {LoadingComponent} from  './Components/loading/loading.component';
 
 const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
@@ -51,7 +53,7 @@ export function jwtOptionsFactory() {
     MarcheComponent,
     CaldaieComponent,
     PacchettiComponent,
-    
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -70,6 +72,7 @@ export function jwtOptionsFactory() {
     MatFormFieldModule,
     NoopAnimationsModule,
     MatDividerModule,
+    MatProgressSpinnerModule,
     FontAwesomeModule,
     JwtModule.forRoot({
       jwtOptionsProvider: {
