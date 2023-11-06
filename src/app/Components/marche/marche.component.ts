@@ -1,7 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MarcheService } from 'src/app/Services/marche.service';
-
-
 
 @Component({
   selector: 'app-marche',
@@ -18,15 +16,23 @@ export class MarcheComponent implements OnInit {
 
   constructor(private marcheService: MarcheService) {}
 
+  loading: boolean = true;
+
   ngOnInit(): void {
-    this.getMarcheList();
+    this.loading = true; // Imposta il caricamento su true prima di iniziare il caricamento dei dati
+    this.getMarcheList(); // Chiamata per caricare i dati
   }
 //#region   CRUD
   getMarcheList(): void {
     this.marcheService.getMarche().subscribe((marche) => {
       this.marcheList = marche;
+      setTimeout(() => {
+        // Dopo aver caricato i dati o completato il processo
+        this.loading = false;
+      }, 0);
     });
   }
+
   addMarca(): void {
     if (this.newMarca) {
       this.marcheService.addMarca({ nome: this.newMarca }).subscribe((response) => {
