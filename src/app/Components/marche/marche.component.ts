@@ -24,7 +24,7 @@ export class MarcheComponent implements OnInit {
   }
 //#region   CRUD
   getMarcheList(): void {
-    this.marcheService.getMarche().subscribe((marche) => {
+    this.marcheService.getItems().subscribe((marche) => {
       this.marcheList = marche;
       setTimeout(() => {
         // Dopo aver caricato i dati o completato il processo
@@ -35,7 +35,7 @@ export class MarcheComponent implements OnInit {
 
   addMarca(): void {
     if (this.newMarca) {
-      this.marcheService.addMarca({ nome: this.newMarca }).subscribe((response) => {
+      this.marcheService.addItem({ nome: this.newMarca }).subscribe((response) => {
         // Aggiorna la lista delle marche dopo l'aggiunta
         this.getMarcheList();
         this.newMarca = ''; // Resetta il campo del nome della marca
@@ -45,7 +45,7 @@ export class MarcheComponent implements OnInit {
   }
 
   deleteMarca(marcaId: number): void {
-    this.marcheService.deleteMarca(marcaId).subscribe(() => {
+    this.marcheService.deleteItem(marcaId).subscribe(() => {
       // Aggiorna la lista delle marche dopo l'eliminazione
       this.getMarcheList();
     });
@@ -54,7 +54,7 @@ export class MarcheComponent implements OnInit {
   updateMarca(): void {
     const updatedMarca = { id: this.editMarcaId, nome: this.editMarcaNome };
 
-    this.marcheService.updateMarca(this.editMarcaId, updatedMarca).subscribe(() => {
+    this.marcheService.updateItem(this.editMarcaId, updatedMarca).subscribe(() => {
       // Aggiorna la lista delle marche dopo la modifica
       this.getMarcheList();
       this.editMarcaNome = ''; // Resetta il campo del nome della marca
