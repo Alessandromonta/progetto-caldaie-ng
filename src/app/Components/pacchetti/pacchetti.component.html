@@ -1,2 +1,42 @@
 <app-crud></app-crud>
-<p>pacchetti works!</p>
+<app-loading [loading]="loading"/>
+
+<div class="marche-list">
+      <h2>Elenco dei Pacchetti</h2>
+      <div *ngFor="let pacchetti of pacchettiList">
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>{{ pacchetti.nome }}</mat-card-title>
+                <mat-card-subtitle>{{ pacchetti.id }}</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-actions>
+                <button mat-raised-button color="primary" (click)="openEditPacchettiPopup(pacchetti)">Modifica</button>
+                <button mat-raised-button color="primary" (click)="deletePacchetti(pacchetti.id)">Elimina</button>
+              </mat-card-actions>
+            </mat-card>
+      </div>
+   
+     <!-- Bottone per aprire il modulo popup -->
+     <button mat-raised-button color="primary" (click)="openAddPacchettiPopup()">Aggiungi Pacchetti</button>
+   
+    <div class="popup" *ngIf="showEditPopup">
+        <h3>Modifica Pacchetti</h3>
+        <mat-form-field >
+          <mat-label>Nuovo Nome del Pacchetto</mat-label>
+          <input [(ngModel)]="editPacchettoNome" matInput placeholder="Ex. Riello">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="updatePacchetti()">Salva</button>
+        <button mat-raised-button color="primary" (click)="closeEditPacchettiPopup()">Annulla</button>
+    </div>
+
+     <div class="popup" *ngIf="showAddPopup">
+        <h3>Aggiungi Nuova Pacchetti</h3>
+        <mat-form-field >
+          <mat-label>Nome della Pacchetti</mat-label>
+          <input [(ngModel)]="newPacchetto" matInput placeholder="Ex. Riello">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="closeAddPacchettiPopup()">Annulla</button>
+        <button mat-raised-button color="primary" (click)="addPacchetti()">Aggiungi</button>
+     </div> 
+</div>
+   

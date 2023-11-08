@@ -3,7 +3,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import {
-  HttpClient,
+  HttpClient, HttpHeaders,
 } from '@angular/common/http';
 
 @Injectable({
@@ -22,15 +22,24 @@ export class AuthService {
         console.log('Risultato della chiamata POST:', response);
       })
     );
-
   }
+  /*
+  logout(): Observable<any> {
+    const token = localStorage.getItem('token');
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }),
+    };
+    return this.http.post(`${this.apiUrl}/Logout`, null, httpOptions);
+  }*/
 
   getUserRole() {
     const token = localStorage.getItem('bearerToken'); 
     const decodedToken = this.jwtHelper.decodeToken(token);
     return decodedToken['Grado']; // Estrai il claim "Grado"
   }
-
-  
 
 }
