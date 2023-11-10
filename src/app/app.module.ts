@@ -31,6 +31,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {LoadingComponent} from  './Components/loading/loading.component';
+import {TableModule} from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import {SidebarModule} from'primeng/sidebar';
+import { InputTextModule } from 'primeng/inputtext';
 
 const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
@@ -73,6 +77,10 @@ export function jwtOptionsFactory() {
     NoopAnimationsModule,
     MatDividerModule,
     MatProgressSpinnerModule,
+    TableModule,
+    ButtonModule,
+    InputTextModule,
+    SidebarModule,
     FontAwesomeModule,
     JwtModule.forRoot({
       jwtOptionsProvider: {

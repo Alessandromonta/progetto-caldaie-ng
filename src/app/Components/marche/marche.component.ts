@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { tap } from 'rxjs';
+import { MarcaCaldaie } from 'src/app/Models/MarcaCaldaie';
 import { MarcheService } from 'src/app/Services/marche.service';
 
 @Component({
@@ -14,7 +17,7 @@ export class MarcheComponent implements OnInit {
   editMarcaId: number;
   editMarcaNome: string = '';
 
-  constructor(private marcheService: MarcheService) {}
+  constructor(private marcheService: MarcheService, private httpClient: HttpClient) {}
 
   loading: boolean = true;
 
@@ -87,7 +90,27 @@ export class MarcheComponent implements OnInit {
     this.showEditMarcaPopup = false;
   }
 //#endregion
-  
+  public viewSidebarVisibile: boolean = false;
+  public editSidebarVisibile: boolean = false;
+  public marcaToView: MarcaCaldaie;
+  public viewData(marca: MarcaCaldaie) {
+    this.viewSidebarVisibile = !this.viewSidebarVisibile;
+    this.marcaToView = marca;
+  }
 
+  public editData(marca: MarcaCaldaie) {
+    this.editSidebarVisibile = !this.editSidebarVisibile;
+    this.marcaToView = marca;
+  }
+
+  public salvaDati() {
+    this.httpClient.put(
+      `http://autoclima-001-site1.atempurl.com/api/MarcaCaldaie/${this.marcaToView.id}`,
+      this.marcaToView
+    )
+    .pipe(
+      tap(response => console.log(response))
+    ).subscribe()
+  }
 }
 
