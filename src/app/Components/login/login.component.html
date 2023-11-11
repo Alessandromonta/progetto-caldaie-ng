@@ -1,26 +1,47 @@
-<div class="login-container">
+ <div class="login-box">
+
      <h2>Login</h2>
      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-       <div class="form-group">
-         <label for="username">Username</label>
-         <input type="text" id="username" formControlName="username" required />
+        <!--Username-->
+        <div class="form-group pt-3">
+         
+         <div class="input-field" [class.error]="loginForm.controls['username'].dirty && loginForm.hasError('required','username')"> 
+            <label for="username">Username</label>
+            <span class="fa fa-user p-2"></span> 
+            <input class="p-input"
+                    type="text"
+                    pInputText
+                    formControlName="username"
+                    placeholder="Username / Email"  required />
+         </div>
        </div>
-       <div class="form-group">
-         <label for="password">Password</label>
-         <input type="password" id="password" formControlName="password" required />
+       <small *ngIf="loginForm.controls['username'].dirty && loginForm.hasError('required','username')" class="text-danger">*Username is required*</small>
+
+       <!--Password-->
+       <div class="form-group pt-3">
+          <div class="input-field" [class.error]="loginForm.controls['password'].dirty && loginForm.hasError('required','password')"> 
+            <label for="password">Password</label>
+            <span class="fa fa-lock px-2"></span> 
+              <p-password
+                          formControlName="password"
+                          [toggleMask] = true
+                          class="p-input"
+                          placeholder="Password">
+                      </p-password>   
+          </div>
        </div>
-       <button type="submit" [disabled]="loginForm.invalid">Login</button>
+       <small *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required','password')" class="text-danger"> *Password is required*</small>
+       
+       <br>
+       <p-button type="submit" [disabled]="loginForm.invalid">Login</p-button>
+       
        <div *ngIf="loginError" class="error-message">
          Login failed. Please check your credentials.
        </div>
      </form>
-   </div>
+  
+  <div class="text-center pt-4 text-muted">Don't have an account? 
+      <a id="forgot" routerLink="/login" >Sign up</a> 
+  </div>
 
-   <!-- eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-    eyJVc2VySWQiOiIyIiwiVXNlcm5hbWUiOiJGaWxsbyIsIkdyYWRvIjoiMSIsIm5iZiI6MTY5ODYxNDgwNSwiZXhwIjoxNjk4NzAxMjA1LCJpYXQiOjE2OTg2MTQ4MDV9.
-    vE0bCOoU7EEloaAzIF7Ae_d0J9peDMWXTsxqRJ8j8K0 
-  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-  eyJVc2VySWQiOiIyIiwiVXNlcm5hbWUiOiJGaWxsbyIsIkdyYWRvIjoiMSIsIm5iZiI6MTY5ODYxNjIwNiwiZXhwIjoxNjk4NzAyNjA2LCJpYXQiOjE2OTg2MTYyMDZ9.
-  PuIVsDqt05rUJXz3RCyMaXW2rAOt20ZwSF6R1b6vOwM
-  -->
-   
+</div>

@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../Auth/Service/auth-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/Auth/Service/auth-service.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.less'],
 })
-export class LoginComponent {
-  public loginForm: FormGroup;
+export class LoginComponent implements OnInit{
+  public loginForm!: FormGroup;
   public loginError: boolean = false;
 
   constructor(
@@ -18,9 +18,13 @@ export class LoginComponent {
     public router: Router
   ) {
     this.loginForm = this.formBuilder.group({
+      //email: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
+  }
+  ngOnInit(): void {
+    //
   }
 
   onSubmit() {
@@ -49,4 +53,5 @@ export class LoginComponent {
       );
     }
   }
+
 }

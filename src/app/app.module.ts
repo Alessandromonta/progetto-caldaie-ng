@@ -16,7 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PrimeNGConfig } from 'primeng/api';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthInterceptor } from './Auth/auth.interceptor';
-import { AuthComponent } from './Auth/Component/auth/auth.component';
+import { AuthComponent } from './Auth/Component/auth.component';
 import { UserProfileComponent } from './Components/user-profile/user-profile.component';
 import { LoginComponent } from './Components/login/login.component';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
@@ -24,13 +24,17 @@ import { CrudComponent } from './Components/crud/crud.component';
 import { MarcheComponent } from './Components/marche/marche.component';
 import { CaldaieComponent } from './Components/caldaie/caldaie.component';
 import { PacchettiComponent } from './Components/pacchetti/pacchetti.component';
-
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {LoadingComponent} from  './Components/loading/loading.component';
+
+//prime ng
+import { ButtonModule } from 'primeng/button';
+import { PasswordModule } from "primeng/password";
+import {InputTextModule} from 'primeng/inputtext';
 
 const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
@@ -63,6 +67,9 @@ export function jwtOptionsFactory() {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ButtonModule,
+    PasswordModule,
+    InputTextModule,
     MatButtonModule,
     MatCardModule,
     MatIconModule,

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 import {
   HttpClient, HttpHeaders,
 } from '@angular/common/http';
@@ -12,7 +13,7 @@ import {
 export class AuthService {
   private apiUrl = 'http://autoclima-001-site1.atempurl.com/api'; 
 
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
+  constructor(private http: HttpClient, private jwtHelper: JwtHelperService, private router: Router) {}
 
   login(username: string, password: string): Observable<any> {
     const credentials = { username, password };
@@ -23,7 +24,7 @@ export class AuthService {
       })
     );
   }
-  /*
+  
   logout(): Observable<any> {
     const token = localStorage.getItem('token');
 
@@ -33,8 +34,15 @@ export class AuthService {
         'Authorization': `Bearer ${token}`
       }),
     };
+
+
+    let removeToken = localStorage.removeItem('access_token');
+    if (removeToken == null) {
+      this.router.navigate(['log-in']);
+    }
+
     return this.http.post(`${this.apiUrl}/Logout`, null, httpOptions);
-  }*/
+  }
 
   getUserRole() {
     const token = localStorage.getItem('bearerToken'); 
