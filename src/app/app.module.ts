@@ -33,8 +33,11 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {LoadingComponent} from  './Components/loading/loading.component';
 import {TableModule} from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
-import {SidebarModule} from'primeng/sidebar';
+import {SidebarModule} from 'primeng/sidebar';
+import {DialogModule} from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
+import { MarcaEditComponent } from './Components/marca-edit/marca-edit.component';
+import { MarcaViewComponent } from './Components/marca-view/marca-view.component';
 
 const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
@@ -57,7 +60,9 @@ export function jwtOptionsFactory() {
     MarcheComponent,
     CaldaieComponent,
     PacchettiComponent,
-    LoadingComponent
+    LoadingComponent,
+    MarcaEditComponent,
+    MarcaViewComponent
   ],
   imports: [
     BrowserModule,
@@ -81,6 +86,7 @@ export function jwtOptionsFactory() {
     ButtonModule,
     InputTextModule,
     SidebarModule,
+    DialogModule,
     FontAwesomeModule,
     JwtModule.forRoot({
       jwtOptionsProvider: {

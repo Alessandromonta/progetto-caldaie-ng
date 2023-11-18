@@ -2,13 +2,37 @@
 
 <app-loading [loading]="loading"/>
 
-<p-sidebar [(visible)]="viewSidebarVisibile" position="right" styleClass="p-sidebar-lg">
-  {{ "Visualizza marca" }}
-
-  <div class="data-box">
-    <p>{{ "Id: " + marcaToView?.id }}</p>
-    <p>{{ "Nome: " + marcaToView?.nome }}</p>
+<p-dialog
+  [(visible)]="deleteDialogVisible"
+  styleClass="delete-dialog"
+>
+  <div class="dialog-content-box">
+    {{ "Confermi di voler eliminare questo elemento?" }}
+    <div class="dialog-button-box">
+      <p-button
+        label="Sì"
+        (onClick)="deleteData()"
+      >
+      </p-button>
+      <p-button
+        label="No"
+        (onClick)="deleteDialogVisible = false"
+      >
+      </p-button>    
+    </div>
   </div>
+</p-dialog>
+
+<p-sidebar
+  *ngIf="viewSidebarVisibile"
+  [(visible)]="viewSidebarVisibile"
+  position="right" 
+  styleClass="p-sidebar-lg"
+>
+  <app-marca-view
+    [selectedMarca]="selectedMarca"
+  >
+  </app-marca-view>
 </p-sidebar>
 
 <p-sidebar
@@ -17,28 +41,24 @@
   position="right"
   styleClass="p-sidebar-lg"
 >
-  <div class="edit-header">
-    <h3>{{ "Modifica Marca" }}</h3>
-    <p-button
-      styleClass="p-button-success"
-      label="Salva"
-      (onClick)="salvaDati()"
-    >
-
-    </p-button>
-  </div>
-  <div class="data-box">
-    <label for="nome">{{ "Nome" }}</label>
-    <input
-      pInputText
-      id="nome"
-      [(ngModel)]="marcaToView.nome"
-    />
-  </div>
+  <app-marca-edit
+    [selectedMarca]="selectedMarca"
+    (saveOrUpdateEvent)="patchDataAfterSaveOrUpdate($event)"
+  >
+  </app-marca-edit>
 </p-sidebar>
 
 <div class="container-list">
-  <div class="marche-list">
+  <div class="add-button-box">
+    <p-button
+      class="add-button"
+      label="Aggiungi"
+      icon="fa fa-solid fa-plus"
+      (onClick)="editData()"
+    >
+    </p-button>
+  </div>
+  <div class="table-list">
     <p-table
       [value]="marcheList"
       [paginator]="true"
@@ -46,8 +66,9 @@
     >
       <ng-template pTemplate="header">
         <tr>
-          <th></th>
+          <th>#</th>
           <th class="edit-cell">
+            {{ "Visualizza/Modifica" }}
           </th>
           <th>
             {{ "Id" }}
@@ -55,28 +76,28 @@
           <th>
             {{ "Nome" }}
           </th>
+          <th>
+            {{ "Elimina" }}
+          </th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-rowIndex="rowIndex" let-rowData>
         <tr>
           <td>
-            {{ rowIndex }}
+            <div class="index-box">
+              {{ rowIndex + 1 }}
+            </div>
           </td>
           <td class="edit-cell">
             <div class="edit-box">
               <p-button
                 icon="fa fa-solid fa-eye"
-                (onClick)="viewData(rowData)"
+                (onClick)="viewData(rowIndex)"
               >
               </p-button>
               <p-button
                 icon="fa fa-solid fa-pencil"
-                (onClick)="editData(rowData)"
-              >
-              </p-button>
-              <p-button
-                styleClass="p-button-danger"
-                icon="fa fa-solid fa-trash"
+                (onClick)="editData(rowIndex)"
               >
               </p-button>
             </div>
@@ -86,6 +107,18 @@
           </td>
           <td>
             {{ rowData.nome }}
+          </td>
+          <td>
+            <p-button
+              styleClass="p-button-danger"
+              icon="fa fa-solid fa-trash"
+              (onClick)="
+                deleteDialogVisible = true;
+                selectedMarca = rowData;
+                selectedId = rowIndex;
+              "
+            >
+            </p-button>
           </td>
         </tr>
       </ng-template>

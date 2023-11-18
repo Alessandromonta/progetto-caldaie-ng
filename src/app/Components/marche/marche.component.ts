@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { tap } from 'rxjs';
 import { MarcaCaldaie } from 'src/app/Models/MarcaCaldaie';
 import { MarcheService } from 'src/app/Services/marche.service';
+import {cloneDeep} from 'lodash';
 
 @Component({
   selector: 'app-marche',
@@ -10,7 +11,9 @@ import { MarcheService } from 'src/app/Services/marche.service';
   styleUrls: ['./marche.component.less']
 })
 export class MarcheComponent implements OnInit {
-  marcheList: any[] = [];
+  marcheList: MarcaCaldaie[] = [];
+  selectedMarca: MarcaCaldaie;
+  selectedId: number;
   showAddMarcaPopup: boolean = false;
   showEditMarcaPopup: boolean = false;
   newMarca: string = '';
@@ -92,25 +95,42 @@ export class MarcheComponent implements OnInit {
 //#endregion
   public viewSidebarVisibile: boolean = false;
   public editSidebarVisibile: boolean = false;
-  public marcaToView: MarcaCaldaie;
-  public viewData(marca: MarcaCaldaie) {
+  public deleteDialogVisible: boolean = false;
+  public viewData(rowIndex: number) {
     this.viewSidebarVisibile = !this.viewSidebarVisibile;
-    this.marcaToView = marca;
+    this.selectedMarca = this.marcheList[rowIndex];
   }
 
-  public editData(marca: MarcaCaldaie) {
-    this.editSidebarVisibile = !this.editSidebarVisibile;
-    this.marcaToView = marca;
+  public editData(rowIndex?: number) {
+    if(rowIndex) {
+      this.selectedMarca = cloneDeep(this.marcheList[rowIndex]);
+      this.selectedId = rowIndex;
+      console.log(rowIndex)
+    }
+    else
+      this.selectedMarca = new MarcaCaldaie();
+      this.editSidebarVisibile = !this.editSidebarVisibile;
   }
 
-  public salvaDati() {
-    this.httpClient.put(
-      `http://autoclima-001-site1.atempurl.com/api/MarcaCaldaie/${this.marcaToView.id}`,
-      this.marcaToView
-    )
-    .pipe(
-      tap(response => console.log(response))
-    ).subscribe()
+  public patchDataAfterSaveOrUpdate(editedMarca: MarcaCaldaie) {
+    const savedOrUpdatedMarca: MarcaCaldaie = cloneDeep(editedMarca);
+    if(this.selectedId)
+      this.marcheList[this.selectedId] = savedOrUpdatedMarca;
+    else
+      this.marcheList.push(savedOrUpdatedMarca);
+    delete this.selectedId;
+    this.editSidebarVisibile = false;
+  }
+
+  public deleteData() {
+    this.marcheService.deleteItem(this.selectedMarca.id)
+      .pipe(
+        tap(response => console.log(response)),
+        tap(() => this.marcheList.splice(this.selectedId, 1)),
+        tap(() => console.log(this.selectedMarca)),
+        tap(() => this.deleteDialogVisible = false)
+      )
+      .subscribe();
   }
 }
 
