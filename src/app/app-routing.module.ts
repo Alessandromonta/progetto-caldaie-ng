@@ -7,27 +7,29 @@ import { UserProfileComponent } from './Components/user-profile/user-profile.com
 import { MarcheComponent } from './Components/marche/marche.component';
 import { CaldaieComponent } from './Components/caldaie/caldaie.component';
 import { PacchettiComponent } from './Components/pacchetti/pacchetti.component';
+import { ProductPageComponent } from './pages/product-page/product-page.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
-  { path: 'login', component: LoginComponent, 
-    data: { 
-      registerFlag: false 
+  { path: 'login', component: LoginComponent,
+    data: {
+      registerFlag: false
     }
   },
-  { path: 'registrati', component: AuthComponent, 
-    data: { 
+  { path: 'registrati', component: AuthComponent,
+    data: {
       registerFlag: true
-    } 
+    }
   },
   {
-    path: 'user-profile', 
+    path: 'user-profile',
     component: UserProfileComponent,
     canActivate: [AuthGuard]
-  }, 
+  },
   { path: 'Marche', component: MarcheComponent },
   { path: 'Caldaie', component: CaldaieComponent },
-  { path: 'Pacchetti', component: PacchettiComponent }
+  { path: 'Pacchetti', component: PacchettiComponent },
+  { path: 'acquista-prodotti', component: ProductPageComponent }
 ];
 
 @NgModule({

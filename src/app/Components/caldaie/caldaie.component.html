@@ -15,10 +15,10 @@
               </mat-card-actions>
             </mat-card>
       </div>
-   
+
      <!-- Bottone per aprire il modulo popup -->
      <button mat-raised-button color="primary" (click)="openAddCaldaiaPopup()">Aggiungi Caldaia</button>
-   
+
     <div class="popup" *ngIf="showEditPopup">
         <h3>Modifica Caldaia</h3>
         <mat-form-field >
@@ -37,6 +37,6 @@
         </mat-form-field>
         <button mat-raised-button color="primary" (click)="closeAddCaldaiaPopup()">Annulla</button>
         <button mat-raised-button color="primary" (click)="addCaldaia()">Aggiungi</button>
-     </div> 
+     </div>
 </div>
-   
+

@@ -32,9 +32,11 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {LoadingComponent} from  './Components/loading/loading.component';
 
 //prime ng
+import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { ButtonModule } from 'primeng/button';
 import { PasswordModule } from "primeng/password";
 import {InputTextModule} from 'primeng/inputtext';
+import { ProductPageComponent } from './pages/product-page/product-page.component';
 
 const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
@@ -57,13 +59,15 @@ export function jwtOptionsFactory() {
     MarcheComponent,
     CaldaieComponent,
     PacchettiComponent,
-    LoadingComponent
+    LoadingComponent,
+    ProductPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MenubarModule,
     CardModule,
+    ScrollPanelModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,

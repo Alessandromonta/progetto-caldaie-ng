@@ -1,0 +1,9 @@
+<app-crud></app-crud>
+
+<p-scrollPanel styleClass="content-panel">
+  <p-card *ngFor="let marca of marcheList">
+    <div class="marca-nome" (click)="isOpen = !isOpen" [@hoverCard]="isOpen ? 'hover' : 'notHover'">
+      {{ marca.nome }}
+    </div>
+  </p-card>
+</p-scrollPanel>
