@@ -1,4 +1,5 @@
 export class MarcaCaldaie {
-     nome?: string;
-   }
+  id: number;
+  nome: string;
+}
    

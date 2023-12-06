@@ -22,7 +22,10 @@ import { LoginComponent } from './Components/login/login.component';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { CrudComponent } from './Components/crud/crud.component';
 import { MarcheComponent } from './Components/marche/marche.component';
+import { MarcaEditComponent } from './Components/marca-edit/marca-edit.component';
+import { MarcaViewComponent } from './Components/marca-view/marca-view.component';
 import { CaldaieComponent } from './Components/caldaie/caldaie.component';
+import {CaldaiaEditComponent} from './Components/caldaia-edit/caldaia-edit.component';
 import { PacchettiComponent } from './Components/pacchetti/pacchetti.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
@@ -34,7 +37,12 @@ import {LoadingComponent} from  './Components/loading/loading.component';
 //prime ng
 import { ButtonModule } from 'primeng/button';
 import { PasswordModule } from "primeng/password";
+import {TableModule} from 'primeng/table';
+import {SidebarModule} from 'primeng/sidebar';
+import {DialogModule} from 'primeng/dialog';
 import {InputTextModule} from 'primeng/inputtext';
+import { CaldaiaViewComponent } from './Components/caldaia-view/caldaia-view.component';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
@@ -55,7 +63,11 @@ export function jwtOptionsFactory() {
     LoginComponent,
     CrudComponent,
     MarcheComponent,
+    MarcaEditComponent,
+    MarcaViewComponent,
     CaldaieComponent,
+    CaldaiaEditComponent,
+    CaldaiaViewComponent,
     PacchettiComponent,
     LoadingComponent
   ],
@@ -70,6 +82,7 @@ export function jwtOptionsFactory() {
     ButtonModule,
     PasswordModule,
     InputTextModule,
+    InputNumberModule,
     MatButtonModule,
     MatCardModule,
     MatIconModule,
@@ -80,6 +93,9 @@ export function jwtOptionsFactory() {
     NoopAnimationsModule,
     MatDividerModule,
     MatProgressSpinnerModule,
+    TableModule,
+    SidebarModule,
+    DialogModule,
     FontAwesomeModule,
     JwtModule.forRoot({
       jwtOptionsProvider: {

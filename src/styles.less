@@ -59,3 +59,83 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.container-list {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 6% 15% 0 15%;
+    gap: 20px;
+    .add-button-box {
+        align-self: flex-end;
+    }
+    .table-list {
+      width: 100%;
+      .edit-cell {
+        width: 20%;
+        .edit-box {
+          display: flex;
+          gap: 12px;
+        }
+      }
+      .index-box {
+        font-weight: bold;
+      }
+    }
+}
+
+.edit-container, .view-container {
+    width: 48rem;
+    .edit-header, .view-header {
+        display: flex;
+        justify-content: space-between;
+    }
+    .edit-data-box, .view-data-box {
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        .edit-item-box, .view-item-box {
+            display: flex;
+            flex-direction: row;
+            gap: 28px;
+            height: 30px;
+            align-items: center;
+            .label-item {
+                font-weight: 700;
+            }
+            .form-item {
+                height: 30px;
+            }
+        }
+    }
+}
+
+.delete-dialog {
+    .dialog-content-box {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        .dialog-button-box {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+
+        }
+    }
+}
+
+.p-element .p-button, .p-button-danger, .p-button-success {
+    &:focus {
+        box-shadow: none;
+    }
+}
+
+.p-dialog-mask {
+    background-color: rgba(33,33,33,.3);
+    z-index: 2102002;
+}
+
+.pi {
+    font-size: 1rem;
+}

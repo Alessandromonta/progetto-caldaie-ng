@@ -1,0 +1,23 @@
+<div class="edit-container">
+    <div class="edit-header">
+        <h3>{{ "Modifica Marca" }}</h3>
+        <p-button
+            styleClass="p-button-success"
+            label="Salva"
+            [loading]="saving"
+            (onClick)="saveOrUpdateData()"
+        >
+        </p-button>
+    </div>
+    <div class="edit-data-box">
+        <div class="edit-item-box">
+            <label for="nome" class="label-item">{{ "Nome" }}</label>
+            <input
+                pInputText
+                id="nome"
+                [(ngModel)]="selectedMarca.nome"
+                class="form-item"
+            />
+        </div>
+    </div>
+</div>

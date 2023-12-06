@@ -1,87 +1,79 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { tap } from 'rxjs';
+import { MarcaCaldaie } from 'src/app/Models/MarcaCaldaie';
 import { CaldaieService } from 'src/app/Services/caldaie.service';
+import {cloneDeep} from 'lodash';
+import { Caldaie } from 'src/app/Models/Caldaie';
 
 @Component({
   selector: 'app-caldaie',
   templateUrl: './caldaie.component.html',
   styleUrls: ['./caldaie.component.less']
 })
-export class CaldaieComponent implements OnInit{
-  caldaieList: any[] = [];
-  showAddPopup: boolean = false;
-  showEditPopup: boolean = false;
-  newCaldaia: string = '';
-  editCaldaiaId: number;
-  editCaldaiaNome: string = '';
+export class CaldaieComponent implements OnInit {
 
-  constructor(private caldaieService: CaldaieService) {}
+  constructor(private caldaieService: CaldaieService, private httpClient: HttpClient) {}
 
-  loading: boolean = true;
+  public caldaieList: Caldaie[] = [];
+  public selectedCaldaia: Caldaie;
+  public selectedId: number;
+
+  public viewSidebarVisibile: boolean = false;
+  public editSidebarVisibile: boolean = false;
+  public deleteDialogVisible: boolean = false;
+  public loading: boolean = true;
 
   ngOnInit(): void {
     this.loading = true; // Imposta il caricamento su true prima di iniziare il caricamento dei dati
     this.getCaldaieList(); // Chiamata per caricare i dati
   }
-
 //#region   CRUD
-getCaldaieList(): void {
-  this.caldaieService.getItems().subscribe((marche) => {
-    this.caldaieList = marche;
-    setTimeout(() => {
-      // Dopo aver caricato i dati o completato il processo
-      this.loading = false;
-    }, 0);
-  });
-}
+  public getCaldaieList(): void {
+    this.caldaieService.getItems()
+      .pipe(
+        tap(caldaie => {
+          this.caldaieList = caldaie;
+          this.loading = false
+        }),
+      )
+      .subscribe();
+  }
 
-addCaldaia(): void {
-  if (this.newCaldaia) {
-    this.caldaieService.addItem({ nome: this.newCaldaia }).subscribe((response) => {
-      // Aggiorna la lista delle caldaie dopo l'aggiunta
-      this.getCaldaieList();
-      this.newCaldaia = ''; 
-      this.showAddPopup = false; // Chiudi il modulo popup
-    });
+  public viewData(rowIndex: number) {
+    this.viewSidebarVisibile = !this.viewSidebarVisibile;
+    this.selectedCaldaia = this.caldaieList[rowIndex];
+  }
+
+  public editData(rowIndex?: number) {
+    if(rowIndex) {
+      this.selectedCaldaia = cloneDeep(this.caldaieList[rowIndex]);
+      this.selectedId = rowIndex;
+    }
+    else
+      this.selectedCaldaia = new Caldaie();
+      this.editSidebarVisibile = !this.editSidebarVisibile;
+  }
+
+  public patchDataAfterSaveOrUpdate(editedMarca: Caldaie) {
+    const savedOrUpdatedMarca: Caldaie = cloneDeep(editedMarca);
+    if(this.selectedId)
+      this.caldaieList[this.selectedId] = savedOrUpdatedMarca;
+    else
+      this.caldaieList.push(savedOrUpdatedMarca);
+    delete this.selectedId;
+    this.editSidebarVisibile = false;
+  }
+
+  public deleteData() {
+    this.caldaieService.deleteItem(this.selectedCaldaia.id)
+      .pipe(
+        tap(response => console.log(response)),
+        tap(() => this.caldaieList.splice(this.selectedId, 1)),
+        tap(() => console.log(this.selectedCaldaia)),
+        tap(() => this.deleteDialogVisible = false)
+      )
+      .subscribe();
   }
 }
 
-deleteCaldaia(caldaiaId: number): void {
-  this.caldaieService.deleteItem(caldaiaId).subscribe(() => {
-    // Aggiorna la lista delle marche dopo l'eliminazione
-    this.getCaldaieList();
-  });
-}
-
-updateCaldaia(): void {
-  const updatedCaldaia = { id: this.editCaldaiaId, nome: this.editCaldaiaNome };
-
-  this.caldaieService.updateItem(this.editCaldaiaId, updatedCaldaia).subscribe(() => {
-    // Aggiorna la lista delle marche dopo la modifica
-    this.getCaldaieList();
-    this.editCaldaiaNome = ''; // Resetta il campo del nome della caldaia
-    this.showEditPopup = false; // Chiudi il modulo popup di modifica
-  });
-}
-//#endregion
-
-
- //#region OLD POPUP
-  openAddCaldaiaPopup(): void {
-    this.showAddPopup = true;
-  }
-
-  closeAddCaldaiaPopup(): void {
-    this.showAddPopup = false;
-  }
-
-  openEditCaldaiaPopup(caldaia: any): void {
-    this.editCaldaiaId = caldaia.id;
-    this.editCaldaiaNome = caldaia.nome;
-    this.showEditPopup = true;
-  }
-
-  closeEditCaldaiaPopup(): void {
-    this.showEditPopup = false;
-  }
-//#endregion
-}

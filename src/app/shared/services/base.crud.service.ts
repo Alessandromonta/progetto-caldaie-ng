@@ -16,8 +16,11 @@ export class BaseCrudService<T> {
         return this.httpClient.post<T>(`${this.apiUrl}`, newItem);
     }
 
-    public deleteItem(itemId: number): Observable<void> {
-        return this.httpClient.delete<void>(`${this.apiUrl}/${itemId}`);
+    public deleteItem(itemId: number): Observable<string> {
+        return this.httpClient.delete(
+            `${this.apiUrl}/${itemId}`,
+            { responseType: 'text' }
+        );
     }
 
     public updateItem(itemId: number, updateItem: T): Observable<T> {

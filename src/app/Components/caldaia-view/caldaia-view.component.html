@@ -1,0 +1,25 @@
+<div class="view-container">
+    <div class="view-header">
+        <h3 class="view-title">
+            {{ "Dettaglio Caldaia" }}
+        </h3>
+    </div>
+    <div class="view-data-box">
+        <div class="view-item-box">
+            <label class="label-item">{{ "Nome" }}</label>
+            <label>{{ selectedCaldaia.nome }}</label>
+        </div>
+        <div class="view-item-box">
+            <label class="label-item">{{ "Descrizione" }}</label>
+            <label>{{ selectedCaldaia.descrizione }}</label>
+        </div>
+        <div class="view-item-box">
+            <label class="label-item">{{ "Prezzo" }}</label>
+            <label>{{ selectedCaldaia.prezzo }}</label>
+        </div>
+        <div class="view-item-box">
+            <label class="label-item">{{ "Sconto" }}</label>
+            <label>{{ selectedCaldaia.sconto + " %" }}</label>
+        </div>
+    </div>
+</div>

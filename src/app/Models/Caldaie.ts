@@ -1,5 +1,5 @@
 export class Caldaie {
-  //idCaldaia: number = 0;
+  id: number;
   nome?: string;
   descrizione?: string;
   immagine?: Uint8Array;

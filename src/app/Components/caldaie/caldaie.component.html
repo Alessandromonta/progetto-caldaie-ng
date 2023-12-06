@@ -1,42 +1,140 @@
 <app-crud></app-crud>
+
 <app-loading [loading]="loading"/>
 
-<div class="marche-list">
-      <h2>Elenco delle Caldaie</h2>
-      <div *ngFor="let caldaia of caldaieList">
-            <mat-card>
-              <mat-card-header>
-                <mat-card-title>{{ caldaia.nome }}</mat-card-title>
-                <mat-card-subtitle>{{ caldaia.id }}</mat-card-subtitle>
-              </mat-card-header>
-              <mat-card-actions>
-                <button mat-raised-button color="primary" (click)="openEditCaldaiaPopup(caldaia)">Modifica</button>
-                <button mat-raised-button color="primary" (click)="deleteCaldaia(caldaia.id)">Elimina</button>
-              </mat-card-actions>
-            </mat-card>
-      </div>
-   
-     <!-- Bottone per aprire il modulo popup -->
-     <button mat-raised-button color="primary" (click)="openAddCaldaiaPopup()">Aggiungi Caldaia</button>
-   
-    <div class="popup" *ngIf="showEditPopup">
-        <h3>Modifica Caldaia</h3>
-        <mat-form-field >
-          <mat-label>Nuovo Nome della Caldaia</mat-label>
-          <input [(ngModel)]="editCaldaiaNome" matInput placeholder="Ex. Riello">
-        </mat-form-field>
-        <button mat-raised-button color="primary" (click)="updateCaldaia()">Salva</button>
-        <button mat-raised-button color="primary" (click)="closeEditCaldaiaPopup()">Annulla</button>
+<p-dialog
+  [(visible)]="deleteDialogVisible"
+  styleClass="delete-dialog"
+>
+  <div class="dialog-content-box">
+    {{ "Confermi di voler eliminare questo elemento?" }}
+    <div class="dialog-button-box">
+      <p-button
+        label="Sì"
+        (onClick)="deleteData()"
+      >
+      </p-button>
+      <p-button
+        label="No"
+        (onClick)="deleteDialogVisible = false"
+      >
+      </p-button>    
     </div>
+  </div>
+</p-dialog>
 
-     <div class="popup" *ngIf="showAddPopup">
-        <h3>Aggiungi Nuova Caldaia</h3>
-        <mat-form-field >
-          <mat-label>Nome della Caldaia</mat-label>
-          <input [(ngModel)]="newCaldaia" matInput placeholder="Ex. Riello">
-        </mat-form-field>
-        <button mat-raised-button color="primary" (click)="closeAddCaldaiaPopup()">Annulla</button>
-        <button mat-raised-button color="primary" (click)="addCaldaia()">Aggiungi</button>
-     </div> 
+<p-sidebar
+  *ngIf="viewSidebarVisibile"
+  [(visible)]="viewSidebarVisibile"
+  position="right" 
+  styleClass="p-sidebar-lg"
+>
+  <app-caldaia-view
+    [selectedCaldaia]="selectedCaldaia"
+  >
+  </app-caldaia-view>
+</p-sidebar>
+
+<p-sidebar
+  *ngIf="editSidebarVisibile"
+  [(visible)]="editSidebarVisibile"
+  position="right"
+  styleClass="p-sidebar-lg"
+>
+  <app-caldaia-edit
+    [selectedCaldaia]="selectedCaldaia"
+    (saveOrUpdateEvent)="patchDataAfterSaveOrUpdate($event)"
+  >
+  </app-caldaia-edit>
+</p-sidebar>
+
+<div class="container-list">
+  <div class="add-button-box">
+    <p-button
+      class="add-button"
+      label="Aggiungi"
+      icon="fa fa-solid fa-plus"
+      (onClick)="editData()"
+    >
+    </p-button>
+  </div>
+  <div class="table-list">
+    <p-table
+      [value]="caldaieList"
+      [paginator]="true"
+      [rows]="10"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>#</th>
+          <th class="edit-cell">
+            {{ "Visualizza/Modifica" }}
+          </th>
+          <th>
+            {{ "Nome" }}
+          </th>
+          <th>
+            {{ "Descrizione" }}
+          </th>
+          <th>
+            {{ "Prezzo" }}
+          </th>
+          <th>
+            {{ "Sconto" }}
+          </th>
+          <th>
+            {{ "Elimina" }}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowIndex="rowIndex" let-rowData>
+        <tr>
+          <td>
+            <div class="index-box">
+              {{ rowIndex + 1 }}
+            </div>
+          </td>
+          <td class="edit-cell">
+            <div class="edit-box">
+              <p-button
+                icon="fa fa-solid fa-eye"
+                (onClick)="viewData(rowIndex)"
+              >
+              </p-button>
+              <p-button
+                icon="fa fa-solid fa-pencil"
+                (onClick)="editData(rowIndex)"
+              >
+              </p-button>
+            </div>
+          </td>
+          <td>
+            {{ rowData.nome }}
+          </td>
+          <td>
+            {{ rowData.descrizione }}
+          </td>
+          <td>
+            {{ rowData.prezzo }}
+          </td>
+          <td>
+            {{ rowData.sconto }}
+          </td>
+          <td>
+            <p-button
+              styleClass="p-button-danger"
+              icon="fa fa-solid fa-trash"
+              (onClick)="
+                deleteDialogVisible = true;
+                selectedCaldaia = rowData;
+                selectedId = rowIndex;
+              "
+            >
+            </p-button>
+          </td>
+        </tr>
+      </ng-template>
+
+    </p-table>
+  </div>
 </div>
-   
