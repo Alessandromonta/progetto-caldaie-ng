@@ -7,6 +7,7 @@ import { UserProfileComponent } from './Components/user-profile/user-profile.com
 import { MarcheComponent } from './Components/marche/marche.component';
 import { CaldaieComponent } from './Components/caldaie/caldaie.component';
 import { PacchettiComponent } from './Components/pacchetti/pacchetti.component';
+import { SignupComponent } from './Components/signup/signup.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -15,7 +16,7 @@ const routes: Routes = [
       registerFlag: false 
     }
   },
-  { path: 'registrati', component: AuthComponent, 
+  { path: 'signup', component: SignupComponent, 
     data: { 
       registerFlag: true
     } 

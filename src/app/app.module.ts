@@ -43,6 +43,7 @@ import {DialogModule} from 'primeng/dialog';
 import {InputTextModule} from 'primeng/inputtext';
 import { CaldaiaViewComponent } from './Components/caldaia-view/caldaia-view.component';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { SignupComponent } from './Components/signup/signup.component';
 
 const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
@@ -69,7 +70,8 @@ export function jwtOptionsFactory() {
     CaldaiaEditComponent,
     CaldaiaViewComponent,
     PacchettiComponent,
-    LoadingComponent
+    LoadingComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

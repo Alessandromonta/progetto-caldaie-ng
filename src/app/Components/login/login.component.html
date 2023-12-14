@@ -33,15 +33,15 @@
        <small *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required','password')" class="text-danger"> *Password is required*</small>
        
        <br>
-       <p-button type="submit" [disabled]="loginForm.invalid">Login</p-button>
+       <p-button type="submit" [disabled]="loginForm.invalid">Accedi</p-button>
        
        <div *ngIf="loginError" class="error-message">
          Login failed. Please check your credentials.
        </div>
      </form>
   
-  <div class="text-center pt-4 text-muted">Don't have an account? 
-      <a id="forgot" routerLink="/login" >Sign up</a> 
+  <div class="text-center pt-4 text-muted">Non hai un account? 
+      <a id="forgot" routerLink="/signup" >Registrati</a> 
   </div>
 
 </div>

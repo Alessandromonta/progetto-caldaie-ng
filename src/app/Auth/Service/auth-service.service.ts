@@ -15,12 +15,22 @@ export class AuthService {
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService, private router: Router) {}
 
+  signup(username: string, email: string, password: string, confirmPassword: string, grado:number, token:number): Observable<any> {
+    const credentials = { username, password, email, grado, token };
+
+    return this.http.post(`${this.apiUrl}/User`, credentials, { responseType: 'text' }).pipe(
+      tap((response) => {
+        console.log('Risultato della chiamata POST Signup:', response);
+      })
+    );
+  }
+
   login(username: string, password: string): Observable<any> {
     const credentials = { username, password };
 
     return this.http.post(`${this.apiUrl}/User/Login`, credentials, { responseType: 'text' }).pipe(
       tap((response) => {
-        console.log('Risultato della chiamata POST:', response);
+        console.log('Risultato della chiamata POST Login:', response);
       })
     );
   }
