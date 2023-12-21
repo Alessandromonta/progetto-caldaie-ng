@@ -12,7 +12,7 @@ import { remove } from 'lodash';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'https://localhost:7173/api'; 
+  private apiUrl = 'http://autoclima-001-site1.atempurl.com/api'; 
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
 
