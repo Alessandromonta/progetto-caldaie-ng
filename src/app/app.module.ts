@@ -44,6 +44,9 @@ import {InputTextModule} from 'primeng/inputtext';
 import { CaldaiaViewComponent } from './Components/caldaia-view/caldaia-view.component';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { SignupComponent } from './Components/signup/signup.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { LogoutComponent } from './Components/logout/logout.component';
+
 
 const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
@@ -52,7 +55,7 @@ const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
 export function jwtOptionsFactory() {
   return {
     tokenGetter: () => localStorage.getItem('bearerToken'), // Nome della chiave in cui hai memorizzato il token nella local storage
-    allowedDomains: ['autoclima-001-site1.atempurl.com'], // Sostituisci con il tuo dominio
+    allowedDomains: ['autoclima-001-site1.atempurl.com'], 
   };
 }
 
@@ -71,7 +74,8 @@ export function jwtOptionsFactory() {
     CaldaiaViewComponent,
     PacchettiComponent,
     LoadingComponent,
-    SignupComponent
+    SignupComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -98,6 +102,7 @@ export function jwtOptionsFactory() {
     TableModule,
     SidebarModule,
     DialogModule,
+    MatSnackBarModule,
     FontAwesomeModule,
     JwtModule.forRoot({
       jwtOptionsProvider: {

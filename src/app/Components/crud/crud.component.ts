@@ -8,9 +8,5 @@ import { AuthService } from 'src/app/Auth/Service/auth-service.service';
 })
 export class CrudComponent {
 
-  constructor(private authService: AuthService) {}
-
-  /*LogoutUser(){
-    this.authService.logout();
-  }*/
+  
 }

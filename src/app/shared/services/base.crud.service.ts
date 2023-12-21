@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 
 export class BaseCrudService<T> {
     constructor(apiUrl:string, private httpClient: HttpClient) {
-        this.apiUrl = 'http://autoclima-001-site1.atempurl.com/api/' + apiUrl;
+        this.apiUrl = 'https://localhost:7173/api/' + apiUrl;
     }
     private apiUrl: string;
 

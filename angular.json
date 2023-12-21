@@ -18,6 +18,9 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/progetto-caldaie-ng",
+            "allowedCommonJsDependencies": [
+              "loadash"
+            ],
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [

@@ -8,6 +8,8 @@ import { MarcheComponent } from './Components/marche/marche.component';
 import { CaldaieComponent } from './Components/caldaie/caldaie.component';
 import { PacchettiComponent } from './Components/pacchetti/pacchetti.component';
 import { SignupComponent } from './Components/signup/signup.component';
+import { CrudComponent } from './Components/crud/crud.component';
+import { LogoutComponent } from './Components/logout/logout.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -26,10 +28,11 @@ const routes: Routes = [
     component: UserProfileComponent,
     canActivate: [AuthGuard]
   }, 
-  { path: 'Marche', component: MarcheComponent },
-  { path: 'Caldaie', component: CaldaieComponent },
-  { path: 'Pacchetti', component: PacchettiComponent }
-];
+  { path: 'Marche',     component: MarcheComponent },
+  { path: 'Caldaie',    component: CaldaieComponent },
+  { path: 'Pacchetti',  component: PacchettiComponent },
+  { path: 'Logout',     component: LogoutComponent}
+];  
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
