@@ -3,10 +3,10 @@ import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
 export class BaseCrudService<T> {
-    constructor(apiUrl:string, private httpClient: HttpClient) {
+    constructor(apiUrl: string, private httpClient: HttpClient) {
         this.apiUrl = 'http://autoclima-001-site1.atempurl.com/api/' + apiUrl;
     }
-    private apiUrl: string;
+    protected apiUrl: string;
 
     public getItems(): Observable<T[]> {
         return this.httpClient.get<T[]>(`${this.apiUrl}`);

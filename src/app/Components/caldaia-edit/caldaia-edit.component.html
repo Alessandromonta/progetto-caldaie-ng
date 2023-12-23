@@ -50,4 +50,62 @@
             />
         </div>
     </div>
+    <h2 class="errori-caldaia-label">{{ "Errori caldaia" }}</h2>
+    <div class="grid-box-layout">
+      <div class="grid-col-3">
+        <i
+          class="fa fa-solid fa-plus add-error-icon"
+          (click)="addError()"
+        ></i>
+      </div>
+    </div>
+    <div
+      *ngFor="let newErrore of newErroriSelectedCaldaia; index as newErrorIdx"
+      class="grid-box-layout"
+    >
+      <div class="grid-col grid-col-1 toggle-error">
+        <div class="icon-box">
+          <i
+            class="pi pi-file-edit"></i>
+        </div>
+      </div>
+      <div class="grid-col grid-col-2">
+        <input
+          [(ngModel)]="newErrore.codiceErrore"
+          class="codice-errore"
+          placeholder="Codice errore"
+          pInputText
+        />
+      </div>
+      <div class="grid-col grid-col-3">
+        <div class="icon-box">
+          <i
+            class="pi pi-trash delete-trash-icon"
+            (click)="newErroriSelectedCaldaia.splice(newErrorIdx, 1)"
+          ></i>
+        </div>
+      </div>
+    </div>
+
+    <div
+      *ngFor="let errore of erroriSelectedCaldaia; index as errorIdx"
+      class="grid-box-layout"
+    >
+      <div class="grid-col grid-col-1 toggle-error">
+        <div class="icon-box">
+          <i class="pi pi-file-edit"></i>
+        </div>
+      </div>
+      <div class="grid-col grid-col-2 codice-errore">
+        <label for="errore" class="codice-errore">{{ errore.codiceErrore }}</label>
+      </div>
+      <div class="grid-col grid-col-3">
+        <div class="icon-box">
+          <i
+            class="pi pi-trash delete-trash-icon"
+            (click)="deleteError(errorIdx)"
+          ></i>
+        </div>
+      </div>
+    </div>
 </div>

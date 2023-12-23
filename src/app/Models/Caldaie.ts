@@ -7,5 +7,5 @@ export class Caldaie {
   sconto?: number;
   dataCreazione?: Date;
   dataUltimaModifica?: Date;
+  idMarca: number;
 }
-   

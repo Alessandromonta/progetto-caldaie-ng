@@ -20,9 +20,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .card-container .package-card {
 
     .p-card:hover {
-        box-shadow: 0 0 11px rgba(33,33,33,.2); 
+        box-shadow: 0 0 11px rgba(33,33,33,.2);
     }
-    
+
     .icon {
         margin: 10px;
         font-size: 40px;
@@ -138,4 +138,43 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .pi {
     font-size: 1rem;
+}
+
+.grid-box-layout {
+  display: grid;
+  grid-template-rows: 40px;
+  grid-template-columns: 20% 65% 15%;
+  row-gap: 20px;
+
+  .grid-col {
+    align-self: center;
+  }
+
+  .grid-col-1 {
+    grid-column-start: 1;
+    grid-column-end: 1;
+  }
+  .grid-col-2 {
+    grid-column-start: 2;
+    grid-column-end: 2;
+
+    .p-inputtext {
+      height: 20px;
+    }
+  }
+
+  .grid-col-3 {
+    grid-column-start: 3;
+    grid-column-end: 3;
+  }
+
+  .add-error-icon:hover{
+    cursor: pointer;
+    opacity: 0.3;
+  }
+
+  .delete-trash-icon {
+    cursor: pointer;
+    color: #ff4c4c;
+  }
 }
