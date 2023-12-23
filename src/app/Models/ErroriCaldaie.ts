@@ -1,7 +1,6 @@
 export class ErroriCaldaie {
-     idCaldaia?: number;
-     codiceErrore?: string;
-     descrizioneErrore?: string;
-     soluzioneErrore?: string;
-   }
-   
+  id: number;
+  idCaldaia?: number;
+  codiceErrore?: string;
+  descrizioneErrore: string = "CIAO";
+}
