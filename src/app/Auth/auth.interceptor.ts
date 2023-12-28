@@ -9,16 +9,18 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { AuthService } from '../Auth/Service/auth-service.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+  constructor(private authService: AuthService) {}
+
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     // Esegui qui la logica per l'aggiunta dell'header del token Bearer alla richiesta HTTP
-    // Ad esempio, se il token è memorizzato nel localStorage:
-    const token = localStorage.getItem('token');
+    const token = this.authService.getToken();
 
     if (token) {
       req = req.clone({
@@ -33,6 +35,8 @@ export class AuthInterceptor implements HttpInterceptor {
         if (error instanceof HttpErrorResponse) {
           if (error.status === 401) {
             // Gestisci l'errore di autorizzazione qui, ad esempio, reindirizza l'utente al login.
+            // Puoi anche implementare una logica per gestire la disconnessione dell'utente o pulire il token.
+            this.authService.logout(); // Esempio: chiama il metodo logout del servizio AuthService
           }
         }
 
