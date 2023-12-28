@@ -12,7 +12,7 @@ import { remove } from 'lodash';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'https://autoclima-001-site1.atempurl.com/api'; 
+  private apiUrl = 'https://localhost:44358/api'; 
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
 
@@ -29,7 +29,13 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<any> {
-    const credentials = { username, password };
+    let email: string = null
+  
+    if(username.includes("@")){
+      email = username;
+      username = null
+    }
+    const credentials = { username, email, password };
 
     return this.http.post(`${this.apiUrl}/User/Login`, credentials, { responseType: 'text' }).pipe(
       tap((response) => {
@@ -39,7 +45,7 @@ export class AuthService {
   }
   
   logout(): Observable<any> {
-    const token = localStorage.getItem('bearerToken');
+    const token = this.getToken()
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -52,7 +58,7 @@ export class AuthService {
   }
 
   getUserRole() {
-    const token = localStorage.getItem('bearerToken'); 
+    const token = this.getToken()
 
     if(token == null){
       console.log("Token non valido, logout effettuato?");
@@ -62,6 +68,10 @@ export class AuthService {
       const decodedToken = this.jwtHelper.decodeToken(token);
       return decodedToken['Grado']; // Estrai il claim "Grado"
     }
+  }
+
+  getToken(): string {
+    return localStorage.getItem('bearerToken');
   }
   
 }
