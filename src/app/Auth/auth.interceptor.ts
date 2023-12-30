@@ -22,7 +22,11 @@ export class AuthInterceptor implements HttpInterceptor {
     // Esegui qui la logica per l'aggiunta dell'header del token Bearer alla richiesta HTTP
     const token = this.authService.getToken();
 
-    if (token) {
+    // Verifica se la richiesta è una richiesta di login
+    const isLoginRequest = req.url.includes('/Login');
+
+    if (token && !isLoginRequest) {
+      console.log("test: " + isLoginRequest);
       req = req.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`,
