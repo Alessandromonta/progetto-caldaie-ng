@@ -73,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "progetto-caldaie-ng:build:production"
+              "buildTarget": "progetto-caldaie-ng:build:production"
             },
             "development": {
-              "browserTarget": "progetto-caldaie-ng:build:development"
+              "buildTarget": "progetto-caldaie-ng:build:development"
             }
           },
           "defaultConfiguration": "development",
@@ -87,7 +87,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "progetto-caldaie-ng:build"
+            "buildTarget": "progetto-caldaie-ng:build"
           }
         },
         "test": {
