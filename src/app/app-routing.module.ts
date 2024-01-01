@@ -10,6 +10,8 @@ import { PacchettiComponent } from './Components/pacchetti/pacchetti.component';
 import { SignupComponent } from './Components/signup/signup.component';
 import { CrudComponent } from './Components/crud/crud.component';
 import { LogoutComponent } from './Components/logout/logout.component';
+import { ProductPageComponent } from './pages/product-page/product-page.component';
+import { AcquistaCaldaieComponent } from './pages/acquista-caldaie/acquista-caldaie.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -31,7 +33,18 @@ const routes: Routes = [
   { path: 'Marche',     component: MarcheComponent },
   { path: 'Caldaie',    component: CaldaieComponent },
   { path: 'Pacchetti',  component: PacchettiComponent },
-  { path: 'Logout',     component: LogoutComponent}
+  { 
+    path: 'Logout',     
+    component: LogoutComponent,
+  },
+  { 
+    path: 'acquista-prodotti', 
+    component: ProductPageComponent
+  },
+  {
+    path: 'marca/:nome',
+    component: AcquistaCaldaieComponent
+  }
 ];  
 
 @NgModule({

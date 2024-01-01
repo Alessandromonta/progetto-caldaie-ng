@@ -1,0 +1,33 @@
+<div class="container-panel">
+    <div class="cane2">
+        <p-scrollPanel>
+            <div class="content-panel">
+                <p-card
+                    *ngFor="let caldaia of caldaieList; index as index"
+                    styleClass="caldaia-card"
+                    [@cardTransition]="
+                        loading ? 
+                        (index === 0 || index % 3 === 0 ? 'left' : (index === 1 || (index % 2 === 0 && index !== 2)  ? 'top' : 'right')) : 'loaded'
+                    "
+                >
+                    <ng-template pTemplate="header">
+                        <img 
+                            src="../../../assets/caldaia-riello.jpg"
+                            alt="Nessun immagine disponibile"
+                            class="caldaia-image"
+                        >
+                    </ng-template>
+                    <ng-template pTemplate="subheader">
+                        <div class="caldaia-name">
+                            {{ caldaia.nome }}
+                        </div>
+                        <i 
+                            class="acquistato-icon"
+                        ></i>
+                    </ng-template>
+                </p-card>
+            </div>
+        </p-scrollPanel>
+    </div>
+</div>
+

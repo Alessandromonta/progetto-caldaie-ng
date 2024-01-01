@@ -1,0 +1,28 @@
+<app-crud></app-crud>
+
+<div class="background-container">
+  <div class="title-box">
+    {{ "Seleziona una marca" }}
+  </div>
+</div>
+
+<div class="container-panel">
+  <div class="cane">
+    <p-scrollPanel styleClass="content-panel">
+      <p-card 
+        *ngFor="let marca of marcheList" 
+        styleClass="marcaCard"
+      >
+        <div 
+          class="marca-nome" 
+          (click)="goToCaldaieList(marca)"
+        >
+          {{ marca.nome }}
+        </div>
+      </p-card>
+    </p-scrollPanel>
+  </div>
+
+</div>
+
+

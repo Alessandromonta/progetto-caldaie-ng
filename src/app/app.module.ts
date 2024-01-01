@@ -9,7 +9,7 @@ import { CardModule } from 'primeng/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCard, MatCardModule} from '@angular/material/card';
 import {MatExpansionModule, } from '@angular/material/expansion';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule, NoopAnimationsModule, provideAnimations} from '@angular/platform-browser/animations';
 import {MatDividerModule} from '@angular/material/divider';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -40,13 +40,15 @@ import { PasswordModule } from "primeng/password";
 import {TableModule} from 'primeng/table';
 import {SidebarModule} from 'primeng/sidebar';
 import {DialogModule} from 'primeng/dialog';
+import {ScrollPanelModule} from 'primeng/scrollpanel';
 import {InputTextModule} from 'primeng/inputtext';
 import { CaldaiaViewComponent } from './Components/caldaia-view/caldaia-view.component';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { SignupComponent } from './Components/signup/signup.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { LogoutComponent } from './Components/logout/logout.component';
-
+import { AcquistaCaldaieComponent } from './pages/acquista-caldaie/acquista-caldaie.component';
+import { ProductPageComponent } from './pages/product-page/product-page.component';
 
 const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
@@ -76,9 +78,12 @@ export function jwtOptionsFactory() {
     LoadingComponent,
     SignupComponent,
     LogoutComponent,
+    ProductPageComponent,
+    AcquistaCaldaieComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     MenubarModule,
     CardModule,
@@ -88,6 +93,7 @@ export function jwtOptionsFactory() {
     ButtonModule,
     PasswordModule,
     InputTextModule,
+    ScrollPanelModule,
     InputNumberModule,
     MatButtonModule,
     MatCardModule,
@@ -112,6 +118,7 @@ export function jwtOptionsFactory() {
     })
   ],
   providers: [
+    provideAnimations(),
     {
       provide: APP_INITIALIZER,
       useFactory: initializePrimeNgConfig,
@@ -124,6 +131,8 @@ export function jwtOptionsFactory() {
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent,
+  ]
 })
 export class AppModule { }
