@@ -54,6 +54,7 @@ export class AuthService {
       }),
     };
     
+    this.removeToken()
     return this.http.post(`${this.apiUrl}/User/Logout`, null, httpOptions);
   }
 
@@ -72,6 +73,10 @@ export class AuthService {
 
   getToken(): string {
     return localStorage.getItem('bearerToken');
+  }
+
+  removeToken():void{
+    localStorage.removeItem('bearerToken');
   }
   
 }
