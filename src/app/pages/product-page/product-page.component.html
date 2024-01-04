@@ -1,0 +1,41 @@
+<app-crud></app-crud>
+
+@if (displayContent) {
+  <div class="background-container">
+    <div 
+      class="title-box animation-duration-1000 animation-ease-in-out"
+      pAnimateOnScroll
+      enterClass="fadeinleft"
+    >
+      {{ "Marche" | uppercase }}
+    </div>
+  </div>
+
+  <div class="marca-card-container">
+    <p-card 
+      class="animation-duration-500 animation-ease-in"
+      *ngFor="let marca of marcheList" 
+      styleClass="marca-card"
+      pAnimateOnScroll
+      enterClass="zoomin"
+    >
+      <div class="marca-card-content">
+        <div 
+          class="marca-nome" 
+        >
+          {{ marca.nome }}
+        </div>
+        <p-button
+          label="Visualizza"
+          severity="warning"
+          (onClick)="goToCaldaieList(marca)"
+        >
+        </p-button>
+      </div>
+    </p-card>
+  </div>
+}
+
+<router-outlet></router-outlet>
+
+

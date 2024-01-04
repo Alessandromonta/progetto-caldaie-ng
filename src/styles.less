@@ -52,13 +52,43 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     }
 }
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: "Quicksand,sans-serif", "Roboto", "Helvetica Neue", sans-serif; }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.p-button.p-button-warning {
+    
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.menu-items {
+    position: absolute;
+    left: 5%;
+    top: 5%;
+    background-color: rgba(255,255,255,.2);
+    border-color: rgba(255, 255, 255,.2);
+    .p-menuitem-text, .p-icon {
+        color: rgb(255, 255, 255);
+    }
+    .p-menuitem-text {
+        &:hover {
+            color: rgb(133, 133, 133);
+            transition: all 100ms ease-in-out;
+        }
+    }
+}
+
+//Sezione Form autenticazione
+.form-group-box {
+    margin-top: 36px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: left;
+    gap: 36px;
+    .input-field {
+        flex-basis: 100%;
+        .input-label, .p-input { 
+            width: 100%;
+        }
+    }
+}
 
 .container-list {
     display: flex;
@@ -177,4 +207,103 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     cursor: pointer;
     color: #ff4c4c;
   }
+}
+
+.background-container {
+    background: url("app/shared/tecnico-sfondo.jpeg");
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .title-box {
+        padding: 50px;
+        border-radius: 25px;
+        backdrop-filter: blur(20px);
+        color: #ffffff;
+        font-size: 51px;
+    }
+}
+
+//Sezione marche
+.marca-card-container {
+    margin: 2% 8%;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .marca-card {
+        box-shadow: 1px 2px 8px 0 rgba(0,0,0,0.12);
+        &:hover {
+            box-shadow: 4px 8px 20px 2px rgba(0,0,0,0.15);
+            transition: 0.2s ease-in-out;
+        }
+        .marca-card-content {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            align-items: stretch;
+            .marca-nome {
+                font-size: 20px;
+                font-weight: bold;
+                font-family: Quicksand,sans-serif;
+                align-self: center;
+            }
+        }
+    }
+}
+
+//Sezione modelli
+.caldaia-card-container {
+    margin: 0 20%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 30px 5%;
+    .caldaia-card {
+        flex-basis: 30%;
+        .button-list {
+            display: flex;
+            flex-direction: row;
+            gap: 12px;
+        }
+    }
+}
+
+.caldaie-list-paginator {
+    margin: 3% 0 3% 0;
+}
+
+//Sezione dettaglio modello
+.background {
+    background: url("app/shared/tecnico-sfondo.jpeg");
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    .detail-caldaia-card {
+        width: 60%;
+        margin: 8% 20%;
+        backdrop-filter: blur(50px);
+        background-color: rgba(255,255,255,.5);
+        .detail-caldaia-box {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-around;
+            
+            .left-side-box {
+                .caldaia-image {
+                    width: 350px;
+                }
+            }
+            .right-side-box {
+                font-family: Quicksand,sans-serif;
+                width: 50%;
+                .nome-caldaia {
+                    font-size: 28px;
+                }
+                .error-panel {
+                    margin-bottom: 20px;
+                }
+            }
+        }
+    }
 }
