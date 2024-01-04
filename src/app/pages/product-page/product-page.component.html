@@ -1,28 +1,41 @@
 <app-crud></app-crud>
 
-<div class="background-container">
-  <div class="title-box">
-    {{ "Seleziona una marca" }}
+@if (displayContent) {
+  <div class="background-container">
+    <div 
+      class="title-box animation-duration-1000 animation-ease-in-out"
+      pAnimateOnScroll
+      enterClass="fadeinleft"
+    >
+      {{ "Marche" | uppercase }}
+    </div>
   </div>
-</div>
 
-<div class="container-panel">
-  <div class="cane">
-    <p-scrollPanel styleClass="content-panel">
-      <p-card 
-        *ngFor="let marca of marcheList" 
-        styleClass="marcaCard"
-      >
+  <div class="marca-card-container">
+    <p-card 
+      class="animation-duration-500 animation-ease-in"
+      *ngFor="let marca of marcheList" 
+      styleClass="marca-card"
+      pAnimateOnScroll
+      enterClass="zoomin"
+    >
+      <div class="marca-card-content">
         <div 
           class="marca-nome" 
-          (click)="goToCaldaieList(marca)"
         >
           {{ marca.nome }}
         </div>
-      </p-card>
-    </p-scrollPanel>
+        <p-button
+          label="Visualizza"
+          severity="warning"
+          (onClick)="goToCaldaieList(marca)"
+        >
+        </p-button>
+      </div>
+    </p-card>
   </div>
+}
 
-</div>
+<router-outlet></router-outlet>
 
 

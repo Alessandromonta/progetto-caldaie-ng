@@ -1,33 +1,78 @@
-<div class="container-panel">
-    <div class="cane2">
-        <p-scrollPanel>
-            <div class="content-panel">
-                <p-card
-                    *ngFor="let caldaia of caldaieList; index as index"
-                    styleClass="caldaia-card"
-                    [@cardTransition]="
-                        loading ? 
-                        (index === 0 || index % 3 === 0 ? 'left' : (index === 1 || (index % 2 === 0 && index !== 2)  ? 'top' : 'right')) : 'loaded'
-                    "
-                >
-                    <ng-template pTemplate="header">
-                        <img 
-                            src="../../../assets/caldaia-riello.jpg"
-                            alt="Nessun immagine disponibile"
-                            class="caldaia-image"
-                        >
-                    </ng-template>
-                    <ng-template pTemplate="subheader">
-                        <div class="caldaia-name">
-                            {{ caldaia.nome }}
-                        </div>
-                        <i 
-                            class="acquistato-icon"
-                        ></i>
-                    </ng-template>
-                </p-card>
+@if (displayContent) {
+    <div class="background-container">
+        <p-breadcrumb
+            class="max-w-full"
+            [model]="menuItems"
+            styleClass="menu-items"
+        ></p-breadcrumb>
+        @if (selectedMarca) {
+            <div 
+                class="title-box animation-duration-1000 animation-ease-in-out"
+                pAnimateOnScroll
+                enterClass="fadeinleft"
+            >
+            {{ "Modelli " + selectedMarca.nome | uppercase }}
             </div>
-        </p-scrollPanel>
+        }
     </div>
-</div>
 
+    <p-paginator
+        [rows]="9"
+        [totalRecords]="caldaieList.length"
+        (onPageChange)="splitCaldaieList($event)"
+        [first]="firstCaldaiaIdx"
+        styleClass="caldaie-list-paginator"
+    >
+    </p-paginator>
+
+    <div class="caldaia-card-container">
+        <p-card
+            *ngFor="let caldaia of caldaieVisibleList; index as index"
+            pAnimateOnScroll
+            [enterClass]="getAnimation(index)"
+            class="caldaia-card animation-duration-1000"
+        >
+            <ng-template pTemplate="header">
+                <img 
+                    src="../../../assets/caldaia-riello.jpg"
+                    alt="Nessun immagine disponibile"
+                    class="caldaia-image"
+                >
+            </ng-template>
+            <ng-template pTemplate="subheader">
+                <div class="caldaia-name">
+                    {{ caldaia.nome }}
+                </div>
+                <i 
+                    class="acquistato-icon"
+                ></i>
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <div class="button-list">
+                    <p-button
+                        label="Visualizza"
+                        severity="info"
+                        icon="pi pi-list"
+                        (onClick)="viewCaldaiaDetail(index)"
+                    ></p-button>
+                    <p-button
+                        label="Sblocca"
+                        severity="warning"
+                        icon="fa fa-solid fa-unlock"
+                    ></p-button>
+                </div>
+            </ng-template>
+        </p-card>
+    </div>
+
+    <p-paginator
+        [rows]="9"
+        [totalRecords]="caldaieList.length"
+        (onPageChange)="splitCaldaieList($event)"
+        [first]="firstCaldaiaIdx"
+        styleClass="caldaie-list-paginator"
+    >
+    </p-paginator>
+}
+
+<router-outlet></router-outlet>

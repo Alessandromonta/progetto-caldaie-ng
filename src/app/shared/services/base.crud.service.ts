@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 
 export class BaseCrudService<T> {
     constructor(apiUrl: string, private httpClient: HttpClient) {
-        this.apiUrl = 'http://autoclima-001-site1.atempurl.com/api/' + apiUrl;
+        this.apiUrl = 'http://autoclima-001-site2.atempurl.com/api/' + apiUrl;
     }
     protected apiUrl: string;
 
@@ -12,8 +12,8 @@ export class BaseCrudService<T> {
         return this.httpClient.get<T[]>(`${this.apiUrl}`);
     }
 
-    public getItemsFromItemId(itemId: number): Observable<T[]> {
-        return this.httpClient.get<T[]>(`${this.apiUrl}/${itemId}`);
+    public getItemsFromItemId(itemId: number): Observable<T> {
+        return this.httpClient.get<T>(`${this.apiUrl}/${itemId}`);
     }
 
     public addItem(newItem: T): Observable<T> {

@@ -1,0 +1,30 @@
+<div class="background">
+    <div class="login-container">
+        <p-card class="form-box">
+            <div class="header">
+                <div 
+                    class="login-button"
+                    [ngClass]="{'focused' : !signupFlag}"
+                    (click)="signupFlag = false"
+                    pRipple
+                >{{ "Login" }}</div>
+                <div 
+                    class="signup-button"
+                    [ngClass]="{'focused' : signupFlag}"
+                    (click)="signupFlag = true"
+                    pRipple
+                >{{ "Registrati" }}</div>
+            </div>
+            @if (!signupFlag) {
+                <div class="auth-box">
+                    <app-login></app-login>
+                </div>
+            }
+            @else {
+                <div class="auth-box">
+                    <app-signup></app-signup>
+                </div>
+            }
+        </p-card>
+    </div>
+</div>

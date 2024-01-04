@@ -16,7 +16,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PrimeNGConfig } from 'primeng/api';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthInterceptor } from './Auth/auth.interceptor';
-import { AuthComponent } from './Auth/Component/auth.component';
 import { UserProfileComponent } from './Components/user-profile/user-profile.component';
 import { LoginComponent } from './Components/login/login.component';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
@@ -41,7 +40,13 @@ import {TableModule} from 'primeng/table';
 import {SidebarModule} from 'primeng/sidebar';
 import {DialogModule} from 'primeng/dialog';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
+import {PanelModule} from 'primeng/panel';
+import {AnimateOnScrollModule} from 'primeng/animateonscroll';
+import { RippleModule } from 'primeng/ripple';
+import { PaginatorModule } from "primeng/paginator";
 import {InputTextModule} from 'primeng/inputtext';
+import {TabMenuModule} from 'primeng/tabmenu';
+import {BreadcrumbModule} from 'primeng/breadcrumb';
 import { CaldaiaViewComponent } from './Components/caldaia-view/caldaia-view.component';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { SignupComponent } from './Components/signup/signup.component';
@@ -49,6 +54,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { LogoutComponent } from './Components/logout/logout.component';
 import { AcquistaCaldaieComponent } from './pages/acquista-caldaie/acquista-caldaie.component';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
+import { DettaglioCaldaiaComponent } from './pages/dettaglio-caldaia/dettaglio-caldaia.component';
+import { AuthComponent } from './pages/auth/auth.component';
 
 const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
@@ -80,6 +87,7 @@ export function jwtOptionsFactory() {
     LogoutComponent,
     ProductPageComponent,
     AcquistaCaldaieComponent,
+    DettaglioCaldaiaComponent
   ],
   imports: [
     BrowserModule,
@@ -93,8 +101,14 @@ export function jwtOptionsFactory() {
     ButtonModule,
     PasswordModule,
     InputTextModule,
+    BreadcrumbModule,
     ScrollPanelModule,
+    PanelModule,
+    AnimateOnScrollModule,
+    RippleModule,
+    PaginatorModule,
     InputNumberModule,
+    TabMenuModule,
     MatButtonModule,
     MatCardModule,
     MatIconModule,

@@ -1,7 +1,8 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, Injector, OnInit, inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { tap } from 'rxjs';
+import { ActivatedRoute, Event, NavigationEnd, Router } from '@angular/router';
+import { filter, map, tap } from 'rxjs';
+import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 import { MarcaCaldaie } from 'src/app/Models/MarcaCaldaie';
 import { MarcheService } from 'src/app/Services/marche.service';
 
@@ -31,13 +32,17 @@ import { MarcheService } from 'src/app/Services/marche.service';
 })
 export class ProductPageComponent implements OnInit {
 
+  public marcheList: MarcaCaldaie[];
+  public displayContent: boolean;
+
   constructor(
     private marcheService: MarcheService,
-    private injector: Injector
-  ) {}
+    private injector: Injector,
+    private router: Router
+  ) {
+    this.checkRoutePattern()
+  }
 
-  public marcheList: MarcaCaldaie[];
-    public isOpen: boolean = false;
   ngOnInit(): void {
     this.marcheList = [];
     this.marcheService.getItems()
@@ -45,16 +50,22 @@ export class ProductPageComponent implements OnInit {
         tap(res => console.log(res)),
         tap(marcheList => this.marcheList = marcheList)
       )
-      .subscribe();
+      .subscribe();    
   }
 
   public goToCaldaieList(selectedMarca: MarcaCaldaie) {
-    console.log("Ciao")
-    this.injector.get(Router).navigate([`marca/${selectedMarca.nome}`])
-    this.ngOnDestroy()
+    this.injector.get(Router).navigate([selectedMarca.id], { relativeTo: this.injector.get(ActivatedRoute) })
   }
 
-  ngOnDestroy() {
+  public checkRoutePattern() {
+    this.router.events
+    .pipe(
+      tap((event: any) => console.log(event)),
 
+      filter((event: any) => event instanceof NavigationEnd),
+      tap((event: any) => console.log(event)),
+      tap((event: NavigationEnd) => this.displayContent = event.url === '/marche')
+    )
+    .subscribe()
   }
 }

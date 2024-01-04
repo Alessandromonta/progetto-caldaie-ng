@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthComponent } from './Auth/Component/auth.component';
+import { AuthComponent } from './pages/auth/auth.component'
 import { AuthGuard } from './Auth/Guard/auth.guard';
 import { LoginComponent } from './Components/login/login.component';
 import { UserProfileComponent } from './Components/user-profile/user-profile.component';
@@ -12,17 +12,20 @@ import { CrudComponent } from './Components/crud/crud.component';
 import { LogoutComponent } from './Components/logout/logout.component';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
 import { AcquistaCaldaieComponent } from './pages/acquista-caldaie/acquista-caldaie.component';
+import { DettaglioCaldaiaComponent } from './pages/dettaglio-caldaia/dettaglio-caldaia.component';
+import { Caldaie } from './Models/Caldaie';
+import { NotfoundComponent } from './pages/notfound/notfound.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
-  { path: 'login', component: LoginComponent, 
+  { path: 'login', component: AuthComponent, 
     data: { 
-      registerFlag: false 
+      signupFlag: false 
     }
   },
-  { path: 'signup', component: SignupComponent, 
+  { path: 'signup', component: AuthComponent, 
     data: { 
-      registerFlag: true
+      signupFlag: true
     } 
   },
   {
@@ -38,13 +41,23 @@ const routes: Routes = [
     component: LogoutComponent,
   },
   { 
-    path: 'acquista-prodotti', 
-    component: ProductPageComponent
+    path: 'marche', 
+    component: ProductPageComponent,
+    children: [
+      {
+        path: ':id',
+        component: AcquistaCaldaieComponent,
+        children: [
+          {
+            path: 'modelli/:id',
+            component: DettaglioCaldaiaComponent
+          }
+        ]
+      },
+    ]
   },
-  {
-    path: 'marca/:nome',
-    component: AcquistaCaldaieComponent
-  }
+  { path: 'notfound', component: NotfoundComponent },
+  { path: '**', component: NotfoundComponent }
 ];  
 
 @NgModule({
