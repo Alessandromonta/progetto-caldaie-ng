@@ -1,3 +1,16 @@
+@if (editErroreFlag) {
+  <p-dialog
+    class="edit-errore"
+    [(visible)]="editErroreFlag"
+  >
+    <app-errore-edit
+      [selectedErrore]="erroriSelectedCaldaia[selectedErroreIdx]"
+      (emitErrore)="updateErrore($event)"
+    >
+    </app-errore-edit>
+  </p-dialog>
+}
+
 <div class="edit-container">
     <div class="edit-header">
         <h3>{{ "Modifica Caldaia" }}</h3>
@@ -10,52 +23,31 @@
         </p-button>
     </div>
     <div class="edit-data-box">
-        <div class="edit-item-box">
-            <label for="nome" class="label-item">{{ "Nome" }}</label>
-            <input
-                pInputText
-                id="nome"
-                [(ngModel)]="selectedCaldaia.nome"
-                class="form-item"
-            />
-        </div>
-        <div class="edit-item-box">
-            <label for="descrizione" class="label-item">{{ "Descrizione" }}</label>
-            <input
-                pInputText
-                id="descrizione"
-                [(ngModel)]="selectedCaldaia.descrizione"
-                class="form-item"
-            />
-        </div>
-        <!-- <div class="edit-item-box">
-            <label for="prezzo" class="label-item">{{ "Prezzo" }}</label>
-            <p-inputNumber
-                id="prezzo"
-                [(ngModel)]="selectedCaldaia.prezzo"
-                class="form-item"
-                [maxFractionDigits]="2"
-                [min]="0"
-            />
-        </div>
-        <div class="edit-item-box">
-            <label for="sconto" class="label-item">{{ "Sconto" }}</label>
-            <p-inputNumber
-                id="sconto"
-                [(ngModel)]="selectedCaldaia.sconto"
-                class="form-item"
-                [maxFractionDigits]="2"
-                [min]="0"
-                [max]="100"
-            />
-        </div> -->
+      <div class="edit-item-box">
+          <label for="nome" class="label-item">{{ "Nome" }}</label>
+          <input
+              pInputText
+              id="nome"
+              [(ngModel)]="selectedCaldaia.nome"
+              class="form-item"
+          />
+      </div>
+      <div class="edit-item-box">
+          <label for="descrizione" class="label-item">{{ "Descrizione" }}</label>
+          <input
+              pInputText
+              id="descrizione"
+              [(ngModel)]="selectedCaldaia.descrizione"
+              class="form-item"
+          />
+      </div>
     </div>
     <h2 class="errori-caldaia-label">{{ "Errori caldaia" }}</h2>
     <div class="grid-box-layout">
       <div class="grid-col-3">
         <i
-          class="fa fa-solid fa-plus add-error-icon"
-          (click)="addError()"
+          class="fa fa-solid fa-plus add-icon"
+          (click)="editErrore()"
         ></i>
       </div>
     </div>
@@ -93,11 +85,14 @@
     >
       <div class="grid-col grid-col-1 toggle-error">
         <div class="icon-box">
-          <i class="pi pi-file-edit"></i>
+          <i
+            class="pi pi-file-edit edit-icon"
+            (click)="editErrore(errorIdx)"
+          ></i>
         </div>
       </div>
       <div class="grid-col grid-col-2 codice-errore">
-        <label for="errore" class="codice-errore">{{ errore.codiceErrore }}</label>
+        <label for="errore" class="codice-errore">{{ errore?.codiceErrore }}</label>
       </div>
       <div class="grid-col grid-col-3">
         <div class="icon-box">

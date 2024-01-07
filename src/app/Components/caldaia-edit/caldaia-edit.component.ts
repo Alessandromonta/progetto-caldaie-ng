@@ -22,6 +22,9 @@ export class CaldaiaEditComponent implements OnInit {
   @Output() saveOrUpdateEvent: EventEmitter<Caldaie> = new EventEmitter<Caldaie>();
   public erroriSelectedCaldaia: ErroriCaldaie[] = [];
   public newErroriSelectedCaldaia: ErroriCaldaie[] = [];
+  public selectedErroreIdx: number;
+  public editErroreFlag: boolean;
+  public viewErroreFlag: boolean;
   public saving: boolean;
 
   ngOnInit() {
@@ -69,10 +72,17 @@ export class CaldaiaEditComponent implements OnInit {
       .subscribe();
   }
 
-  public addError() {
-    const newErrore = new ErroriCaldaie();
-    newErrore.idCaldaia = this.selectedCaldaia.id;
-    this.newErroriSelectedCaldaia.push(newErrore);
+  public editErrore(selectedErroreIdx?: number) {
+    if(selectedErroreIdx != null) {
+      this.selectedErroreIdx = selectedErroreIdx;
+    } else {
+      const newErrore = new ErroriCaldaie();
+      newErrore.idCaldaia = this.selectedCaldaia.id;
+      this.erroriSelectedCaldaia.push(newErrore);
+      console.log(this.selectedCaldaia)
+      this.selectedErroreIdx = this.erroriSelectedCaldaia.length - 1;
+    }
+    this.editErroreFlag = true;
   }
 
   public deleteError(errorIdx: number) {
@@ -82,5 +92,10 @@ export class CaldaiaEditComponent implements OnInit {
         tap(() => this.erroriSelectedCaldaia.splice(errorIdx, 1))
       )
       .subscribe();
+  }
+
+  public updateErrore(errore: ErroriCaldaie) {
+    this.erroriSelectedCaldaia[this.selectedErroreIdx] = errore;
+    this.editErroreFlag = false;
   }
 }

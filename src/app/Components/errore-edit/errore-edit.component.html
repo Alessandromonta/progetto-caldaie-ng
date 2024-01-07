@@ -1,0 +1,56 @@
+<div class="edit-container">
+  <div class="edit-header">
+    <h3>{{ "Modifica Errore" }}</h3>
+      <p-button
+          styleClass="p-button-success"
+          label="Salva"
+          [loading]="saving"
+          (onClick)="saveOrUpdateData()"
+      >
+      </p-button>
+  </div>
+  <div class="edit-data-box">
+    <div class="edit-item-box">
+        <label for="codice" class="label-item">{{ "Codice" }}</label>
+        <input
+            pInputText
+            id="codice"
+            [(ngModel)]="selectedErrore.codiceErrore"
+            class="form-item"
+        />
+    </div>
+    <div class="edit-item-box">
+        <label for="descrizione" class="label-item">{{ "Descrizione" }}</label>
+        <input
+            pInputText
+            id="descrizione"
+            [(ngModel)]="selectedErrore.descrizioneErrore"
+            class="form-item"
+            [style]="{'width': '100%'}"
+        />
+    </div>
+    <div class="edit-header">
+      <h2>{{ "Modifica Soluzioni" }}</h2>
+      <i
+        class="fa fa-solid fa-plus add-icon"
+        (click)="addSoluzione()"
+      ></i>
+    </div>
+  </div>
+  <div class="edit-soluzioni-container">
+    @for (soluzione of soluzioniErrore; track $index) {
+      <div class="edit-soluzione-box">
+        <input
+            pInputText
+            [(ngModel)]="soluzione.soluzione"
+            class="form-item"
+        />
+        <div class="delete-item">
+          <i
+            class="pi pi-trash delete-trash-icon"
+          ></i>
+        </div>
+      </div>
+    }
+  </div>
+</div>
