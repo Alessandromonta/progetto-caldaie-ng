@@ -25,6 +25,8 @@ import { MarcaEditComponent } from './Components/marca-edit/marca-edit.component
 import { MarcaViewComponent } from './Components/marca-view/marca-view.component';
 import { CaldaieComponent } from './Components/caldaie/caldaie.component';
 import {CaldaiaEditComponent} from './Components/caldaia-edit/caldaia-edit.component';
+import { ErroreEditComponent } from './Components/errore-edit/errore-edit.component';
+import { ErroreViewComponent } from './Components/errore-view/errore-view.component';
 import { PacchettiComponent } from './Components/pacchetti/pacchetti.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
@@ -64,7 +66,7 @@ const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
 export function jwtOptionsFactory() {
   return {
     tokenGetter: () => localStorage.getItem('bearerToken'), // Nome della chiave in cui hai memorizzato il token nella local storage
-    allowedDomains: ['autoclima-001-site1.atempurl.com'], 
+    allowedDomains: ['autoclima-001-site1.atempurl.com'],
   };
 }
 
@@ -81,6 +83,8 @@ export function jwtOptionsFactory() {
     CaldaieComponent,
     CaldaiaEditComponent,
     CaldaiaViewComponent,
+    ErroreEditComponent,
+    ErroreViewComponent,
     PacchettiComponent,
     LoadingComponent,
     SignupComponent,

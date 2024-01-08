@@ -55,7 +55,25 @@ html, body { height: 100%; }
 body { margin: 0; font-family: "Quicksand,sans-serif", "Roboto", "Helvetica Neue", sans-serif; }
 
 .p-button.p-button-warning {
-    
+
+}
+
+.add-icon, .edit-icon{
+  cursor: pointer;
+  &:hover {
+    opacity: 0.3;
+    transition: opacity 200ms ease-in-out;
+  }
+}
+
+.delete-trash-icon {
+  cursor: pointer;
+  color: #ca0000;
+
+  &:hover {
+    color: #ff3c3c;
+    transition: color 200ms ease-in-out;
+  }
 }
 
 .menu-items {
@@ -84,7 +102,7 @@ body { margin: 0; font-family: "Quicksand,sans-serif", "Roboto", "Helvetica Neue
     gap: 36px;
     .input-field {
         flex-basis: 100%;
-        .input-label, .p-input { 
+        .input-label, .p-input {
             width: 100%;
         }
     }
@@ -119,6 +137,7 @@ body { margin: 0; font-family: "Quicksand,sans-serif", "Roboto", "Helvetica Neue
     .edit-header, .view-header {
         display: flex;
         justify-content: space-between;
+        align-items: center;
     }
     .edit-data-box, .view-data-box {
         padding: 16px;
@@ -139,6 +158,27 @@ body { margin: 0; font-family: "Quicksand,sans-serif", "Roboto", "Helvetica Neue
             }
         }
     }
+}
+
+.edit-soluzioni-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 16px;
+  .edit-soluzione-box {
+    display: flex;
+    flex-direction: row;
+    gap: 18px;
+    height: 30px;
+    align-items: center;
+    .form-item {
+        flex-basis: 95%;
+        height: 30px;
+    }
+    .delete-item {
+      flex-basis: 5%;
+    }
+  }
 }
 
 .delete-dialog {
@@ -196,16 +236,6 @@ body { margin: 0; font-family: "Quicksand,sans-serif", "Roboto", "Helvetica Neue
   .grid-col-3 {
     grid-column-start: 3;
     grid-column-end: 3;
-  }
-
-  .add-error-icon:hover{
-    cursor: pointer;
-    opacity: 0.3;
-  }
-
-  .delete-trash-icon {
-    cursor: pointer;
-    color: #ff4c4c;
   }
 }
 
@@ -288,7 +318,7 @@ body { margin: 0; font-family: "Quicksand,sans-serif", "Roboto", "Helvetica Neue
             display: flex;
             flex-flow: row wrap;
             justify-content: space-around;
-            
+
             .left-side-box {
                 .caldaia-image {
                     width: 350px;
