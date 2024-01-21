@@ -12,7 +12,7 @@ import { remove } from 'lodash';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'https://autoclima-001-site1.atempurl.com/api';  
+  private apiUrl = 'http://autoclima-001-site2.atempurl.com/api';  
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
 
@@ -54,6 +54,7 @@ export class AuthService {
       }),
     };
     
+    this.removeToken()
     return this.http.post(`${this.apiUrl}/User/Logout`, null, httpOptions);
   }
 
@@ -72,6 +73,10 @@ export class AuthService {
 
   getToken(): string {
     return localStorage.getItem('bearerToken');
+  }
+
+  removeToken():void{
+    localStorage.removeItem('bearerToken');
   }
   
 }

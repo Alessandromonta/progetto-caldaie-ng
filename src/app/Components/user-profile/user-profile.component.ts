@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IconDefinition } from '@fortawesome/free-brands-svg-icons';
-import { AuthService } from 'src/app/Auth/Service/auth-service.service';
+import { AuthService } from 'src/app/Auth/Service/auth.service';
 
 @Component({
   selector: 'app-user-profile',

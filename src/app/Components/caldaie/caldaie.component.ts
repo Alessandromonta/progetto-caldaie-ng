@@ -46,8 +46,9 @@ export class CaldaieComponent implements OnInit {
   }
 
   public editData(rowIndex?: number) {
-    if(rowIndex) {
+    if(rowIndex != null) {
       this.selectedCaldaia = cloneDeep(this.caldaieList[rowIndex]);
+      console.log(this.selectedCaldaia)
       this.selectedId = rowIndex;
     }
     else

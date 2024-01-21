@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/Auth/Service/auth-service.service';
+import { AuthService } from 'src/app/Auth/Service/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -24,7 +24,7 @@ export class SignupComponent implements OnInit{
 
   ngOnInit(): void {
     this.signupForm = this.formBuilder.group({
-      email: ['', Validators.required],
+      email: ['', Validators.required, Validators.email],
       username: ['', Validators.required],
       password: ['', Validators.required],
       confirmPassword: ['', [Validators.required, this.matchPassword.bind(this)]],

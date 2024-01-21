@@ -43,7 +43,7 @@ export class MarcheComponent implements OnInit {
   }
 
   public editData(rowIndex?: number) {
-    if(rowIndex) {
+    if(rowIndex != null) {
       this.selectedMarca = cloneDeep(this.marcheList[rowIndex]);
       this.selectedId = rowIndex;
       console.log(rowIndex)

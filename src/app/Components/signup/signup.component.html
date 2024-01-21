@@ -1,79 +1,77 @@
-<div class="login-box">
+<!-- <h2>Signup</h2> -->
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <div class="form-group-box">
+    <!--Username-->
+    <div class="input-field" [class.error]="signupForm.controls['username'].dirty && signupForm.hasError('required','username')"> 
+      <span class="p-float-label"> 
+        <input 
+          class="p-input"
+          pInputText
+          formControlName="username"
+          placeholder="Username"  required 
+        />
+        <label for="username">Username<span class="fa fa-user px-2"></span></label>
+        </span>
+    </div>
+    <small *ngIf="signupForm.controls['username'].dirty && signupForm.hasError('required','username')" class="text-danger">*Username è richiesto*</small>
 
-     <h2>Signup</h2>
-     <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-        <!--Username-->
-        <div class="form-group pt-3">
-         
-         <div class="input-field" [class.error]="signupForm.controls['username'].dirty && signupForm.hasError('required','username')"> 
-            <label for="username">Username</label>
-            <span class="fa fa-user p-2"></span> 
-            <input class="p-input"
-                    type="text"
-                    pInputText
-                    formControlName="username"
-                    placeholder="Username"  required />
-         </div>
-       </div>
-       <small *ngIf="signupForm.controls['username'].dirty && signupForm.hasError('required','username')" class="text-danger">*Username is required*</small>
+    <!--Email-->
+    <div class="input-field" [class.error]="signupForm.controls['email'].dirty && signupForm.hasError('required','email')"> 
+      <span class="p-float-label">       
+        <input class="p-input"
+          type="email"
+          class="p-input"
+          pInputText
+          formControlName="email"
+          placeholder=" Email"  required 
+        />
+        <label for="email">Email<span class="fa fa-user px-2"></span></label>
+      </span>
+    </div>
+    <small *ngIf="signupForm.controls['username'].dirty && signupForm.hasError('required','username')" class="text-danger">*Username è richiesto*</small>
 
-       <!--Email-->
-       <div class="form-group pt-3">
-         
-        <div class="input-field" [class.error]="signupForm.controls['email'].dirty && signupForm.hasError('required','email')"> 
-           <label for="email">Email</label>
-           <span class="fa fa-user p-2"></span> 
-           <input class="p-input"
-                   type="email"
-                   pInputText
-                   formControlName="email"
-                   placeholder=" Email"  required />
-        </div>
-      </div>
-      <small *ngIf="signupForm.controls['username'].dirty && signupForm.hasError('required','username')" class="text-danger">*Username is required*</small>
-      <small *ngIf="signupForm.hasError('passwordMismatch', 'confirmPassword')" class="text-danger">*Le password non coincidono*</small>
+    <!--Password-->
+    <div class="input-field" [class.error]="signupForm.controls['password'].dirty && signupForm.hasError('required','password')"> 
+      <span class="p-float-label">       
+        <p-password
+          formControlName="password"
+          [toggleMask] = true
+          class="p-input"
+          styleClass="p-input"
+          inputStyleClass="p-input"
+          placeholder="Password">
+        </p-password>  
+        <label for="password">Password<span class="fa fa-lock px-2"></span></label>
+      </span> 
+    </div>
+    <small *ngIf="signupForm.controls['password'].dirty && signupForm.hasError('required','password')" class="text-danger"> *Password è richiesta*</small>
+    
+    <!--Confirm Password-->
+    <div class="input-field" [class.error]="signupForm.controls['confirmPassword'].dirty && signupForm.hasError('required','confirmPassword')"> 
+      <span class="p-float-label">       
+        <p-password
+          formControlName="confirmPassword"
+          [toggleMask]="true"
+          [feedback]="false"
+          class="p-input"
+          styleClass="p-input"
+          inputStyleClass="p-input"
+          placeholder="Conferma Password"
+        ></p-password>   
+        <label for="password">ConfermaPassword<span class="fa fa-lock px-2"></span></label>
+      </span>
+    </div>
+    <small *ngIf="signupForm.controls['confirmPassword'].dirty && signupForm.hasError('required','confirmPassword')" class="text-danger"> *Password è richiesta*</small>
+    <small *ngIf="signupForm.hasError('passwordMismatch', 'confirmPassword')" class="text-danger">*Le password non coincidono*</small>
 
-       <!--Password-->
-       <div class="form-group pt-3">
-          <div class="input-field" [class.error]="signupForm.controls['password'].dirty && signupForm.hasError('required','password')"> 
-            <label for="password">Password</label>
-            <span class="fa fa-lock px-2"></span> 
-              <p-password
-                          formControlName="password"
-                          [toggleMask] = true
-                          class="p-input"
-                          placeholder="Password">
-                      </p-password>   
-          </div>
-       </div>
-       <small *ngIf="signupForm.controls['password'].dirty && signupForm.hasError('required','password')" class="text-danger"> *Password è richiesta*</small>
-       
-       <!--Confirm Password-->
-       <div class="form-group pt-3">
-          <div class="input-field" [class.error]="signupForm.controls['confirmPassword'].dirty && signupForm.hasError('required','confirmPassword')"> 
-            <label for="password">ConfermaPassword</label>
-            <span class="fa fa-lock px-2"></span> 
-              <p-password
-                          formControlName="confirmPassword"
-                          [toggleMask] = true
-                          class="p-input"
-                          placeholder="Conferma Password">
-                      </p-password>   
-          </div>
-       </div>
-       <small *ngIf="signupForm.controls['confirmPassword'].dirty && signupForm.hasError('required','confirmPassword')" class="text-danger"> *Password è richiesta*</small>
-       <small *ngIf="signupForm.hasError('passwordMismatch', 'confirmPassword')" class="text-danger">*Le password non coincidono*</small>
+    <p-button type="submit" [disabled]="signupForm.invalid">Registrati</p-button>
 
-       <br>
-       <p-button type="submit" [disabled]="signupForm.invalid">Registrati</p-button>
-       
-       <div *ngIf="signupError" class="error-message">
-         Signup failed. Please check your data.
-       </div>
-     </form>
-  
-  <div class="text-center pt-4 text-muted">Hai già un account? 
-      <a id="forgot" routerLink="/login" >Accedi</a> 
   </div>
+  <div *ngIf="signupError" class="error-message">
+    Registrazione fallita. Assicurati che i dati siano corretti.
+  </div>
+</form>
 
-</div>
+<!-- <div class="text-center pt-4 text-muted">Hai già un account? 
+    <a id="forgot" routerLink="/login" >Accedi</a> 
+</div> -->

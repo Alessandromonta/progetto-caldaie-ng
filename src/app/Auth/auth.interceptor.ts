@@ -9,7 +9,7 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { AuthService } from '../Auth/Service/auth-service.service';
+import { AuthService } from './Service/auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -19,19 +19,30 @@ export class AuthInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    // Esegui qui la logica per l'aggiunta dell'header del token Bearer alla richiesta HTTP
-    const token = this.authService.getToken();
 
     // Verifica se la richiesta è una richiesta di login
     const isLoginRequest = req.url.includes('/Login');
 
-    if (token && !isLoginRequest) {
-      console.log("test: " + isLoginRequest);
+    if (!isLoginRequest) {
+      const token = this.authService.getToken();
+      if(token){
+        console.log("bearer mandato: " + isLoginRequest);
+        req = req.clone({
+          setHeaders: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
+    }
+    else
+    {
       req = req.clone({
         setHeaders: {
-          Authorization: `Bearer ${token}`,
+          Authorization: ``,
         },
       });
+      this.authService.removeToken()
+      console.log("bearer non mandato: " + this.authService.getToken());
     }
 
     return next.handle(req).pipe(

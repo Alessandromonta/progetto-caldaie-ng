@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AuthComponent } from './auth.component';
+import { ErroreViewComponent } from './errore-view.component';
 
-describe('AuthComponent', () => {
-  let component: AuthComponent;
-  let fixture: ComponentFixture<AuthComponent>;
+describe('ErroreViewComponent', () => {
+  let component: ErroreViewComponent;
+  let fixture: ComponentFixture<ErroreViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AuthComponent ]
+      imports: [ErroreViewComponent]
     })
     .compileComponents();
-
-    fixture = TestBed.createComponent(AuthComponent);
+    
+    fixture = TestBed.createComponent(ErroreViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -3,9 +3,9 @@ export class Caldaie {
   nome?: string;
   descrizione?: string;
   immagine?: Uint8Array;
-  prezzo?: number;
-  sconto?: number;
   dataCreazione?: Date;
   dataUltimaModifica?: Date;
   idMarca: number;
+
+  sbloccata?: boolean;
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'progetto-caldaie-ng';
+  
+  constructor(private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.params.subscribe(params => console.log(params))
+  }
 }
