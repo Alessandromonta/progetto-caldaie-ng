@@ -60,10 +60,8 @@ export class AcquistaCaldaieComponent {
     private marcheService: MarcheService,
     private router: Router,
     private activatedRoute: ActivatedRoute
-  ) {  
-    // this.activatedRoute.params.subscribe(param => console.log(param))
-    this.checkRoutePattern();
-    //this.selectedMarca = this.router.getCurrentNavigation().extras.state as MarcaCaldaie;
+  ) {
+      this.checkRoutePattern();
   }
 
   public isOpen: boolean;
@@ -88,7 +86,7 @@ export class AcquistaCaldaieComponent {
         tap(marca => this.selectedMarca = marca),
         tap(marca => this.marcheService.marcaId$.next(marca)),
         tap(marca => this.initMenu()),
-        switchMap(marca => 
+        switchMap(marca =>
           this.marcheService.getCaldaieMarca(marca.id)
             .pipe(
               tap(caldaieList => caldaieList = [...caldaieList, ...caldaieList]),
@@ -129,9 +127,11 @@ export class AcquistaCaldaieComponent {
     //   .subscribe();
   }
 
-  public splitCaldaieList(paginatorState: PaginatorState) {
-    this.caldaieVisibleList = this.caldaieList.slice(paginatorState.first, paginatorState.first + paginatorState.rows);
+  public splitCaldaieList(paginatorState: PaginatorState, paginatorTopBox: HTMLElement) {
+    this.caldaieVisibleList = [];
+    setTimeout(() => this.caldaieVisibleList = this.caldaieList.slice(paginatorState.first, paginatorState.first + paginatorState.rows), 200)
     this.firstCaldaiaIdx = paginatorState.first;
+    paginatorTopBox.scrollTo();
   }
 
   public viewCaldaiaDetail(idxCaldaia: number) {

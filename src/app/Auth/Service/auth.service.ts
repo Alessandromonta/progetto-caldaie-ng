@@ -12,7 +12,7 @@ import { remove } from 'lodash';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://autoclima-001-site2.atempurl.com/api';  
+  private apiUrl = 'http://autoclima-001-site2.atempurl.com/api';
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
 
@@ -20,7 +20,7 @@ export class AuthService {
     const credentials = { username, password, email, grado, token };
 
     console.log(credentials);
-    
+
     return this.http.post(`${this.apiUrl}/User`, credentials, { responseType: 'text' }).pipe(
       tap((response) => {
         console.log('Risultato della chiamata POST Signup:', response);
@@ -30,7 +30,7 @@ export class AuthService {
 
   login(username: string, password: string): Observable<any> {
     let email: string = null
-  
+
     if(username.includes("@")){
       email = username;
       username = null
@@ -43,7 +43,7 @@ export class AuthService {
       })
     );
   }
-  
+
   logout(): Observable<any> {
     const token = this.getToken()
 
@@ -53,7 +53,7 @@ export class AuthService {
         'Authorization': `Bearer ${token}`
       }),
     };
-    
+
     this.removeToken()
     return this.http.post(`${this.apiUrl}/User/Logout`, null, httpOptions);
   }
@@ -63,11 +63,11 @@ export class AuthService {
 
     if(token == null){
       console.log("Token non valido, logout effettuato?");
-      
+
     }
     else{
       const decodedToken = this.jwtHelper.decodeToken(token);
-      return decodedToken['Grado']; // Estrai il claim "Grado"
+      return decodedToken['UserId']; // Estrai il claim "Grado"
     }
   }
 
@@ -78,5 +78,5 @@ export class AuthService {
   removeToken():void{
     localStorage.removeItem('bearerToken');
   }
-  
+
 }
