@@ -15,33 +15,35 @@ import { AcquistaCaldaieComponent } from './pages/acquista-caldaie/acquista-cald
 import { DettaglioCaldaiaComponent } from './pages/dettaglio-caldaia/dettaglio-caldaia.component';
 import { Caldaie } from './Models/Caldaie';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
+import { AcquistaPacchettiComponent } from './pages/acquista-pacchetti/acquista-pacchetti.component';
+import { ProfiloComponent } from './pages/profilo/profilo.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
-  { path: 'login', component: AuthComponent, 
-    data: { 
-      signupFlag: false 
+  { path: 'login', component: AuthComponent,
+    data: {
+      signupFlag: false
     }
   },
-  { path: 'signup', component: AuthComponent, 
-    data: { 
+  { path: 'signup', component: AuthComponent,
+    data: {
       signupFlag: true
-    } 
+    }
   },
   {
-    path: 'user-profile', 
+    path: 'user-profile',
     component: UserProfileComponent,
     canActivate: [AuthGuard]
-  }, 
+  },
   { path: 'Marche',     component: MarcheComponent },
   { path: 'Caldaie',    component: CaldaieComponent },
   { path: 'Pacchetti',  component: PacchettiComponent },
-  { 
-    path: 'Logout',     
+  {
+    path: 'Logout',
     component: LogoutComponent,
   },
-  { 
-    path: 'marche', 
+  {
+    path: 'marche',
     component: ProductPageComponent,
     children: [
       {
@@ -56,9 +58,17 @@ const routes: Routes = [
       },
     ]
   },
+  {
+    path: "servizi",
+    component: AcquistaPacchettiComponent
+  },
+  {
+    path: 'profilo',
+    component: ProfiloComponent
+  },
   { path: 'notfound', component: NotfoundComponent },
   { path: '**', component: NotfoundComponent }
-];  
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

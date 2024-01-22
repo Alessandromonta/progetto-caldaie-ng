@@ -2,7 +2,7 @@
 
 @if (displayContent) {
   <div class="background-container">
-    <div 
+    <div
       class="title-box animation-duration-1000 animation-ease-in-out"
       pAnimateOnScroll
       enterClass="fadeinleft"
@@ -12,27 +12,28 @@
   </div>
 
   <div class="marca-card-container">
-    <p-card 
-      class="animation-duration-500 animation-ease-in"
-      *ngFor="let marca of marcheList" 
-      styleClass="marca-card"
-      pAnimateOnScroll
-      enterClass="zoomin"
-    >
-      <div class="marca-card-content">
-        <div 
-          class="marca-nome" 
-        >
-          {{ marca.nome }}
+    @for (marca of marcheList; track $index) {
+      <p-card
+        class="animation-duration-500 animation-ease-in"
+        styleClass="marca-card"
+        pAnimateOnScroll
+        enterClass="zoomin"
+      >
+        <div class="marca-card-content">
+          <div
+            class="marca-nome"
+          >
+            {{ marca.nome }}
+          </div>
+          <p-button
+            label="Visualizza"
+            severity="warning"
+            (onClick)="goToCaldaieList(marca)"
+          >
+          </p-button>
         </div>
-        <p-button
-          label="Visualizza"
-          severity="warning"
-          (onClick)="goToCaldaieList(marca)"
-        >
-        </p-button>
-      </div>
-    </p-card>
+      </p-card>
+    }
   </div>
 }
 

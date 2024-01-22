@@ -7,12 +7,14 @@ import {
   HttpClient, HttpHeaders,
 } from '@angular/common/http';
 import { remove } from 'lodash';
+import { Utenti } from 'src/app/Models/utenti';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://autoclima-001-site2.atempurl.com/api';  
+  private apiUrl = 'http://autoclima-001-site2.atempurl.com/api';
+  public utenteLoggato: Utenti;
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
 
@@ -20,7 +22,7 @@ export class AuthService {
     const credentials = { username, password, email, grado, token };
 
     console.log(credentials);
-    
+
     return this.http.post(`${this.apiUrl}/User`, credentials, { responseType: 'text' }).pipe(
       tap((response) => {
         console.log('Risultato della chiamata POST Signup:', response);
@@ -30,7 +32,7 @@ export class AuthService {
 
   login(username: string, password: string): Observable<any> {
     let email: string = null
-  
+
     if(username.includes("@")){
       email = username;
       username = null
@@ -43,7 +45,7 @@ export class AuthService {
       })
     );
   }
-  
+
   logout(): Observable<any> {
     const token = this.getToken()
 
@@ -53,30 +55,28 @@ export class AuthService {
         'Authorization': `Bearer ${token}`
       }),
     };
-    
+
     this.removeToken()
     return this.http.post(`${this.apiUrl}/User/Logout`, null, httpOptions);
   }
 
-  getUserRole() {
+  public getUserRole() {
     const token = this.getToken()
-
-    if(token == null){
-      console.log("Token non valido, logout effettuato?");
-      
-    }
-    else{
-      const decodedToken = this.jwtHelper.decodeToken(token);
-      return decodedToken['Grado']; // Estrai il claim "Grado"
-    }
+    const decodedToken = this.jwtHelper.decodeToken(token);
+    return decodedToken['Grado']; // Estrai il claim "Grado"
   }
 
-  getToken(): string {
+  public getUserId() {
+    const token = this.getToken()
+    const decodedToken = this.jwtHelper.decodeToken(token);
+    return decodedToken['UserId']; // Estrai il claim "UserId"
+  }
+
+  public getToken(): string {
     return localStorage.getItem('bearerToken');
   }
 
-  removeToken():void{
+  public removeToken():void{
     localStorage.removeItem('bearerToken');
   }
-  
 }

@@ -34,8 +34,7 @@ export class AuthInterceptor implements HttpInterceptor {
         });
       }
     }
-    else
-    {
+    else {
       req = req.clone({
         setHeaders: {
           Authorization: ``,

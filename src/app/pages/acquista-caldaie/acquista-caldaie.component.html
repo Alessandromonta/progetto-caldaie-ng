@@ -6,7 +6,7 @@
             styleClass="menu-items"
         ></p-breadcrumb>
         @if (selectedMarca) {
-            <div 
+            <div
                 class="title-box animation-duration-1000 animation-ease-in-out"
                 pAnimateOnScroll
                 enterClass="fadeinleft"
@@ -16,24 +16,27 @@
         }
     </div>
 
-    <p-paginator
-        [rows]="9"
-        [totalRecords]="caldaieList.length"
-        (onPageChange)="splitCaldaieList($event)"
-        [first]="firstCaldaiaIdx"
-        styleClass="caldaie-list-paginator"
-    >
-    </p-paginator>
+    <div class="paginator-top-box" #paginatorTopBox>
+      <p-paginator
+          [rows]="9"
+          [totalRecords]="caldaieList.length"
+          (onPageChange)="splitCaldaieList($event, paginatorTopBox)"
+          [first]="firstCaldaiaIdx"
+          styleClass="caldaie-list-paginator"
+          #paginatorTop
+      >
+      </p-paginator>
+    </div>
 
     <div class="caldaia-card-container">
         <p-card
             *ngFor="let caldaia of caldaieVisibleList; index as index"
             pAnimateOnScroll
-            [enterClass]="getAnimation(index)"
-            class="caldaia-card animation-duration-1000"
+            enterClass="flipleft"
+            class="caldaia-card animation-duration-1000 animation-ease-in-out"
         >
             <ng-template pTemplate="header">
-                <img 
+                <img
                     src="../../../assets/caldaia-riello.jpg"
                     alt="Nessun immagine disponibile"
                     class="caldaia-image"
@@ -43,7 +46,7 @@
                 <div class="caldaia-name">
                     {{ caldaia.nome }}
                 </div>
-                <i 
+                <i
                     class="acquistato-icon"
                 ></i>
             </ng-template>
@@ -68,7 +71,7 @@
     <p-paginator
         [rows]="9"
         [totalRecords]="caldaieList.length"
-        (onPageChange)="splitCaldaieList($event)"
+        (onPageChange)="splitCaldaieList($event, paginatorTopBox)"
         [first]="firstCaldaiaIdx"
         styleClass="caldaie-list-paginator"
     >

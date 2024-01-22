@@ -1,0 +1,80 @@
+<app-crud></app-crud>
+
+<div class="background">
+  <p-card
+    styleClass="user-profile-card"
+  >
+    @if(utente) {
+      <div class="user-profile-content-box">
+        <div class="card-item">
+          <span
+            class="title-box animation-duration-1000 user-icon"
+            pAnimateOnScroll
+            enterClass="zoomin"
+          >
+            <fa-icon [icon]="['fas', 'user']"></fa-icon>
+          </span>
+        </div>
+        <span
+          class="title-box animation-duration-1000 animation-ease-in-out card-item user-name"
+          pAnimateOnScroll
+          enterClass="fadeinleft"
+        >
+          <h1>
+            Bentornato {{ utente.username }}
+          </h1>
+        </span>
+        <div class="card-item user-sblocchi">
+          @for(caldaia of caldaieSbloccate; track $index) {
+            <span
+              class="title-box animation-duration-1000 animation-ease-in-out card-item sblocco-row"
+              pAnimateOnScroll
+              enterClass="scalein"
+            >
+              <fa-icon [icon]="['fas', 'lock-open']" class="row-item"></fa-icon>
+              <div class="row-item"><b>{{ caldaia.nome }}</b></div>
+              <p-button
+                icon="fa fa-solid fa-eye"
+                label="Visualizza"
+                severity="info"
+                styleClass="view-caldaia-button"
+                class="row-item"
+                (onClick)="viewDettaglioCaldaia(caldaia)"
+              ></p-button>
+            </span>
+          }
+          <span
+            class="title-box animation-duration-1000 animation-ease-in-out card-item sblocco-row"
+            pAnimateOnScroll
+            enterClass="scalein"
+          >
+            <fa-icon [icon]="utente.accortezzeFlag ? ['fas', 'lock-open'] : ['fas', 'lock']" class="row-item special-content-flag"></fa-icon>
+            <div class="row-item"><b>{{ "Accortezze per la sostituzione" }}</b></div>
+            <p-button
+              icon="fa fa-solid fa-eye"
+              label="Visualizza"
+              severity="info"
+              styleClass="view-caldaia-button"
+              class="row-item"
+            ></p-button>
+          </span>
+          <span
+            class="title-box animation-duration-1000 animation-ease-in-out card-item sblocco-row"
+            pAnimateOnScroll
+            enterClass="scalein"
+          >
+            <fa-icon [icon]="!utente.risoluzioneGuastiFlag ? ['fas', 'lock-open'] : ['fas', 'lock']" class="row-item special-content-flag"></fa-icon>
+            <div class="row-item"><b>{{ "Risoluzione guasti" }}</b></div>
+            <p-button
+              icon="fa fa-solid fa-eye"
+              label="Visualizza"
+              severity="info"
+              styleClass="view-caldaia-button"
+              class="row-item"
+            ></p-button>
+          </span>
+        </div>
+      </div>
+    }
+  </p-card>
+</div>

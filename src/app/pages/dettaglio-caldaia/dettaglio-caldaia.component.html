@@ -6,13 +6,12 @@
             styleClass="menu-items"
         ></p-breadcrumb>
         <p-card
-            styleClass="detail-caldaia-card"
-            [style]="{ 'backdrop-filter': 'blur(50px)'}"
+          styleClass="detail-caldaia-card"
         >
             <div class="detail-caldaia-box">
                 <div class="left-side-box">
-                    <img 
-                        src="assets/caldaia-riello.jpg" 
+                    <img
+                        src="assets/caldaia-riello.jpg"
                         alt="No image"
                         pAnimateOnScroll
                         enterClass="fadeinleft"
@@ -21,7 +20,7 @@
                 </div>
                 <div class="right-side-box">
                     <p class="nome-caldaia">{{ selectedCaldaia.nome }}</p>
-                    <p-scrollPanel>
+                    <p-scrollPanel [style]="{'height': '430px'}">
                         @for (errore of errori; track $index) {
                             <p-panel
                                 [toggleable]="true"

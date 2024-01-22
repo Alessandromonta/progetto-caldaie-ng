@@ -1,5 +1,4 @@
 export class ServizioPacchetti {
-     idPacchetto?: number;
-     idServizio?: number;
-   }
-   
+  idPacchetto?: number;
+  nomeServzio?: string;
+}
