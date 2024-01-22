@@ -474,3 +474,37 @@ body { margin: 0; font-family: "Quicksand,sans-serif", "Roboto", "Helvetica Neue
     }
   }
 }
+
+//Individuazione guasti
+.background {
+  background: url("app/shared/tecnico-sfondo.jpeg");
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  .istruzioni-panel-box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column nowrap;
+    gap: 24px;
+    .guasti-title-box {
+      padding: 41px;
+      border-radius: 25px;
+      backdrop-filter: blur(20px);
+      color: #ffffff;
+      font-size: 43px;
+    }
+    .istruzioni-panel {
+      width: 760px;
+      height: 80vh;
+      background-color: rgba(255,255,255,.8);
+      border-radius: 50px;
+      padding: 25px;
+      @media screen and (max-width: 860px) {
+        width: 85%;
+      }
+    }
+  }
+}

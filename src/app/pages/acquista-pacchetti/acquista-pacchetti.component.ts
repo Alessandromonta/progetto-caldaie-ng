@@ -1,7 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Pacchetti } from 'src/app/Models/Pacchetti';
 import { Servizi } from 'src/app/Models/Servizi';
-
+import { CheckoutInfo } from 'src/app/Models/CheckoutInfo';
+import { tap } from 'rxjs';
 @Component({
   selector: 'app-acquista-pacchetti',
   templateUrl: './acquista-pacchetti.component.html',
@@ -11,7 +13,7 @@ export class AcquistaPacchettiComponent {
   public pacchettiList: Pacchetti[] = [];
   public servizi: Servizi[] = [];
 
-  constructor() {}
+  constructor(private httpClient: HttpClient) {}
 
   ngOnInit(): void {
     this.pacchettiList.push(
@@ -65,4 +67,57 @@ export class AcquistaPacchettiComponent {
       }
     );
   }
+
+  public navigateToCheckout(selectedPacchetto: Pacchetti) {
+    const checkoutInfo: CheckoutInfo = new CheckoutInfo();
+    checkoutInfo.line_items = [];
+    checkoutInfo.line_items.push(
+      {
+        price_data: {
+          unit_amount: (selectedPacchetto.sconto ?? selectedPacchetto.prezzo)*100,
+          currency: "EUR",
+          product_data: {
+            name: selectedPacchetto.nome
+          }
+        },
+        quantity: 1
+      }
+    );
+    checkoutInfo.cancel_url = "http://localhost/4200/login";
+    checkoutInfo.allow_promotion_codes = true;
+    checkoutInfo.customerEmail = "test@gmail.com";
+    checkoutInfo.mode = "payment";
+    checkoutInfo.success_url = "http://localhost/4200/profilo";
+    checkoutInfo.payment_method_types = [];
+    checkoutInfo.payment_method_types.push("card");
+    this.httpClient
+      .post<string>('http://autoclima-001-site2.atempurl.com/api/payment/create-checkout-session', checkoutInfo)
+      .pipe(
+        tap((checkoutUrl: string) => window.location.href = checkoutUrl)
+      )
+      .subscribe();
+  }
 }
+
+// {
+//   "line_items": [
+//     {
+//       "price_data": {
+//         "unit_amount": 499,
+//         "currency": "EUR",
+//         "product_data": {
+//           "name": "Pacchetto Singola Caldaia"
+//         }
+//       },
+//       "quantity": 1
+//     }
+//   ],
+//   "cancel_url": "autoclimarepair.it/cancel",
+//   "allow_promotion_codes": true,
+//   "customerEmail": "test@gmai.com",
+//   "mode": "payment",
+//   "success_url": "autoclimarepair.it",
+//   "payment_method_types": [
+//     "card"
+//   ]
+// }

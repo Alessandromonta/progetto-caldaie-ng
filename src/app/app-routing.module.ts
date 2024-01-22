@@ -17,6 +17,8 @@ import { Caldaie } from './Models/Caldaie';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { AcquistaPacchettiComponent } from './pages/acquista-pacchetti/acquista-pacchetti.component';
 import { ProfiloComponent } from './pages/profilo/profilo.component';
+import { IndividuazioneGuastiComponent } from './pages/individuazione-guasti/individuazione-guasti.component';
+import { AccortezzeSostituzioneComponent } from './pages/accortezze-sostituzione/accortezze-sostituzione.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -65,6 +67,14 @@ const routes: Routes = [
   {
     path: 'profilo',
     component: ProfiloComponent
+  },
+  {
+    path: 'individuazione-guasti',
+    component: IndividuazioneGuastiComponent
+  },
+  {
+    path: 'accortezze-sostituzione',
+    component: AccortezzeSostituzioneComponent
   },
   { path: 'notfound', component: NotfoundComponent },
   { path: '**', component: NotfoundComponent }
