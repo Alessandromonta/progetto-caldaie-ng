@@ -1,0 +1,57 @@
+<app-crud></app-crud>
+
+<div class="background-container">
+  <div
+    class="title-box animation-duration-1000 animation-ease-in-out"
+    pAnimateOnScroll
+    enterClass="fadeinleft"
+  >
+    {{ "Acquista servizi" | uppercase }}
+  </div>
+</div>
+
+<section class="pacchetti-section">
+  <div class="pacchetto-card-container">
+    @for (pacchetto of pacchettiList; track $index) {
+      @if (pacchetto.attivo) {
+        <p-card
+          styleClass="pacchetto-card"
+        >
+          <div class="pacchetto-card-box">
+            <div class="pacchetto-icon-box">
+              <span class="icon-box">
+                <fa-icon [icon]="['fab', 'gripfire']"></fa-icon>
+              </span>
+            </div>
+            <div class="pacchetto-descrizione-box">
+              <h3>
+                <span class="nome">
+                  {{ pacchetto.nome }}
+                  <s class="prezzo">{{ pacchetto.prezzo }}</s>
+                </span>
+                <span class="sconto">
+                  {{ pacchetto.sconto }}
+                </span>
+              </h3>
+              <p class="servizi">
+                @for (servizio of servizi; track $index) {
+                  {{ "- " + servizio.nomeServizio }}
+                  <br>
+                }
+              </p>
+            </div>
+            <div class="pacchetto-button-box">
+              <p-button
+                icon="pi pi-shopping-cart"
+                label="Acquista"
+                severity="warning"
+                styleClass="acquista-button"
+              ></p-button>
+            </div>
+          </div>
+        </p-card>
+      }
+    }
+  </div>
+</section>
+

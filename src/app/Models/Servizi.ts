@@ -1,4 +1,3 @@
 export class Servizi {
-     nomeServizio?: string;
-   }
-   
+  nomeServizio?: string;
+}
