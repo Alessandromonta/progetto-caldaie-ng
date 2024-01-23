@@ -17,5 +17,17 @@ export class AppComponent {
   ) {
     this.activatedRoute.params.subscribe(params => console.log(params));
     this.faIconLibrary.addIconPacks(fas, fab);
+
+    document.addEventListener('scroll', (event) => {
+      let desktopMenuBarElement = document.querySelector('.desktop-menu-bar');
+      if(window.scrollY !== 0) {
+        if(!desktopMenuBarElement.classList.contains('minimized-bar'))
+          desktopMenuBarElement.classList.add('minimized-bar');
+      }
+      else {
+        if(desktopMenuBarElement.classList.contains('minimized-bar'))
+          desktopMenuBarElement.classList.remove('minimized-bar');
+      }
+    });
   }
 }

@@ -34,6 +34,7 @@ export class ProductPageComponent implements OnInit {
 
   public marcheList: MarcaCaldaie[];
   public displayContent: boolean;
+  public toggleMenu: boolean = false;
 
   constructor(
     private marcheService: MarcheService,

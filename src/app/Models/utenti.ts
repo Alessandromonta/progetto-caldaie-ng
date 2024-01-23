@@ -4,7 +4,7 @@ export class Utenti {
   email: string;
   grado: number;
   token: number;
-  accortezzeFlag: boolean;
+  accortezzeSostituzioneFlag: boolean;
   risoluzioneGuastiFlag: boolean;
   lastLogin: Date | null;
   lastLogout: Date | null;

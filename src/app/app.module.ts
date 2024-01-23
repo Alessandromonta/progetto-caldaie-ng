@@ -60,6 +60,8 @@ import { DettaglioCaldaiaComponent } from './pages/dettaglio-caldaia/dettaglio-c
 import { AuthComponent } from './pages/auth/auth.component';
 import { AcquistaPacchettiComponent } from './pages/acquista-pacchetti/acquista-pacchetti.component';
 import { ProfiloComponent } from './pages/profilo/profilo.component';
+import { IndividuazioneGuastiComponent } from './pages/individuazione-guasti/individuazione-guasti.component';
+import { AccortezzeSostituzioneComponent } from './pages/accortezze-sostituzione/accortezze-sostituzione.component';
 
 const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
@@ -95,7 +97,9 @@ export function jwtOptionsFactory() {
     AcquistaCaldaieComponent,
     DettaglioCaldaiaComponent,
     AcquistaPacchettiComponent,
-    ProfiloComponent
+    ProfiloComponent,
+    IndividuazioneGuastiComponent,
+    AccortezzeSostituzioneComponent
   ],
   imports: [
     BrowserModule,
