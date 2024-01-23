@@ -1,4 +1,31 @@
-<app-crud></app-crud>
+
+
+<!-- Responsive menu -->
+<!-- <p-button
+  class="menu-button"
+  styleClass="menu-button-nested"
+  icon="fa fa-solid fa-bars"
+  label="Menu"
+  (onClick)="toggleMenu = true"
+>
+</p-button> -->
+
+<p-sidebar
+  [(visible)]="toggleMenu"
+  position="right"
+  class="menu-sidebar"
+  styleClass="menu-sidebar-nested"
+>
+  <div class="menu-box">
+    <ul class="menu">
+      <a><li>Marche e modelli</li></a>
+      <a><li>Servizi</li></a>
+      <a><li>Profilo</li></a>
+      <a><li>Torna alla Home</li></a>
+      <a><li>Area riservata</li></a>
+    </ul>
+  </div>
+</p-sidebar>
 
 @if (displayContent) {
   <div class="background-container">
@@ -10,7 +37,6 @@
       {{ "Marche" | uppercase }}
     </div>
   </div>
-
   <div class="marca-card-container">
     @for (marca of marcheList; track $index) {
       <p-card
