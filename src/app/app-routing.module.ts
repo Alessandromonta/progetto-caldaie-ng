@@ -19,9 +19,9 @@ import { AcquistaPacchettiComponent } from './pages/acquista-pacchetti/acquista-
 import { ProfiloComponent } from './pages/profilo/profilo.component';
 import { IndividuazioneGuastiComponent } from './pages/individuazione-guasti/individuazione-guasti.component';
 import { AccortezzeSostituzioneComponent } from './pages/accortezze-sostituzione/accortezze-sostituzione.component';
+import { AreaRiservataComponent } from './pages/area-riservata/area-riservata.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: 'login', component: AuthComponent,
     data: {
       signupFlag: false
@@ -37,11 +37,8 @@ const routes: Routes = [
     component: UserProfileComponent,
     canActivate: [AuthGuard]
   },
-  { path: 'Marche',     component: MarcheComponent },
-  { path: 'Caldaie',    component: CaldaieComponent },
-  { path: 'Pacchetti',  component: PacchettiComponent },
   {
-    path: 'Logout',
+    path: 'logout',
     component: LogoutComponent,
   },
   {
@@ -75,6 +72,16 @@ const routes: Routes = [
   {
     path: 'accortezze-sostituzione',
     component: AccortezzeSostituzioneComponent
+  },
+  {
+    path: 'area-riservata',
+    component: AreaRiservataComponent,
+    children: [
+      { path: '', redirectTo: 'modelli', pathMatch: 'full' },
+      { path: 'marche',     component: MarcheComponent },
+      { path: 'modelli',    component: CaldaieComponent },
+      { path: 'pacchetti',  component: PacchettiComponent }
+    ]
   },
   { path: 'notfound', component: NotfoundComponent },
   { path: '**', component: NotfoundComponent }

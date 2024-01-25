@@ -1,7 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .p-tabmenu {
     .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link {
@@ -89,7 +92,7 @@ body { margin: 0; font-family: "Quicksand,sans-serif", "Roboto", "Helvetica Neue
     height: 90px;
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     z-index: 100;
     transition: all .2s ease-in-out;
@@ -155,6 +158,71 @@ body { margin: 0; font-family: "Quicksand,sans-serif", "Roboto", "Helvetica Neue
             }
         }
     }
+    &.area-riservata-menu {
+      position: relative;
+    }
+}
+
+.background-area-riservata {
+  background: url("app/shared/tecnico-sfondo.jpeg");
+  height: 100%;
+  width: 100%;
+  top: 0;
+  position: absolute;
+  .area-riservata-menu-bar {
+    position: absolute;
+    width: 100%;
+    top: 180px;
+    padding: 0.8em 1em;
+    height: 60px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    transition: all .2s ease-in-out;
+    .menu-box {
+      background-color: rgba(255,255,255,.7);
+      backdrop-filter: blur(50px);
+      padding: 20px;
+      border-radius: 25px;
+      color:rgba(26, 26, 26, 0.3);
+      .menu-list {
+        margin: 0;
+        padding-left: 0;
+        list-style-type: none;
+        line-height: 2;
+        li {
+          display: inline-block;
+          cursor: pointer;
+          float: left;
+          font-family: Quicksand, sans-serif;
+          text-align: center;
+          &::after {
+            content: "";
+            display: block;
+            border-bottom: 3px solid #000;
+            transform: scaleX(0);
+            transition: transform 250ms ease-in-out;
+          }
+          &:hover {
+              &::after {
+                  transform: scaleX(1);
+              }
+          }
+          a {
+            text-decoration: none;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 1em 0.6em;
+            margin: 0 0.3em;
+              color: #000;
+          }
+        }
+      }
+    }
+  }
 }
 
 .menu-button {
@@ -198,7 +266,7 @@ body { margin: 0; font-family: "Quicksand,sans-serif", "Roboto", "Helvetica Neue
 .menu-items {
     position: absolute;
     left: 5%;
-    top: 5%;
+    top: 120px;
     background-color: rgba(255,255,255,.2);
     border-color: rgba(255, 255, 255,.2);
     .p-menuitem-text, .p-icon {
@@ -231,7 +299,7 @@ body { margin: 0; font-family: "Quicksand,sans-serif", "Roboto", "Helvetica Neue
     display: flex;
     justify-content: center;
     flex-direction: column;
-    margin: 6% 15% 0 15%;
+    margin: 300px 15% 0 15%;
     gap: 20px;
     .add-button-box {
         align-self: flex-end;
@@ -430,7 +498,7 @@ body { margin: 0; font-family: "Quicksand,sans-serif", "Roboto", "Helvetica Neue
     position: absolute;
     .detail-caldaia-card {
         width: 70%;
-        margin: 8% 15%;
+        margin: 180px 15%;
         backdrop-filter: blur(40px);
         background-color: rgba(255,255,255,.2);
         .detail-caldaia-box {
@@ -606,6 +674,7 @@ body { margin: 0; font-family: "Quicksand,sans-serif", "Roboto", "Helvetica Neue
     .guasti-title-box {
       padding: 41px;
       border-radius: 25px;
+      margin-top: 90px;
       backdrop-filter: blur(20px);
       color: #ffffff;
       font-size: 43px;

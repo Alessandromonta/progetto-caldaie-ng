@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit{
     });
   }
   ngOnInit(): void {
-    //
   }
 
   onSubmit() {
@@ -62,7 +61,13 @@ export class LoginComponent implements OnInit{
           switchMap((userId: number) =>
             this.utentiService.getItemsFromItemId(userId)
           ),
-          tap((user: any) => this.authService.utenteLoggato = user.content)
+          tap((user: any) => {
+            localStorage.setItem('userData', JSON.stringify(user.content));
+            this.authService.utenteLoggato = user.content;
+          }),
+          tap(() => {
+            console.log(JSON.parse(localStorage.getItem('userData')));
+          })
         )
         .subscribe({
           error: error => {
@@ -70,7 +75,6 @@ export class LoginComponent implements OnInit{
             this.loginError = true;
           },
           complete: () => {
-            console.log(this.authService.utenteLoggato);
             this.router.navigate(['profilo']);
           }
         });

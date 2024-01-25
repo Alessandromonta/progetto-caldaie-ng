@@ -1,23 +1,24 @@
 <!-- <app-header-menu></app-header-menu> -->
 <div class="desktop-menu-bar">
-    <div class="logo-box">
-      <img 
-        src="https://www.autoclimarepair.it/wp-content/uploads/2024/01/cropped-WhatsApp_Image_2024-01-21_at_16.12.20-removebg-preview.png" 
-        alt=""
-        class="logo"
-      >
-    </div>
-    <div class="menu-box">
-      <ul class="menu-list">
-        <li><a>Marche e modelli</a></li>
-        <li><a>Servizi</a></li>
-        <li><a>Profilo</a></li>
-        <li><a>Individuazione Guasti</a></li>
-        <li><a>Accortezze per la Sostituzione</a></li>
-        <li><a>Torna alla Home</a></li>
-        <li><a>Area riservata</a></li>
-      </ul>
-    </div>
+  <div class="logo-box">
+    <img
+      src="https://www.autoclimarepair.it/wp-content/uploads/2024/01/cropped-WhatsApp_Image_2024-01-21_at_16.12.20-removebg-preview.png"
+      alt=""
+      class="logo"
+    >
   </div>
+  <div class="menu-box">
+    <ul class="menu-list">
+      <li><a routerLink="/marche">Marche e modelli</a></li>
+      <li><a routerLink="/servizi">Servizi</a></li>
+      <li><a routerLink="/profilo">Profilo</a></li>
+      <li><a routerLink="/individuazione-guasti">Individuazione Guasti</a></li>
+      <li><a routerLink="/accortezze-sostituzione">Accortezze per la Sostituzione</a></li>
+      <li><a  (click)="navigateToHome()">Torna alla Home</a></li>
+      <li><a routerLink="/logout">Logout</a></li>
+      <li><a routerLink="/area-riservata">Area riservata</a></li>
+    </ul>
+  </div>
+</div>
 
 <router-outlet></router-outlet>

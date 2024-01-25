@@ -1,4 +1,3 @@
-<app-crud></app-crud>
 <app-loading [loading]="loading"/>
 
 <div class="marche-list">
@@ -15,10 +14,10 @@
               </mat-card-actions>
             </mat-card>
       </div>
-   
+
      <!-- Bottone per aprire il modulo popup -->
      <button mat-raised-button color="primary" (click)="openAddPacchettiPopup()">Aggiungi Pacchetti</button>
-   
+
     <div class="popup" *ngIf="showEditPopup">
         <h3>Modifica Pacchetti</h3>
         <mat-form-field >
@@ -37,6 +36,6 @@
         </mat-form-field>
         <button mat-raised-button color="primary" (click)="closeAddPacchettiPopup()">Annulla</button>
         <button mat-raised-button color="primary" (click)="addPacchetti()">Aggiungi</button>
-     </div> 
+     </div>
 </div>
-   
+

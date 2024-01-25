@@ -62,6 +62,7 @@ import { AcquistaPacchettiComponent } from './pages/acquista-pacchetti/acquista-
 import { ProfiloComponent } from './pages/profilo/profilo.component';
 import { IndividuazioneGuastiComponent } from './pages/individuazione-guasti/individuazione-guasti.component';
 import { AccortezzeSostituzioneComponent } from './pages/accortezze-sostituzione/accortezze-sostituzione.component';
+import { AreaRiservataComponent } from './pages/area-riservata/area-riservata.component';
 
 const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
@@ -99,7 +100,8 @@ export function jwtOptionsFactory() {
     AcquistaPacchettiComponent,
     ProfiloComponent,
     IndividuazioneGuastiComponent,
-    AccortezzeSostituzioneComponent
+    AccortezzeSostituzioneComponent,
+    AreaRiservataComponent
   ],
   imports: [
     BrowserModule,
