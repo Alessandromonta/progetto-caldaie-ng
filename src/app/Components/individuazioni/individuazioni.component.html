@@ -25,10 +25,10 @@
   position="right"
   styleClass="p-sidebar-lg"
 >
-  <app-marca-view
-    [selectedMarca]="selectedMarca"
+  <app-individuazione-view
+    [selectedItem]="selectedItem"
   >
-  </app-marca-view>
+  </app-individuazione-view>
 </p-sidebar>
 
 <p-sidebar
@@ -37,11 +37,11 @@
   position="right"
   styleClass="p-sidebar-lg"
 >
-  <app-marca-edit
-    [selectedMarca]="selectedMarca"
+  <app-individuazione-edit
+    [selectedItem]="selectedItem"
     (saveOrUpdateEvent)="patchDataAfterSaveOrUpdate($event)"
   >
-  </app-marca-edit>
+  </app-individuazione-edit>
 </p-sidebar>
 
 <div class="container-list">
@@ -56,7 +56,7 @@
   </div>
   <div class="table-list">
     <p-table
-      [value]="marcheList"
+      [value]="itemList"
       [paginator]="true"
       [rows]="10"
     >
@@ -72,6 +72,9 @@
           </th>
           <th class="edit-cell">
             {{ "Visualizza/Modifica" }}
+          </th>
+          <th>
+            {{ "Id" }}
           </th>
           <th>
             {{ "Nome" }}
@@ -103,6 +106,9 @@
             </div>
           </td>
           <td>
+            {{ rowData.id }}
+          </td>
+          <td>
             {{ rowData.nome }}
           </td>
           <td>
@@ -111,7 +117,7 @@
               icon="fa fa-solid fa-trash"
               (onClick)="
                 deleteDialogVisible = true;
-                selectedMarca = rowData;
+                selectedItem = rowData;
                 selectedId = rowIndex;
               "
             >

@@ -5,20 +5,26 @@
       src="https://www.autoclimarepair.it/wp-content/uploads/2024/01/cropped-WhatsApp_Image_2024-01-21_at_16.12.20-removebg-preview.png"
       alt=""
       class="logo"
+      (click)="navigateToHome()"
     >
   </div>
-  <div class="menu-box">
-    <ul class="menu-list">
-      <li><a routerLink="/marche">Marche e modelli</a></li>
-      <li><a routerLink="/servizi">Servizi</a></li>
-      <li><a routerLink="/profilo">Profilo</a></li>
-      <li><a routerLink="/individuazione-guasti">Individuazione Guasti</a></li>
-      <li><a routerLink="/accortezze-sostituzione">Accortezze per la Sostituzione</a></li>
-      <li><a  (click)="navigateToHome()">Torna alla Home</a></li>
-      <li><a routerLink="/logout">Logout</a></li>
-      <li><a routerLink="/area-riservata">Area riservata</a></li>
-    </ul>
-  </div>
+  @if (!!authService.utenteLoggato) {
+    <div class="menu-box">
+      <ul class="menu-list">
+        <li><a routerLink="/marche">Marche e modelli</a></li>
+        <li><a routerLink="/servizi">Servizi</a></li>
+        <li><a routerLink="/profilo">Profilo</a></li>
+        <li><a routerLink="/individuazione-guasti">Individuazione Guasti</a></li>
+        <li><a routerLink="/accortezze-sostituzione">Accortezze per la Sostituzione</a></li>
+        <li><a  (click)="navigateToHome()">Torna alla Home</a></li>
+        <li><a (click)="logout()">Logout</a></li>
+        @if (authService?.utenteLoggato?.grado === 1) {
+          <li><a routerLink="/area-riservata">Area riservata</a></li>
+        }
+      </ul>
+    </div>
+  }
 </div>
-
+<!-- Componenti delle subroutes -->
 <router-outlet></router-outlet>
+

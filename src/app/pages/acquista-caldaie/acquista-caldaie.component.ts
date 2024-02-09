@@ -89,15 +89,11 @@ export class AcquistaCaldaieComponent {
         switchMap(marca =>
           this.marcheService.getCaldaieMarca(marca.id)
             .pipe(
-              tap(caldaieList => caldaieList = [...caldaieList, ...caldaieList]),
-              tap(caldaieList => this.caldaieList = [...caldaieList, ...caldaieList]),
-              tap(() => {
-                for(let i = 0; i < 3; i++) {
-                  this.caldaieList.push(...this.caldaieList)
-                }
+              tap(caldaieList => {
+                this.caldaieList = caldaieList;
+                this.caldaieVisibleList = this.caldaieList.slice(0, 9);
+                this.firstCaldaiaIdx = 0;
               }),
-              tap(() => this.caldaieVisibleList = this.caldaieList.slice(0, 9)),
-              tap(() => this.firstCaldaiaIdx = 0),
               finalize(() => setTimeout( () => this.loading = false, 1500))
             )
         ),
@@ -108,23 +104,6 @@ export class AcquistaCaldaieComponent {
         })
       )
       .subscribe()
-
-    // this.marcheService.getCaldaieMarca(this.selectedMarca.id)
-    //   .pipe(
-    //     tap(caldaieList => caldaieList = [...caldaieList, ...caldaieList]),
-    //     tap(caldaieList => this.caldaieList = [...caldaieList, ...caldaieList]),
-    //     tap(() => {
-    //       for(let i = 0; i < 3; i++) {
-    //         this.caldaieList.push(...this.caldaieList)
-    //       }
-    //     }),
-    //     tap(() => console.log(this.caldaieList)),
-    //     tap(() => this.caldaieVisibleList = this.caldaieList.slice(0, 9)),
-    //     tap(() => this.firstCaldaiaIdx = 0),
-    //     tap(() => console.log(this.caldaieVisibleList)),
-    //     finalize(() => setTimeout( () => this.loading = false, 1500))
-    //   )
-    //   .subscribe();
   }
 
   public splitCaldaieList(paginatorState: PaginatorState, paginatorTopBox: HTMLElement) {

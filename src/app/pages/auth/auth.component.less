@@ -1,53 +1,48 @@
-.background {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: url("src/app/shared/tecnico-sfondo.jpeg");
-    .login-container {
-        display: flex;
-        justify-content: center;
-        margin-top: 12%;
-        .form-box {
-            position: relative;
-            gap: 5px;
-            .header {
-                height: 40px;
-                width: 50%;
-                margin-left: 25%;
-                border: 1px solid #3B82F6;
-                border-radius: 50px;
-                display: flex;
-                flex-flow: row nowrap;
-                
-                .login-button, .signup-button {
-                    text-align: center;
-                    padding: 10px;
-                    flex-basis: 50%;
-                    &.focused {
-                        background-color: #3B82F6;
-                        color: #ffffff
-                    }
-                }
-                .login-button {
-                    border-right: 1px solid #3B82F6;
-                    border-radius: 50px 0 0 50px;
-                }
-                .signup-button {
-                    border-left: 1px solid #3B82F6;
-                    border-radius: 0 50px 50px 0;
-                }
 
-                @media screen and (max-width: 800px) {
-                    width: 70%;
-                    margin-left: 15%;
+.login-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 12%;
+    .form-box {
+        position: relative;
+        gap: 5px;
+        .header {
+            height: 40px;
+            width: 50%;
+            margin-left: 25%;
+            border: 1px solid #3B82F6;
+            border-radius: 50px;
+            display: flex;
+            flex-flow: row nowrap;
+
+            .login-button, .signup-button {
+                text-align: center;
+                padding: 10px;
+                flex-basis: 50%;
+                &.focused {
+                    background-color: #3B82F6;
+                    color: #ffffff
                 }
             }
-            .auth-box {
-                width: 650px;
+            .login-button {
+                border-right: 1px solid #3B82F6;
+                border-radius: 50px 0 0 50px;
+            }
+            .signup-button {
+                border-left: 1px solid #3B82F6;
+                border-radius: 0 50px 50px 0;
+            }
 
-                @media screen and (max-width: 800px) {
-                    width: 300px;
-                }
+            @media screen and (max-width: 800px) {
+                width: 70%;
+                margin-left: 15%;
+            }
+        }
+        .auth-box {
+            width: 650px;
+
+            @media screen and (max-width: 800px) {
+                width: 300px;
             }
         }
     }

@@ -63,6 +63,12 @@ import { ProfiloComponent } from './pages/profilo/profilo.component';
 import { IndividuazioneGuastiComponent } from './pages/individuazione-guasti/individuazione-guasti.component';
 import { AccortezzeSostituzioneComponent } from './pages/accortezze-sostituzione/accortezze-sostituzione.component';
 import { AreaRiservataComponent } from './pages/area-riservata/area-riservata.component';
+import { IndividuazioneEditComponent } from './Components/individuazione-edit/individuazione-edit.component';
+import { IndividuazioneViewComponent } from './Components/individuazione-view/individuazione-view.component';
+import { IndividuazioniComponent } from './Components/individuazioni/individuazioni.component';
+import { AccortezzeComponent } from './Components/accortezze/accortezze.component';
+import { AccortezzaEditComponent } from './Components/accortezza-edit/accortezza-edit.component';
+import { AccortezzaViewComponent } from './Components/accortezza-view/accortezza-view.component';
 
 const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
@@ -101,7 +107,13 @@ export function jwtOptionsFactory() {
     ProfiloComponent,
     IndividuazioneGuastiComponent,
     AccortezzeSostituzioneComponent,
-    AreaRiservataComponent
+    AreaRiservataComponent,
+    IndividuazioniComponent,
+    IndividuazioneEditComponent,
+    IndividuazioneViewComponent,
+    AccortezzeComponent,
+    AccortezzaEditComponent,
+    AccortezzaViewComponent
   ],
   imports: [
     BrowserModule,

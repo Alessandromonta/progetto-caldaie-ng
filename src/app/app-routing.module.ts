@@ -20,12 +20,16 @@ import { ProfiloComponent } from './pages/profilo/profilo.component';
 import { IndividuazioneGuastiComponent } from './pages/individuazione-guasti/individuazione-guasti.component';
 import { AccortezzeSostituzioneComponent } from './pages/accortezze-sostituzione/accortezze-sostituzione.component';
 import { AreaRiservataComponent } from './pages/area-riservata/area-riservata.component';
+import { IndividuazioniComponent } from './Components/individuazioni/individuazioni.component';
+import { AccortezzeComponent } from './Components/accortezze/accortezze.component';
 
 const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'login'},
   { path: 'login', component: AuthComponent,
     data: {
       signupFlag: false
-    }
+    },
+    canActivate: [AuthGuard]
   },
   { path: 'signup', component: AuthComponent,
     data: {
@@ -44,10 +48,16 @@ const routes: Routes = [
   {
     path: 'marche',
     component: ProductPageComponent,
+    data: {
+      notFullBackground: true
+    },
     children: [
       {
         path: ':id',
         component: AcquistaCaldaieComponent,
+        data: {
+          notFullBackground: true
+        },
         children: [
           {
             path: 'modelli/:id',
@@ -59,7 +69,10 @@ const routes: Routes = [
   },
   {
     path: "servizi",
-    component: AcquistaPacchettiComponent
+    component: AcquistaPacchettiComponent,
+    data: {
+      notFullBackground: true
+    }
   },
   {
     path: 'profilo',
@@ -80,7 +93,9 @@ const routes: Routes = [
       { path: '', redirectTo: 'modelli', pathMatch: 'full' },
       { path: 'marche',     component: MarcheComponent },
       { path: 'modelli',    component: CaldaieComponent },
-      { path: 'pacchetti',  component: PacchettiComponent }
+      { path: 'pacchetti',  component: PacchettiComponent },
+      { path: 'individuazione-guasti',  component: IndividuazioniComponent },
+      { path: 'accortezze-sostituzione', component: AccortezzeComponent }
     ]
   },
   { path: 'notfound', component: NotfoundComponent },

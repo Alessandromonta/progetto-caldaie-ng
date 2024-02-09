@@ -1,53 +1,51 @@
-<div class="background">
-    @if (selectedCaldaia) {
-        <p-breadcrumb
-            class="max-w-full"
-            [model]="menuItems"
-            styleClass="menu-items"
-        ></p-breadcrumb>
-        <p-card
-          styleClass="detail-caldaia-card"
-        >
-            <div class="detail-caldaia-box">
-                <div class="left-side-box">
-                    <img
-                        src="assets/caldaia-riello.jpg"
-                        alt="No image"
-                        pAnimateOnScroll
-                        enterClass="fadeinleft"
-                        class="caldaia-image animation-duration-1000 animation-ease-in-out"
-                    >
-                </div>
-                <div class="right-side-box">
-                    <p class="nome-caldaia">{{ selectedCaldaia.nome }}</p>
-                    <p-scrollPanel [style]="{'height': '430px'}">
-                        @for (errore of errori; track $index) {
-                            <p-panel
-                                [toggleable]="true"
-                                [collapsed]="true"
-                                styleClass="error-panel"
-                                pAnimateOnScroll
-                                enterClass="scalein"
-                                class="animation-duration-1000 animation-ease-in-out"
-                            >
-                                <ng-template pTemplate="header">
-                                    {{ errore.codiceErrore }}
-                                </ng-template>
-                                <p>{{ " - Soluzione adolf" }}</p>
-                                <p>{{ " - Soluzione benito" }}</p>
-                                <p>{{ " - Soluzione adolf" }}</p>
-                                <p>{{ " - Soluzione benito" }}</p>
-                                <p>{{ " - Soluzione adolf" }}</p>
-                            </p-panel>
-                        }
-                    </p-scrollPanel>
-                    <p-button
-                        icon="fa fa-solid fa-unlock"
-                        label="Sblocca soluzione errori"
-                        severity="warning"
-                    ></p-button>
-                </div>
-            </div>
-        </p-card>
-    }
-</div>
+@if (selectedCaldaia) {
+  <p-breadcrumb
+      class="max-w-full"
+      [model]="menuItems"
+      styleClass="menu-items"
+  ></p-breadcrumb>
+  <p-card
+    styleClass="detail-caldaia-card"
+  >
+      <div class="detail-caldaia-box">
+          <div class="left-side-box">
+              <img
+                  src="assets/caldaia-riello.jpg"
+                  alt="No image"
+                  pAnimateOnScroll
+                  enterClass="fadeinleft"
+                  class="caldaia-image animation-duration-1000 animation-ease-in-out"
+              >
+          </div>
+          <div class="right-side-box">
+              <p class="nome-caldaia">{{ selectedCaldaia.nome }}</p>
+              <p-scrollPanel [style]="{'height': '430px'}">
+                  @for (errore of errori; track $index) {
+                      <p-panel
+                          [toggleable]="true"
+                          [collapsed]="true"
+                          styleClass="error-panel"
+                          pAnimateOnScroll
+                          enterClass="scalein"
+                          class="animation-duration-1000 animation-ease-in-out"
+                      >
+                          <ng-template pTemplate="header">
+                              {{ errore.codiceErrore }}
+                          </ng-template>
+                          <p>{{ " - Soluzione adolf" }}</p>
+                          <p>{{ " - Soluzione benito" }}</p>
+                          <p>{{ " - Soluzione adolf" }}</p>
+                          <p>{{ " - Soluzione benito" }}</p>
+                          <p>{{ " - Soluzione adolf" }}</p>
+                      </p-panel>
+                  }
+              </p-scrollPanel>
+              <p-button
+                  icon="fa fa-solid fa-unlock"
+                  label="Sblocca soluzione errori"
+                  severity="warning"
+              ></p-button>
+          </div>
+      </div>
+  </p-card>
+}

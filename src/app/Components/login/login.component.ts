@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { map, switchMap, tap } from 'rxjs';
+import { EMPTY, SequenceError, catchError, map, switchMap, tap } from 'rxjs';
 import { AuthService } from 'src/app/Auth/Service/auth.service';
 import { Utenti } from 'src/app/Models/utenti';
 import { UtentiService } from 'src/app/Services/utenti.service';
@@ -46,15 +46,7 @@ export class LoginComponent implements OnInit{
               // Esegui il reindirizzamento o altre azioni necessarie
               return this.authService.getUserId(); // Implementa questo metodo nel tuo servizio
 
-              // Verifica se l'utente è un "Owner" o ha il grado appropriato
-              // if (userRole === '1' ) {
-              //   this.isOwner = true;
-              // }
-              // else{
-              //   this.isOwner = false;
-              // }
             } else {
-              // Il server non ha restituito un token valido, gestisci l'errore
               this.loginError = true;
             }
           }),
@@ -65,8 +57,8 @@ export class LoginComponent implements OnInit{
             localStorage.setItem('userData', JSON.stringify(user.content));
             this.authService.utenteLoggato = user.content;
           }),
-          tap(() => {
-            console.log(JSON.parse(localStorage.getItem('userData')));
+          catchError((err: Error) => {
+            return EMPTY;
           })
         )
         .subscribe({

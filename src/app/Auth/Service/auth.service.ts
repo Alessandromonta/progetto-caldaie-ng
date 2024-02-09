@@ -13,7 +13,7 @@ import { Utenti } from 'src/app/Models/utenti';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://autoclima-001-site2.atempurl.com/api';
+  private apiUrl = 'https://autoclima-001-site2.atempurl.com/api';
   public utenteLoggato: Utenti;
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
@@ -47,7 +47,7 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-    const token = this.getToken()
+    const token = this.getToken;
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -56,23 +56,23 @@ export class AuthService {
       }),
     };
 
-    this.removeToken()
+    this.removeToken();
     return this.http.post(`${this.apiUrl}/User/Logout`, null, httpOptions);
   }
 
   public getUserRole() {
-    const token = this.getToken()
+    const token = this.getToken
     const decodedToken = this.jwtHelper.decodeToken(token);
     return decodedToken['Grado']; // Estrai il claim "Grado"
   }
 
   public getUserId() {
-    const token = this.getToken()
+    const token = this.getToken
     const decodedToken = this.jwtHelper.decodeToken(token);
     return decodedToken['UserId']; // Estrai il claim "UserId"
   }
 
-  public getToken(): string {
+  public get getToken(): string {
     return localStorage.getItem('bearerToken');
   }
 
