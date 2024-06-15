@@ -1,5 +1,6 @@
 <p-dialog
   [(visible)]="deleteDialogVisible"
+  [blockScroll]="true"
   styleClass="delete-dialog"
 >
   <div class="dialog-content-box">
@@ -22,6 +23,7 @@
 <p-sidebar
   *ngIf="viewSidebarVisibile"
   [(visible)]="viewSidebarVisibile"
+  [blockScroll]="true"
   position="right"
   styleClass="p-sidebar-lg"
 >
@@ -34,6 +36,7 @@
 <p-sidebar
   *ngIf="editSidebarVisibile"
   [(visible)]="editSidebarVisibile"
+  [blockScroll]="true"
   position="right"
   styleClass="p-sidebar-lg"
 >
@@ -77,7 +80,7 @@
             {{ "Nome" }}
           </th>
           <th>
-            {{ "Descrizione" }}
+            {{ "Come sbloccare" }}
           </th>
           <th>
             {{ "Elimina" }}
@@ -109,7 +112,7 @@
             {{ rowData.nome }}
           </td>
           <td>
-            {{ rowData.descrizione }}
+            {{ rowData.sbloccoIstruzione }}
           </td>
           <td>
             <p-button

@@ -93,7 +93,7 @@ export class AcquistaPacchettiComponent {
     this.httpClient
       .post<string>('https://autoclima-001-site2.atempurl.com/api/payment/create-checkout-session', checkoutInfo)
       .pipe(
-        tap((checkoutUrl: string) => window.location.href = checkoutUrl)
+        tap((checkoutUrl: string) => window.location.href = checkoutUrl),
       )
       .subscribe();
   }

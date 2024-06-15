@@ -340,16 +340,30 @@ body {
             display: flex;
             flex-direction: row;
             gap: 28px;
-            height: 30px;
-            align-items: center;
-            .label-item {
-                font-weight: 700;
-            }
-            .form-item {
+            &:not(.error-description) {
+              height: 30px;
+              .form-item {
                 height: 30px;
+              }
+            }
+            align-items: center;
+            .item-label {
+                font-weight: 700;
             }
         }
     }
+}
+
+.caldaia-image-modal {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 28px;
+  .remove-button {
+    float: right;
+  }
+  .caldaia-image-view {
+    width: 360px;
+  }
 }
 
 .edit-soluzioni-container {
@@ -475,6 +489,14 @@ body {
 }
 
 //Sezione modelli
+.filters {
+  margin: 24px 0 0 20%;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  gap: 20px;
+}
+
 .caldaia-card-container {
     margin: 0 20%;
     display: flex;
@@ -682,4 +704,8 @@ body {
       width: 85%;
     }
   }
+}
+
+.p-dialog {
+  height: 90% !important;
 }

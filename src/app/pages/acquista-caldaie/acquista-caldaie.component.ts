@@ -2,7 +2,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Event, NavigationEnd, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
-import { PaginatorState } from 'primeng/paginator';
+import { Paginator, PaginatorState } from 'primeng/paginator';
 import { catchError, filter, finalize, switchMap, tap } from 'rxjs';
 import { Caldaie } from 'src/app/Models/Caldaie';
 import { MarcaCaldaie } from 'src/app/Models/MarcaCaldaie';
@@ -49,11 +49,13 @@ export class AcquistaCaldaieComponent {
 
   @Input() selectedMarca: MarcaCaldaie;
   public caldaieList: Caldaie[];
+  public filteredCaldaieList: Caldaie[];
   public caldaieVisibleList: Caldaie[];
   public firstCaldaiaIdx: number;
   public loading: boolean;
   public displayContent: boolean;
   public menuItems: MenuItem[];
+  public nameFilter: string;
 
   constructor(
     private caldaieService: CaldaieService,
@@ -67,7 +69,6 @@ export class AcquistaCaldaieComponent {
   public isOpen: boolean;
   public changeOpen() {
     this.isOpen = !this.isOpen;
-    console.log(this.isOpen)
   }
   public items: MenuItem[] = [
     { label: 'Prova 1'},
@@ -78,6 +79,7 @@ export class AcquistaCaldaieComponent {
   ngOnInit() {
     this.loading = true;
     this.caldaieList = [];
+    this.filteredCaldaieList = [];
 
     const marcaId: number = this.activatedRoute.snapshot.params['id'];
     this.marcheService
@@ -90,7 +92,7 @@ export class AcquistaCaldaieComponent {
           this.marcheService.getCaldaieMarca(marca.id)
             .pipe(
               tap(caldaieList => {
-                this.caldaieList = caldaieList;
+                this.caldaieList = this.filteredCaldaieList = caldaieList;
                 this.caldaieVisibleList = this.caldaieList.slice(0, 9);
                 this.firstCaldaiaIdx = 0;
               }),
@@ -108,7 +110,7 @@ export class AcquistaCaldaieComponent {
 
   public splitCaldaieList(paginatorState: PaginatorState, paginatorTopBox: HTMLElement) {
     this.caldaieVisibleList = [];
-    setTimeout(() => this.caldaieVisibleList = this.caldaieList.slice(paginatorState.first, paginatorState.first + paginatorState.rows), 200)
+    setTimeout(() => this.caldaieVisibleList = this.filteredCaldaieList.slice(paginatorState.first, paginatorState.first + paginatorState.rows), 200)
     this.firstCaldaiaIdx = paginatorState.first;
     paginatorTopBox.scrollTo();
   }
@@ -131,6 +133,13 @@ export class AcquistaCaldaieComponent {
       { label: 'Marche', routerLink: '/marche' },
       { label: this.selectedMarca.nome },
     ]
+  }
+
+  public applyFilterToList(nameFilter: string, paginatorTop: Paginator) {
+    nameFilter = nameFilter.toLowerCase();
+    this.filteredCaldaieList = this.caldaieList.filter(caldaia => caldaia.nome.toLowerCase().includes(nameFilter));
+    this.firstCaldaiaIdx = 0;
+    setTimeout(() => this.caldaieVisibleList = this.filteredCaldaieList.slice(this.firstCaldaiaIdx, this.firstCaldaiaIdx + paginatorTop.rows), 200)
   }
 
   public getAnimation(idxCard: number) {

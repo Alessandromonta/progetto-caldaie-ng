@@ -1,3 +1,4 @@
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { Component, Injector, Renderer2, inject } from '@angular/core';
@@ -6,6 +7,7 @@ import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { filter, switchMap, take, tap } from 'rxjs';
 import { AuthService } from './Auth/Service/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DateTime } from 'luxon';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -39,8 +41,14 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.injector.get(Renderer2).addClass(document.body, 'background');
-    if(localStorage.getItem('bearerToken'))
-      this.injector.get(AuthService).utenteLoggato = JSON.parse(localStorage.getItem('userData'));
+    const decodedToken = this.injector.get(JwtHelperService).decodeToken(JSON.parse(localStorage.getItem('bearerToken')));
+    console.log(decodedToken)
+    if(!!decodedToken) {
+      this.injector.get(AuthService).utenteLoggato = JSON.parse(localStorage.getItem('userData'))
+      const expirationDate: DateTime = DateTime.fromJSDate(new Date(Date.parse(decodedToken['ExpirationDate'])));
+      if(expirationDate < DateTime.now())
+        this.authService.logout();
+    }
   }
 
   ngAfterContentChecked(): void {
@@ -75,20 +83,7 @@ export class AppComponent {
   }
 
   public logout(): void {
-
     this.authService.logout()
-      .pipe(
-        tap((data) => {
-          let removeToken = localStorage.removeItem('bearerToken');
-
-          if (this.authService.getToken == null) {
-            this.router.navigate(['/']);
-            console.log("token removed");
-            delete this.authService.utenteLoggato;
-            this.openSnackBar("Logout effettuato con successo", "Ok")
-          }
-        })
-      )
       .subscribe({
         error: (error) => {
           console.error('Errore durante il logout', error);

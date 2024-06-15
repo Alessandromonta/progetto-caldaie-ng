@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -16,7 +16,7 @@ export class AuthService {
   private apiUrl = 'https://autoclima-001-site2.atempurl.com/api';
   public utenteLoggato: Utenti;
 
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
+  constructor(private http: HttpClient, private jwtHelper: JwtHelperService, private injector: Injector) {}
 
   signup(username: string, email: string, password: string, confirmPassword: string, grado:number = 0, token:number = 0): Observable<any> {
     const credentials = { username, password, email, grado, token };
@@ -57,7 +57,16 @@ export class AuthService {
     };
 
     this.removeToken();
-    return this.http.post(`${this.apiUrl}/User/Logout`, null, httpOptions);
+    return this.http.post(`${this.apiUrl}/User/Logout`, null, httpOptions)
+            .pipe(
+              tap(() => {
+                if (this.getToken == null) {
+                  this.injector.get(Router).navigate(['/']);
+                  delete this.utenteLoggato;
+                  //this.openSnackBar("Logout effettuato con successo", "Ok")
+                }
+              })
+            );
   }
 
   public getUserRole() {
@@ -73,7 +82,7 @@ export class AuthService {
   }
 
   public get getToken(): string {
-    return localStorage.getItem('bearerToken');
+    return JSON.parse(localStorage.getItem('bearerToken'));
   }
 
   public removeToken():void{

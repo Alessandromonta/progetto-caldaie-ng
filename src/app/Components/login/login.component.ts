@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit{
             // Gestisci la risposta dell'API dopo un login riuscito
             if (response) {
               // Memorizza il token nella local storage
-              localStorage.setItem('bearerToken', response);
+              localStorage.setItem('bearerToken', JSON.stringify(response));
 
               // Esegui il reindirizzamento o altre azioni necessarie
               return this.authService.getUserId(); // Implementa questo metodo nel tuo servizio

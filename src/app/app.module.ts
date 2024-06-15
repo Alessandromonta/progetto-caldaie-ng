@@ -47,6 +47,8 @@ import {AnimateOnScrollModule} from 'primeng/animateonscroll';
 import { RippleModule } from 'primeng/ripple';
 import { PaginatorModule } from "primeng/paginator";
 import {InputTextModule} from 'primeng/inputtext';
+import {InputTextareaModule} from 'primeng/inputtextarea'
+import {FileUploadModule} from 'primeng/fileupload';
 import {TabMenuModule} from 'primeng/tabmenu';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 import { CaldaiaViewComponent } from './Components/caldaia-view/caldaia-view.component';
@@ -76,7 +78,7 @@ const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
 
 export function jwtOptionsFactory() {
   return {
-    tokenGetter: () => localStorage.getItem('bearerToken'), // Nome della chiave in cui hai memorizzato il token nella local storage
+    tokenGetter: () => JSON.parse(localStorage.getItem('bearerToken')), // Nome della chiave in cui hai memorizzato il token nella local storage
     allowedDomains: ['autoclima-001-site1.atempurl.com'],
   };
 }
@@ -127,6 +129,8 @@ export function jwtOptionsFactory() {
     ButtonModule,
     PasswordModule,
     InputTextModule,
+    InputTextareaModule,
+    FileUploadModule,
     BreadcrumbModule,
     ScrollPanelModule,
     PanelModule,
