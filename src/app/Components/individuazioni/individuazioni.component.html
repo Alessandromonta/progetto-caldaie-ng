@@ -1,0 +1,131 @@
+<p-dialog
+  [(visible)]="deleteDialogVisible"
+  styleClass="delete-dialog"
+>
+  <div class="dialog-content-box">
+    {{ "Confermi di voler eliminare questo elemento?" }}
+    <div class="dialog-button-box">
+      <p-button
+        label="Sì"
+        (onClick)="deleteData()"
+      >
+      </p-button>
+      <p-button
+        label="No"
+        (onClick)="deleteDialogVisible = false"
+      >
+      </p-button>
+    </div>
+  </div>
+</p-dialog>
+
+<p-sidebar
+  *ngIf="viewSidebarVisibile"
+  [(visible)]="viewSidebarVisibile"
+  position="right"
+  styleClass="p-sidebar-lg"
+>
+  <app-individuazione-view
+    [selectedItem]="selectedItem"
+  >
+  </app-individuazione-view>
+</p-sidebar>
+
+<p-sidebar
+  *ngIf="editSidebarVisibile"
+  [(visible)]="editSidebarVisibile"
+  position="right"
+  styleClass="p-sidebar-lg"
+>
+  <app-individuazione-edit
+    [selectedItem]="selectedItem"
+    (saveOrUpdateEvent)="patchDataAfterSaveOrUpdate($event)"
+  >
+  </app-individuazione-edit>
+</p-sidebar>
+
+<div class="container-list">
+  <div class="add-button-box">
+    <p-button
+      class="add-button"
+      label="Aggiungi"
+      icon="fa fa-solid fa-plus"
+      (onClick)="editData()"
+    >
+    </p-button>
+  </div>
+  <div class="table-list">
+    <p-table
+      [value]="itemList"
+      [paginator]="true"
+      [rows]="10"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>
+            @if (!loading) {
+              {{ "#" }}
+            }
+            @else {
+              <app-loading></app-loading>
+            }
+          </th>
+          <th class="edit-cell">
+            {{ "Visualizza/Modifica" }}
+          </th>
+          <th>
+            {{ "Id" }}
+          </th>
+          <th>
+            {{ "Nome" }}
+          </th>
+          <th>
+            {{ "Elimina" }}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowIndex="rowIndex" let-rowData>
+        <tr>
+          <td>
+            <div class="index-box">
+              {{ rowIndex + 1 }}
+            </div>
+          </td>
+          <td class="edit-cell">
+            <div class="edit-box">
+              <p-button
+                icon="fa fa-solid fa-eye"
+                (onClick)="viewData(rowIndex)"
+              >
+              </p-button>
+              <p-button
+                icon="fa fa-solid fa-pencil"
+                (onClick)="editData(rowIndex)"
+              >
+              </p-button>
+            </div>
+          </td>
+          <td>
+            {{ rowData.id }}
+          </td>
+          <td>
+            {{ rowData.nome }}
+          </td>
+          <td>
+            <p-button
+              styleClass="p-button-danger"
+              icon="fa fa-solid fa-trash"
+              (onClick)="
+                deleteDialogVisible = true;
+                selectedItem = rowData;
+                selectedId = rowIndex;
+              "
+            >
+            </p-button>
+          </td>
+        </tr>
+      </ng-template>
+
+    </p-table>
+  </div>
+</div>

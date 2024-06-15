@@ -38,9 +38,13 @@ export class DettaglioCaldaiaComponent {
     this.caldaieService
       .getItemsFromItemId(caldaiaId)
       .pipe(
+        tap((caldaia: Caldaie) => caldaia.immagine = caldaia.immagine),
         tap((caldaia: Caldaie) => this.selectedCaldaia = caldaia),
+        tap((caldaia: Caldaie) => {
+          console.log(caldaia.immagine)
+        }),
         tap(caldaia => this.initMenu()),
-        switchMap( caldaia => 
+        switchMap(caldaia =>
             this.erroriService
               .getErroriCaldaia(this.selectedCaldaia.id)
         ),

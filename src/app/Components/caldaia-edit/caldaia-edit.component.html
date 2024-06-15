@@ -1,3 +1,23 @@
+@if (viewImageModal) {
+  <p-dialog
+    [(visible)]=viewImageModal
+  >
+    <div class="caldaia-image-modal">
+      <p-button
+        styleClass="p-button-danger remove-button"
+        (onClick)="selectedCaldaia.immagine = null; viewImageModal = false"
+      >
+        Rimuovi immagine
+      </p-button>
+      <img
+        src="data:image/png;base64,{{selectedCaldaia.immagine}}"
+        class="caldaia-image-view"
+        alt="Immagine non disponibile"
+      />
+    </div>
+  </p-dialog>
+}
+
 @if (editErroreFlag) {
   <p-dialog
     class="edit-errore"
@@ -24,7 +44,16 @@
     </div>
     <div class="edit-data-box">
       <div class="edit-item-box">
-          <label for="nome" class="label-item">{{ "Nome" }}</label>
+        <label for="marca" class="item-label">{{ "Marca" }}</label>
+        <p-dropdown
+            [options]="marcheListForDropdown"
+            id="marca"
+            [(ngModel)]="selectedCaldaia.idMarca"
+            class="form-item"
+        />
+    </div>
+      <div class="edit-item-box">
+          <label for="nome" class="item-label">{{ "Nome" }}</label>
           <input
               pInputText
               id="nome"
@@ -33,14 +62,28 @@
           />
       </div>
       <div class="edit-item-box">
-          <label for="descrizione" class="label-item">{{ "Descrizione" }}</label>
+          <label for="descrizione" class="item-label">{{ "Come sbloccare" }}</label>
           <input
               pInputText
               id="descrizione"
-              [(ngModel)]="selectedCaldaia.descrizione"
+              [(ngModel)]="selectedCaldaia.sbloccoIstruzione"
               class="form-item"
           />
       </div>
+      <div class="edit-item-box">
+        <label for="immagine" class="item-label">{{ "Immagine" }}</label>
+        <p-button
+          *ngIf="!!selectedCaldaia.immagine"
+          styleClass="p-button-info"
+          (onClick)="viewImageModal = !viewImageModal"
+        >Visualizza immagine</p-button>
+        <input
+          type="file"
+          class="form-item"
+          (change)="uploadImage($event.target)"
+          accept=".jpg,.png"
+        >
+    </div>
     </div>
     <h2 class="errori-caldaia-label">{{ "Errori caldaia" }}</h2>
     <div class="grid-box-layout">

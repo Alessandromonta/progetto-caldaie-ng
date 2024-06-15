@@ -24,7 +24,7 @@ export class AuthInterceptor implements HttpInterceptor {
     const isLoginRequest = req.url.includes('/Login');
 
     if (!isLoginRequest) {
-      const token = this.authService.getToken();
+      const token = this.authService.getToken;
       if(token){
         console.log("bearer mandato: " + isLoginRequest);
         req = req.clone({
@@ -41,7 +41,7 @@ export class AuthInterceptor implements HttpInterceptor {
         },
       });
       this.authService.removeToken()
-      console.log("bearer non mandato: " + this.authService.getToken());
+      console.log("bearer non mandato: " + this.authService.getToken);
     }
 
     return next.handle(req).pipe(

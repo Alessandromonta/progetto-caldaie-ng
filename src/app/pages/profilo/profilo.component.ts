@@ -25,13 +25,13 @@ export class ProfiloComponent {
         {
           idMarca: 1,
           nome: "ladro",
-          descrizione: "asda",
+          sbloccoIstruzione: "asda",
           id: 1
         },
         {
           "idMarca": 1,
           "nome": "ADER3",
-          "descrizione": "SDAD",
+          "sbloccoIstruzione": "SDAD",
           "id": 2
         }
       ]

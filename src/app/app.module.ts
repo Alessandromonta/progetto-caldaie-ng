@@ -47,6 +47,8 @@ import {AnimateOnScrollModule} from 'primeng/animateonscroll';
 import { RippleModule } from 'primeng/ripple';
 import { PaginatorModule } from "primeng/paginator";
 import {InputTextModule} from 'primeng/inputtext';
+import {InputTextareaModule} from 'primeng/inputtextarea'
+import {FileUploadModule} from 'primeng/fileupload';
 import {TabMenuModule} from 'primeng/tabmenu';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 import { CaldaiaViewComponent } from './Components/caldaia-view/caldaia-view.component';
@@ -62,6 +64,13 @@ import { AcquistaPacchettiComponent } from './pages/acquista-pacchetti/acquista-
 import { ProfiloComponent } from './pages/profilo/profilo.component';
 import { IndividuazioneGuastiComponent } from './pages/individuazione-guasti/individuazione-guasti.component';
 import { AccortezzeSostituzioneComponent } from './pages/accortezze-sostituzione/accortezze-sostituzione.component';
+import { AreaRiservataComponent } from './pages/area-riservata/area-riservata.component';
+import { IndividuazioneEditComponent } from './Components/individuazione-edit/individuazione-edit.component';
+import { IndividuazioneViewComponent } from './Components/individuazione-view/individuazione-view.component';
+import { IndividuazioniComponent } from './Components/individuazioni/individuazioni.component';
+import { AccortezzeComponent } from './Components/accortezze/accortezze.component';
+import { AccortezzaEditComponent } from './Components/accortezza-edit/accortezza-edit.component';
+import { AccortezzaViewComponent } from './Components/accortezza-view/accortezza-view.component';
 
 const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
   primeConfig.ripple = true;
@@ -69,7 +78,7 @@ const initializePrimeNgConfig = (primeConfig: PrimeNGConfig) => () => {
 
 export function jwtOptionsFactory() {
   return {
-    tokenGetter: () => localStorage.getItem('bearerToken'), // Nome della chiave in cui hai memorizzato il token nella local storage
+    tokenGetter: () => JSON.parse(localStorage.getItem('bearerToken')), // Nome della chiave in cui hai memorizzato il token nella local storage
     allowedDomains: ['autoclima-001-site1.atempurl.com'],
   };
 }
@@ -99,7 +108,14 @@ export function jwtOptionsFactory() {
     AcquistaPacchettiComponent,
     ProfiloComponent,
     IndividuazioneGuastiComponent,
-    AccortezzeSostituzioneComponent
+    AccortezzeSostituzioneComponent,
+    AreaRiservataComponent,
+    IndividuazioniComponent,
+    IndividuazioneEditComponent,
+    IndividuazioneViewComponent,
+    AccortezzeComponent,
+    AccortezzaEditComponent,
+    AccortezzaViewComponent
   ],
   imports: [
     BrowserModule,
@@ -113,6 +129,8 @@ export function jwtOptionsFactory() {
     ButtonModule,
     PasswordModule,
     InputTextModule,
+    InputTextareaModule,
+    FileUploadModule,
     BreadcrumbModule,
     ScrollPanelModule,
     PanelModule,

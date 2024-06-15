@@ -91,9 +91,9 @@ export class AcquistaPacchettiComponent {
     checkoutInfo.payment_method_types = [];
     checkoutInfo.payment_method_types.push("card");
     this.httpClient
-      .post<string>('http://autoclima-001-site2.atempurl.com/api/payment/create-checkout-session', checkoutInfo)
+      .post<string>('https://autoclima-001-site2.atempurl.com/api/payment/create-checkout-session', checkoutInfo)
       .pipe(
-        tap((checkoutUrl: string) => window.location.href = checkoutUrl)
+        tap((checkoutUrl: string) => window.location.href = checkoutUrl),
       )
       .subscribe();
   }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -13,10 +13,10 @@ import { Utenti } from 'src/app/Models/utenti';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://autoclima-001-site2.atempurl.com/api';
+  private apiUrl = 'https://autoclima-001-site2.atempurl.com/api';
   public utenteLoggato: Utenti;
 
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
+  constructor(private http: HttpClient, private jwtHelper: JwtHelperService, private injector: Injector) {}
 
   signup(username: string, email: string, password: string, confirmPassword: string, grado:number = 0, token:number = 0): Observable<any> {
     const credentials = { username, password, email, grado, token };
@@ -47,7 +47,7 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-    const token = this.getToken()
+    const token = this.getToken;
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -56,24 +56,33 @@ export class AuthService {
       }),
     };
 
-    this.removeToken()
-    return this.http.post(`${this.apiUrl}/User/Logout`, null, httpOptions);
+    this.removeToken();
+    return this.http.post(`${this.apiUrl}/User/Logout`, null, httpOptions)
+            .pipe(
+              tap(() => {
+                if (this.getToken == null) {
+                  this.injector.get(Router).navigate(['/']);
+                  delete this.utenteLoggato;
+                  //this.openSnackBar("Logout effettuato con successo", "Ok")
+                }
+              })
+            );
   }
 
   public getUserRole() {
-    const token = this.getToken()
+    const token = this.getToken
     const decodedToken = this.jwtHelper.decodeToken(token);
     return decodedToken['Grado']; // Estrai il claim "Grado"
   }
 
   public getUserId() {
-    const token = this.getToken()
+    const token = this.getToken
     const decodedToken = this.jwtHelper.decodeToken(token);
     return decodedToken['UserId']; // Estrai il claim "UserId"
   }
 
-  public getToken(): string {
-    return localStorage.getItem('bearerToken');
+  public get getToken(): string {
+    return JSON.parse(localStorage.getItem('bearerToken'));
   }
 
   public removeToken():void{

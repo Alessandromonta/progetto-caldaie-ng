@@ -1,7 +1,3 @@
-<app-crud></app-crud>
-
-<app-loading [loading]="loading"/>
-
 <p-dialog
   [(visible)]="deleteDialogVisible"
   styleClass="delete-dialog"
@@ -18,7 +14,7 @@
         label="No"
         (onClick)="deleteDialogVisible = false"
       >
-      </p-button>    
+      </p-button>
     </div>
   </div>
 </p-dialog>
@@ -26,7 +22,7 @@
 <p-sidebar
   *ngIf="viewSidebarVisibile"
   [(visible)]="viewSidebarVisibile"
-  position="right" 
+  position="right"
   styleClass="p-sidebar-lg"
 >
   <app-marca-view
@@ -66,12 +62,16 @@
     >
       <ng-template pTemplate="header">
         <tr>
-          <th>#</th>
+          <th>
+            @if (!loading) {
+              {{ "#" }}
+            }
+            @else {
+              <app-loading></app-loading>
+            }
+          </th>
           <th class="edit-cell">
             {{ "Visualizza/Modifica" }}
-          </th>
-          <th>
-            {{ "Id" }}
           </th>
           <th>
             {{ "Nome" }}
@@ -101,9 +101,6 @@
               >
               </p-button>
             </div>
-          </td>
-          <td>
-            {{ rowData.id }}
           </td>
           <td>
             {{ rowData.nome }}

@@ -19,21 +19,21 @@ export class SignupComponent implements OnInit{
     public authService: AuthService,
     public router: Router
   ) {
-    
+
   }
 
   ngOnInit(): void {
     this.signupForm = this.formBuilder.group({
-      email: ['', Validators.required, Validators.email],
+      email: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', Validators.required],
-      confirmPassword: ['', [Validators.required, this.matchPassword.bind(this)]],
+      confirmPassword: ['', [Validators.required]],
     });
   }
 
   matchPassword(control: AbstractControl): { [key: string]: boolean } | null {
     if(!this.signupForm){return null;}
-    
+
     const password = this.signupForm.get('password')?.value;
     const confirmPassword = control.value;
 

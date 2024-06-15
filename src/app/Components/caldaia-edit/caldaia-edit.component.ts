@@ -5,6 +5,9 @@ import { CaldaieService } from 'src/app/Services/caldaie.service';
 import { Caldaie } from 'src/app/Models/Caldaie';
 import { ErroriService } from 'src/app/Services/errori.service';
 import { ErroriCaldaie } from 'src/app/Models/ErroriCaldaie';
+import { MarcheService } from 'src/app/Services/marche.service';
+import { MarcaCaldaie } from 'src/app/Models/MarcaCaldaie';
+import { SelectItem } from 'primeng/api';
 
 @Component({
   selector: 'app-caldaia-edit',
@@ -15,6 +18,7 @@ export class CaldaiaEditComponent implements OnInit {
 
   constructor(
     private caldaieService: CaldaieService,
+    private marcheService: MarcheService,
     private erroriService: ErroriService
   ) {}
 
@@ -26,16 +30,33 @@ export class CaldaiaEditComponent implements OnInit {
   public editErroreFlag: boolean;
   public viewErroreFlag: boolean;
   public saving: boolean;
+  public marcheListForDropdown: SelectItem[];
+  public loadingMarche: boolean;
+  public viewImageModal: boolean;
 
   ngOnInit() {
-    this.selectedCaldaia.idMarca = 1;
-    if(this.selectedCaldaia.id)
-      this.erroriService.getErroriCaldaia(this.selectedCaldaia.id)
-        .pipe(
-          tap(erroriCaldaie => console.log(erroriCaldaie)),
-          tap(erroriCaldaia => this.erroriSelectedCaldaia = erroriCaldaia)
-        )
-        .subscribe()
+    this.marcheService.getItems()
+      .pipe(
+        tap(marcheList => {
+          this.marcheListForDropdown = marcheList.map(marca => {
+            return {
+              label: marca.nome,
+              value: marca.id
+            }
+          })
+        }),
+        switchMap(() => {
+          if(this.selectedCaldaia.id)
+            return this.erroriService.getErroriCaldaia(this.selectedCaldaia.id)
+              .pipe(
+                tap(erroriCaldaie => console.log(erroriCaldaie)),
+                tap(erroriCaldaia => this.erroriSelectedCaldaia = erroriCaldaia)
+              )
+            else
+                return EMPTY;
+        })
+      )
+      .subscribe();
   }
 
   public saveOrUpdateData() {
@@ -97,5 +118,16 @@ export class CaldaiaEditComponent implements OnInit {
   public updateErrore(errore: ErroriCaldaie) {
     this.erroriSelectedCaldaia[this.selectedErroreIdx] = errore;
     this.editErroreFlag = false;
+  }
+
+  public uploadImage(event: any) {
+    //console.log(event.files[0])
+    const fileReader = new FileReader();
+    fileReader.onloadend = () => {
+      new Uint8Array()
+      const base64String = (fileReader.result as string).split(',')[1];
+      this.selectedCaldaia.immagine = base64String;
+    }
+    fileReader.readAsDataURL(event.files[0])
   }
 }

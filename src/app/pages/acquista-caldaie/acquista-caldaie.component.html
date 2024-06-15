@@ -16,10 +16,22 @@
         }
     </div>
 
+    <div class="filters">
+      <label for="name-filter" class="filters-label">{{ "Filtra per nome" }}</label>
+      <input
+        id="name-filter"
+        type="text"
+        placeholder="Es. Eolo..."
+        (ngModelChange)="applyFilterToList($event, paginatorTop)"
+        [ngModel]="nameFilter"
+        pInputText
+      />
+    </div>
+
     <div class="paginator-top-box" #paginatorTopBox>
       <p-paginator
           [rows]="9"
-          [totalRecords]="caldaieList.length"
+          [totalRecords]="filteredCaldaieList.length"
           (onPageChange)="splitCaldaieList($event, paginatorTopBox)"
           [first]="firstCaldaiaIdx"
           styleClass="caldaie-list-paginator"
@@ -70,7 +82,7 @@
 
     <p-paginator
         [rows]="9"
-        [totalRecords]="caldaieList.length"
+        [totalRecords]="filteredCaldaieList.length"
         (onPageChange)="splitCaldaieList($event, paginatorTopBox)"
         [first]="firstCaldaiaIdx"
         styleClass="caldaie-list-paginator"

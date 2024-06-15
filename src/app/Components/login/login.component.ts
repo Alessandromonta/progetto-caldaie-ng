@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { map, switchMap, tap } from 'rxjs';
+import { EMPTY, SequenceError, catchError, map, switchMap, tap } from 'rxjs';
 import { AuthService } from 'src/app/Auth/Service/auth.service';
 import { Utenti } from 'src/app/Models/utenti';
 import { UtentiService } from 'src/app/Services/utenti.service';
@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit{
     });
   }
   ngOnInit(): void {
-    //
   }
 
   onSubmit() {
@@ -42,27 +41,25 @@ export class LoginComponent implements OnInit{
             // Gestisci la risposta dell'API dopo un login riuscito
             if (response) {
               // Memorizza il token nella local storage
-              localStorage.setItem('bearerToken', response);
+              localStorage.setItem('bearerToken', JSON.stringify(response));
 
               // Esegui il reindirizzamento o altre azioni necessarie
               return this.authService.getUserId(); // Implementa questo metodo nel tuo servizio
 
-              // Verifica se l'utente è un "Owner" o ha il grado appropriato
-              // if (userRole === '1' ) {
-              //   this.isOwner = true;
-              // }
-              // else{
-              //   this.isOwner = false;
-              // }
             } else {
-              // Il server non ha restituito un token valido, gestisci l'errore
               this.loginError = true;
             }
           }),
           switchMap((userId: number) =>
             this.utentiService.getItemsFromItemId(userId)
           ),
-          tap((user: any) => this.authService.utenteLoggato = user.content)
+          tap((user: any) => {
+            localStorage.setItem('userData', JSON.stringify(user.content));
+            this.authService.utenteLoggato = user.content;
+          }),
+          catchError((err: Error) => {
+            return EMPTY;
+          })
         )
         .subscribe({
           error: error => {
@@ -70,7 +67,6 @@ export class LoginComponent implements OnInit{
             this.loginError = true;
           },
           complete: () => {
-            console.log(this.authService.utenteLoggato);
             this.router.navigate(['profilo']);
           }
         });
